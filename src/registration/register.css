@@ -1,0 +1,31 @@
+.styletwo{
+    width: 900px;
+    height: auto;
+    margin: auto;
+    padding: 100px;
+    background-color: #ffffff; /* Background color */
+    border-radius: 8px / 8px; /* Border radius for rounded corners */
+    padding-top: 50px;
+    margin-top: 110px;
+    border: 3px solid rgba(0, 0, 0, 0.74);
+}
+
+  hr {
+    
+    border: 2px solid rgba(76, 96, 114, 0.781); /* Set the thickness to 2 pixels and color to black */
+  }
+
+  .TwoTextFieldsTogether {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+  
+  
+
+  
+  h3{
+    display: flex;
+  }

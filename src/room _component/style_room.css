@@ -1,0 +1,50 @@
+.style {
+    width: 900px;
+    height: auto;
+    margin: auto;
+    padding: 100px;
+    background-color: #fffffffa; /* Background color */
+    border-radius: 8px / 8px; /* Border radius for rounded corners */
+    padding-top: 30px;
+    margin-top: 80px;
+    font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif;
+    border: 3px solid rgba(46, 42, 42, 0.764); /* Border color and thickness */
+    font-size: 1.25rem;
+}
+
+  Button {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    width: 29.5%;
+    
+  }
+
+
+  .floor {
+   
+    width: 230px; /* Adjust width based on desired spacing */
+    padding-right: 50px; 
+}
+
+.room {
+  
+    width: 275px; 
+    margin-left: 10px; 
+}
+.roomLeader {
+  
+  width: 275px; 
+  margin-left: 10px; 
+}
+.position {
+  
+  width: 230px; 
+  margin-left: 10px; 
+}
+.roommate {
+  
+  width: 275px; 
+  margin-left: 10px; 
+}
+

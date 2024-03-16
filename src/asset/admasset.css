@@ -1,0 +1,28 @@
+.Style{
+    width: 700px;
+    height: auto;
+    margin: auto;
+    padding: 100px;
+    background-color: #fffffffa; /*Background color */
+    border-radius: 8px; /* Border radius for rounded corners */
+    padding-top: 30px;
+    margin-top: 60px;
+    font-family: TimesNewRoman,Times New Roman,Times,Baskerville,Georgia,serif; 
+    text-align: center;
+    font-size: 1.25rem;
+    
+  }
+  
+  
+
+  Button {
+    cursor: pointer;
+  }
+
+  #one{
+    margin-right: 30px;
+    width: 25%;
+    margin-left:35px;
+  }
+
+  

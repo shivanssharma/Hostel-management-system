@@ -1,0 +1,25 @@
+.Style{
+  width: 500px;
+  height: auto;
+  margin: auto;
+  padding: 100px;
+  justify-content: center;
+  text-align: center;
+  background-color: #ffffff; /*Background color */
+  border-radius: 8px; /* Border radius for rounded corners */
+  padding-top: 30px;
+  margin-top: 60px;
+  font-family: TimesNewRoman,Times New Roman,Times,Baskerville,Georgia,serif; 
+}
+
+Button{
+  width: 45%;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+

@@ -1,0 +1,24 @@
+.grid-item {
+    width: 100%;
+    background-image: url('C:\Users\dmacs-214214\Desktop\project\hms\public\images\SSSIHL-Ad-Block-2020.jpg');
+    background-repeat: no-repeat;
+    background-color: #d7d6d68d; 
+    background-size: cover;
+    background-position: center;
+  }
+  
+  @media (min-width: 600px) {
+    .grid-item {
+      flex-basis: 33.3333%; /* 4 out of 12 columns for sm size */
+    }
+  }
+  
+  @media (min-width: 960px) {
+    .grid-item {
+      flex-basis: 58.3333%; /* 7 out of 12 columns for md size */
+    }
+  }
+  
+ 
+  
+ 

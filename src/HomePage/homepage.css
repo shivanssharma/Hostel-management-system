@@ -1,0 +1,151 @@
+.sidebar {
+
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+  width: 15.5%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(12, 12, 12, 0.762);
+  z-index: 10;
+  }
+    
+   .sidebar img{
+    width: 100%;
+  }
+
+  
+  #link {
+    text-decoration: none; 
+    color: rgb(255, 255, 255) ;
+    padding-left: 50px;
+    font-size: 16px;
+    font-weight: 300;
+    text-align: center;
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 10px;
+   
+    width: 90%;
+    margin-left: 5%;
+    cursor: pointer;
+  
+  }
+  
+  
+  #link:after {
+    content: '';
+    position: absolute;
+    width: 80%;
+    border-bottom: 1px solid rgba(233, 233, 238, 0.842);
+    bottom: 50%;
+    right: -400%;
+    transition-delay: all 0.5s;
+    transition: all 0.5s;
+  }
+  
+  #link:hover:after,
+  #link.hover:after {
+    left: 10%;
+  }
+  
+  
+  
+  
+  
+  
+  
+
+
+
+  .layout {
+    display: flex;
+  }
+  
+  .left-content {
+    width: 82%; /* Adjust the width as needed */
+    
+    
+    padding: 1rem;
+  }
+  
+  .right-content {
+    width: auto; /* Adjust the width as needed */
+    padding: 1rem;
+    
+  }
+  
+  .Title div> p{
+    font-size: 15px;
+    font-family: 'Times New Roman', Times, serif;
+   padding-left: 20px; 
+   
+  }
+  
+  #text{  
+      color: rgba(0, 0, 0, 0.87);
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 4px;
+    box-shadow: none;
+    padding: 16px;
+    background-color: rgb(238, 238, 238);
+  }
+
+
+  .Title  hr{
+    display: flex;
+    width: 100%;
+    border-width: 2px ;
+    border-color: rgb(0, 0, 0);
+    
+  }
+  
+  /* Layout.jsx */
+  
+  .Title {
+    text-align: center;
+    margin-top: 20px; /* Add spacing as needed */
+  }
+  
+  .Title p {
+    font-size: 42px;
+    font-family:'Times New Roman', Times, serif;
+  
+    display: fixed;
+  }
+  
+  .Title img {
+    
+    max-width: 800px; 
+    height: auto; 
+    display: fixed;
+    margin: 50px auto; 
+  
+    
+  }
+  
+ 
+
+
+  
+
+  .figure{
+    display:flex;
+  }
+
+
+  .greeting {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    color: #FFE6E6; /* Set the color of the "Hello" text */
+    font-weight: bold; /* Make the "Hello" text bold */
+    transition: color 0.3s ease; /* Transition for color change */
+  }
+  
+  .username {
+    color: #EABE6C; /* Initial color for username */
+  }
+  
+  .greeting:hover .username {
+    color: #BFEA7C; /* Hover color for username */
+  }

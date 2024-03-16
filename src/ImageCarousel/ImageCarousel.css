@@ -1,0 +1,19 @@
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha value to control darkness */
+    color: #fff; /* Arrow color */
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 29px;
+  }
+  
+  .carousel-arrow.left {
+    left: 70px;
+  }
+  
+  .carousel-arrow.right {
+    right: 10px;
+  }
