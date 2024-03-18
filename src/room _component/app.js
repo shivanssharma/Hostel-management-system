@@ -145,7 +145,7 @@ function AdminRoomAllotment() {
 
           // Fetch 3UG list
           
-            axios.get(`http://127.0.0.1:8000/api/room/${selectedFloor}/${selectedRoom}/`)
+            axios.get(`http://127.0.0.1:8000/api/room/${selectedFloor}/${selectedRoom}/${selectedPosition}`)
             .then(response => {
               setRoomList(response.data);
               console.log('hello world, we got list data: ')
@@ -156,7 +156,7 @@ function AdminRoomAllotment() {
               console.error('Error fetching Room list:', error);
             });
                 
-        }, [selectedFloor,selectedRoom]);
+        }, [selectedFloor,selectedRoom,selectedPosition]);
         console.log(studentList);
         useEffect(() => {
           
@@ -308,9 +308,15 @@ function AdminRoomAllotment() {
       )}
       <br/><br/>
       <div style={{paddingRight:'195px'}}>
-      {
+      {/* {
         roomList && studentList && <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList}/>
-      }
+      } */}
+      {roomList && studentList && (
+      <div >
+        <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList} />
+      </div>
+      )}
+
       </div>
       <br/>
     {loginError && <p style={{ color: 'Green' }}>{loginError}</p>} 

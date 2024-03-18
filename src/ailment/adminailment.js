@@ -15,6 +15,7 @@ import {
 import axios from "axios";
 import './adailment.css';
 import AdminHorizontalNav from "../navbars/HorizontalNav/Admin_hnav";
+import StaffHorizontalNavUser from "../navbars/HorizontalNav/StaffhorizontalNav";
 
 function AdminAilment() {
   const [ailmentData, setAilmentData] = useState({
@@ -22,7 +23,8 @@ function AdminAilment() {
     description: "",
     selectedMedicine: null,
   });
-
+ 
+  
   const [ailment, setAilment] = useState([]);
   const [medicines, setMedicines] = useState([]);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -151,7 +153,10 @@ function AdminAilment() {
 
   return (
     <header>
-    <AdminHorizontalNav />
+    {/* <AdminHorizontalNav /> */}
+    {/* {isAdminHomePage && <AdminHorizontalNav />}
+    {isStaffHomePage && <StaffHorizontalNavUser />} */}
+    {isAdminPage ? <AdminHorizontalNav /> : <StaffHorizontalNavUser />}
       <div id="Style_four">
         <div>
           <h2>Enter Ailment</h2>
