@@ -32,8 +32,15 @@
   
   }
   
+  #link {
+    box-shadow: 0 0 0 transparent; /* Ensure no box shadow by default */
+    transition: box-shadow 0.5s ease-in-out;
+  }
   
-  #link:after {
+  #link:hover {
+    box-shadow: 5px 5px 10px rgba(196, 194, 194, 0.5); /* Add box shadow on hover */
+  }
+  /* #link:after {
     content: '';
     position: absolute;
     width: 80%;
@@ -47,7 +54,7 @@
   #link:hover:after,
   #link.hover:after {
     left: 10%;
-  }
+  } */
   
   
   
