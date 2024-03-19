@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import LogoImage from './Bright_Colorful_Playful_Funny_Donuts_Food_Circle_Logo-removebg-preview.png'; // Import your logo image here
 import './nav_health.css';
-function AdminHorizontalNavUser() {
+function StaffHorizontalNavUser() {
     return (
         <div>
             <Navbar expand="lg" className="bg-body-tertiary">
@@ -26,7 +26,7 @@ function AdminHorizontalNavUser() {
     );
 }
 
-export default AdminHorizontalNavUser;
+export default StaffHorizontalNavUser;
 
 
 

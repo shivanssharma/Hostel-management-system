@@ -20,6 +20,7 @@ import "../asset/sharedAnimation.css"
 import "../asset/sharedCss.css"
 import AdminHorizontalNav from "../navbars/HorizontalNav/Admin_hnav";
 import { server, serverPort } from "../utils/Constants";
+import StaffHorizontalNavUser from "../navbars/HorizontalNav/StaffhorizontalNav";
 
 function AdminAilment() {
   const [ailmentData, setAilmentData] = useState({
@@ -27,7 +28,8 @@ function AdminAilment() {
     description: "",
     selectedMedicine: null,
   });
-
+ 
+  
   const [ailment, setAilment] = useState([]);
   const [medicines, setMedicines] = useState([]);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -152,7 +154,10 @@ function AdminAilment() {
 
   return (
     <Box>
-      <AdminHorizontalNav />
+      {/* <AdminHorizontalNav /> */}
+      {/* {isAdminHomePage && <AdminHorizontalNav />}
+      {isStaffHomePage && <StaffHorizontalNavUser />} */}
+      {/* {isAdminPage ? <AdminHorizontalNav /> : <StaffHorizontalNavUser />} */}
       <Box id="Style_four">
         <Box sx={{ p: '2%' }}>
           <Typography 
@@ -163,7 +168,6 @@ function AdminAilment() {
             Enter Ailment
             </text>
           </Typography>
-          
           <TextField
             className="floatUpIn"
             label="Name"

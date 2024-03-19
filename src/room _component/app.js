@@ -149,7 +149,7 @@ function AdminRoomAllotment() {
 
           // Fetch 3UG list
           
-            axios.get(`${server}:${serverPort}/api/room/${selectedFloor}/${selectedRoom}/`)
+            axios.get(`${server}:${serverPort}/api/room/${selectedFloor}/${selectedRoom}/${selectedPosition}`)
             .then(response => {
               setRoomList(response.data);
               console.log('hello world, we got list data: ')
@@ -160,7 +160,7 @@ function AdminRoomAllotment() {
               console.error('Error fetching Room list:', error);
             });
                 
-        }, [selectedFloor,selectedRoom]);
+        }, [selectedFloor,selectedRoom,selectedPosition]);
         console.log(studentList);
         useEffect(() => {
           
@@ -303,7 +303,8 @@ function AdminRoomAllotment() {
           )}
 
           {selectedPosition === "room mate" && (
-              <FormControl sx={{width:'48%', marginLeft: '1%'}}>
+            // Todo: remove calssNAme="roommate" after test
+              <FormControl  className="roommate" sx={{width:'48%', marginLeft: '1%'}}>
               <InputLabel id="label-id_5">Select Rooms for Roommate</InputLabel>
               <Select
                 labelId="select-id_5"

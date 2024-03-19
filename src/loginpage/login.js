@@ -64,11 +64,11 @@ export default function SignInSide(props) {
       if (responseData.is_superuser) {
         localStorage.setItem('userType', "admin");
         navigate('/admin-home', { state: { username: formData.username } });
+      }
+      else if (responseData.is_staff) {
+        localStorage.setItem('userType', "staff");
+        navigate('/staffhome',{ state: { username: formData.username } });
       } 
-      // else if (responseData.is_staff) {
-        // localStorage.setItem('userType', "staff");
-      //   navigate('/staff-home',{ state: { username: formData.username } });
-      // } 
       else {
         localStorage.setItem('userType', "student");
         // navigate('/student-home',{ state: { username: formData.username } });
