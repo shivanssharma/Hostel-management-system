@@ -26,8 +26,8 @@ export default function SelectAllTransferList(props) {
   // console.log("here")                  //main function 
   const {setRightList } = props;
   const [checked, setChecked] = React.useState([]);                     //array containg all the elements
-  const [left, setLeft] = React.useState(props.studentList);                    //left box
-  const [right, setRight] = React.useState(props.roomList);                   //right box
+  const [left, setLeft] = React.useState(props.studentList ? props.studentList.flat() : []);                    //left box
+  const [right, setRight] = React.useState(props.roomList ? props.roomList.flat() : []);                   //right box
   // console.log(right)
   const leftChecked = intersection(checked, left);                          //intersect the all elements and left side box
   const rightChecked = intersection(checked, right);                        //intersect the all elements and right side box
