@@ -60,7 +60,7 @@ export default function SignInSide() {
         navigate('/adminhome', { state: { username: formData.username } });
       } 
       else if (responseData.is_staff) {
-        navigate('/staffhome',{ state: { username: formData.username } });
+        navigate('/adminhome',{ state: { username: formData.username } });
       } 
       else {
         navigate('/studenthome',{ state: { username: formData.username } });
