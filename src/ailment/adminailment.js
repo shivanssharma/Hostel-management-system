@@ -11,11 +11,15 @@ import {
   Paper,
   Snackbar,
   Autocomplete,
+  Box,
+  Typography,
 } from '@mui/material';
 import axios from "axios";
 import './adailment.css';
+import "../asset/sharedAnimation.css"
+import "../asset/sharedCss.css"
 import AdminHorizontalNav from "../navbars/HorizontalNav/Admin_hnav";
-// import StaffHorizontalNavUser from "../navbars/HorizontalNav/StaffhorizontalNav";
+import { server, serverPort } from "../utils/Constants";
 
 function AdminAilment() {
   const [ailmentData, setAilmentData] = useState({
@@ -31,8 +35,8 @@ function AdminAilment() {
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
   const textFieldStyle = {
-    width: '75%',
-    marginBottom: '15px',
+    width: '100%',
+    marginBottom: '5%',
   };
 
   const handleInputChange = (fieldName) => (event, value) => {
@@ -55,7 +59,7 @@ function AdminAilment() {
       const medicineId = ailmentData.selectedMedicine.MedicineID;
 
       await axios.post(
-        'http://127.0.0.1:8000/api/ailment/',
+        server+':'+serverPort+'/api/ailment/',
         {
           AilmentName: ailmentData.ailmentname,
           AilmentDescription: ailmentData.description,
@@ -89,7 +93,7 @@ function AdminAilment() {
   const handleDeleteAilment = async (AilmentName) => {
     try {
       const csrftoken = getCookie('csrftoken');
-      await axios.delete(`http://127.0.0.1:8000/api/ailment/${encodeURIComponent(AilmentName)}/`, {
+      await axios.delete(`${server}:${serverPort}/api/ailment/${encodeURIComponent(AilmentName)}/`, {
         headers: {
           'X-CSRFToken': csrftoken,
         },
@@ -110,13 +114,9 @@ function AdminAilment() {
     }
   };
   
-  
-  
-  
-
   const fetchAilments = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/ailment/');
+      const response = await axios.get(server+':'+serverPort+'/api/ailment/');
       setAilment(response.data);
     } catch (error) {
       console.error(error);
@@ -127,7 +127,7 @@ function AdminAilment() {
 
   const fetchMedicines = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/medicine/');
+      const response = await axios.get(server+':'+serverPort+'/api/medicine/');
       setMedicines(response.data);
     } catch (error) {
       console.error(error);
@@ -152,33 +152,38 @@ function AdminAilment() {
   };
 
   return (
-    <header>
-    <AdminHorizontalNav />
-    {/* {isAdminHomePage && <AdminHorizontalNav />}
-    {isStaffHomePage && <StaffHorizontalNavUser />} */}
-    
-      <div id="Style_four">
-        <div>
-          <h2>Enter Ailment</h2>
+    <Box>
+      <AdminHorizontalNav />
+      <Box id="Style_four">
+        <Box sx={{ p: '2%' }}>
+          <Typography 
+            variant="h3" className="grayFont" 
+            sx={{display: 'flex', justifyContent: 'flex-start', paddingBottom: '5%'}}
+          >
+            <text className="BrasikaFont floatRightIn">
+            Enter Ailment
+            </text>
+          </Typography>
           <TextField
+            className="floatUpIn"
             label="Name"
             variant="outlined"
             value={ailmentData.ailmentname}
             onChange={handleInputChange("ailmentname")}
             style={textFieldStyle}
           />
-          <br />
-          <br />
+
           <TextField
+            className="floatUpIn"
             label="Description"
             variant="outlined"
             value={ailmentData.description}
             onChange={handleInputChange("description")}
             style={textFieldStyle}
           />
-          <br />
-          <br />
+
           <Autocomplete
+            className="floatUpIn"
             options={medicines}
             getOptionLabel={(option) => option.MedicineName}
             onChange={(event, value) => handleInputChange("selectedMedicine")(event, value)}
@@ -191,52 +196,58 @@ function AdminAilment() {
               />
             )}
           />
-        </div>
+          <Box className="button-container floatUpIn">
+            <Button className="AdA-Btn" variant="outlined" onClick={handleAddAilment}>
+              Add
+            </Button>
+            <Button className="AdA-Btn" variant="outlined" onClick={fetchAilments}>
+              View All
+            </Button>
+          </Box>
+        </Box>
 
-        <br />
+        <hr style={{margin: '4% 7% 4% 7%'}}/>       
 
-        <div className="button-container">
-          <Button className="one" variant="outlined" onClick={handleAddAilment}>
-            Add
-          </Button>
-          <Button className="two" variant="outlined" onClick={fetchAilments}>
-            View All
-          </Button>
-        </div>
-
-        <br />
-        <hr />        
-        {handleDeleteAilment && <div>
-          <h2>Ailments</h2>
-          <div style={{ maxHeight: '300px', overflow: 'auto' }}>
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  {/* <TableCell>ID</TableCell> */}
-                  <TableCell>Name</TableCell>
-                  <TableCell>Description</TableCell>
-                  <TableCell>Action</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {Object.values(ailment).map((ailment) => (
-                  <TableRow key={ailment.AilmentID}>
-                    {/* <TableCell>{ailment.AilmentID}</TableCell> */}
-                    <TableCell>{ailment.AilmentName}</TableCell>
-                    <TableCell>{ailment.AilmentDescription}</TableCell>
-                    <TableCell>
-                      <Button variant="outlined" onClick={() => handleDeleteAilment(ailment.AilmentName)}>
-                        Delete
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          </div>
-        </div>}
+        {handleDeleteAilment && 
+          <Box className="AdAil-Listcontainer" sx={{flex: 1, p: '2% 0% 2% 0%'}}>
+            <Typography 
+              variant="h3" className="grayFont" 
+              sx={{display: 'flex', justifyContent: 'flex-start', paddingBottom: '5%'}}
+            >
+              <text className="BrasikaFont floatRightIn">
+                Ailments
+              </text>
+            </Typography>
+            <Box >
+              <TableContainer component={Paper}>
+                <Table className="floatUpIn" style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
+                  <TableHead>
+                    <TableRow>
+                      {/* <TableCell>ID</TableCell> */}
+                      <TableCell class="BrasikaFont">Name</TableCell>
+                      <TableCell class="BrasikaFont">Description</TableCell>
+                      <TableCell class="BrasikaFont">Action</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {Object.values(ailment).map((ailment) => (
+                      <TableRow key={ailment.AilmentID}>
+                        {/* <TableCell>{ailment.AilmentID}</TableCell> */}
+                        <TableCell>{ailment.AilmentName}</TableCell>
+                        <TableCell>{ailment.AilmentDescription}</TableCell>
+                        <TableCell>
+                          <Button variant="outlined" onClick={() => handleDeleteAilment(ailment.AilmentName)}>
+                            Delete
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
+          </Box>
+        }
 
         <Snackbar
           open={snackbarOpen}
@@ -244,8 +255,8 @@ function AdminAilment() {
           onClose={handleCloseSnackbar}
           message={snackbarMessage}
         />
-      </div>
-    </header>
+      </Box>
+    </Box>
   );
 }
 

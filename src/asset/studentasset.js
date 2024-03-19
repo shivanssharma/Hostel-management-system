@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Autocomplete, TextField, Switch, Button } from "@mui/material";
+import { Autocomplete, TextField, Switch, Button, Box, Typography } from "@mui/material";
 import './studasset.css';
+import "../asset/sharedAnimation.css"
 // import HealthNav from "../navbars/navbarHealth";
 import StudentHorizontalNav from "../navbars/HorizontalNav/student_hnav";
+import { server, serverPort } from "../utils/Constants";
 
 function StudentAsset() {
     const [hostelAssets, setHostelAssets] = useState([]);
@@ -17,7 +19,7 @@ function StudentAsset() {
     const fetchData = () => {
         // Fetch data from the backend API
         axios
-            .get("http://127.0.0.1:8000/api/hostel_assets/")
+            .get(server+':'+serverPort+"/api/hostel_assets/")
             .then((response) => {
                 // Log the raw response data for inspection
                 console.log("Raw response data:", response.data);
@@ -43,16 +45,20 @@ function StudentAsset() {
     };
 
     return (
-        <header>
+        <Box>
             {/* Styling div for better organization */}
             <StudentHorizontalNav />
-            <div className="Style">
-              <h1>Book Assets for Yourself!!</h1>
-              <hr/>
-              <br/>
-              <div className="center-container">
+            <div className="SAS-Style">
+                <Typography variant="h3" className="AdA-title grayFont" sx={{display: 'flex', justifyContent: 'flex-start'}}>
+                    <text className="BrasikaFont floatRightIn">
+                        Book Assets for Yourself!!
+                    </text>
+                </Typography>
+
+                <Box className="center-container">
                     {/* Autocomplete component for hostel assets */}
                     <Autocomplete
+                        className="floatRightIn" 
                         disablePortal
                         id="combo-box-demo"
                         options={hostelAssets}
@@ -62,11 +68,12 @@ function StudentAsset() {
                         onChange={handleAssetSelect}
                         renderInput={(params) => <TextField {...params} label="Hostel Assets" />}
                     />
-                </div>
-                <br/>
+                </Box>
+
                 {/* Display selected asset's description */}
                 {selectedAsset && (
                     <TextField
+                        className="floatRightIn" 
                         id="outlined-multiline-static"
                         label="Description"
                         multiline
@@ -80,24 +87,28 @@ function StudentAsset() {
                 )}
 
                 {/* Display availability status with a loading indicator */}
-                <h2>Availability:</h2>
-                No {loading ? (
-                    <p>Loading...</p>
-                ) : (
-                    <Switch
-                        checked={selectedAsset ? selectedAsset.availabilityStatus : false}
-                        disabled={true}
-                        inputProps={{ "aria-label": "controlled" }}
-                    />
-                )} Yes
+                <Box className="SAS-switchController">
+                    <h2 class="BrasikaFont floatRightIn grayFont">Availability:</h2>
+                    <Box className="SAS-switch">
+                        <h4 class="BrasikaFont floatRightIn grayFont"> No </h4> 
+                        {
+                            loading 
+                            ?   <p>Loading...</p>
+                            :   <Switch
+                                    className="floatRightIn"
+                                    checked={selectedAsset ? selectedAsset.availabilityStatus : false}
+                                    disabled={true}
+                                    inputProps={{ "aria-label": "controlled" }}
+                                />
+                        }
+                        <h4 class="BrasikaFont floatRightIn grayFont"> Yes </h4>
+                    </Box>
 
-                <br />
-                <br />
-
+                </Box>
                 {/* Button for booking */}
-                <Button variant="outlined">Book</Button>
+                <Button className="floatRightIn" variant="outlined">Book</Button>
             </div>
-        </header>
+        </Box>
     );
 }
 

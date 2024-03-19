@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import StudentHorizontalNav2 from "../navbars/HorizontalNav/StudenthNav2";
+import './style_room.css';
+import { server, serverPort } from "../utils/Constants";
 
 function StudentView() {
   const [name, setName] = useState('');
@@ -25,7 +27,7 @@ function StudentView() {
 
     // Fetch floor number and room number from backend
     axios
-      .get(`http://127.0.0.1:8000/api/get_floor_and_room_numbers/?username=${username}`)
+      .get(`${server}:${serverPort}/api/get_floor_and_room_numbers/?username=${username}`)
       .then((response) => {
         const { floorNumber, roomNumber } = response.data;
         setFloorNumber(floorNumber);
@@ -34,7 +36,7 @@ function StudentView() {
 
         // Fetch student list based on floor number and room number
         axios
-          .get(`http://127.0.0.1:8000/api/student_pannel/${floorNumber}/${roomNumber}/`)
+          .get(`${server}:${serverPort}/api/student_pannel/${floorNumber}/${roomNumber}/`)
           .then((response) => {
             setList(response.data);
             console.log("hello world, we got list data: ");
@@ -52,15 +54,15 @@ function StudentView() {
   return (
     <header>
       <StudentHorizontalNav2 />
-      <div className="style">
-        <h2>Hello {name}, Your Floor is {floorNumber} and Room Number is {roomNumber} </h2>
-        <h2>Your Room Members Are</h2>
+      <div className="AV-style">
+        <h3 className="BrasikaFont floatRightIn grayFont" >Hello {name} Your Floor is {floorNumber} and RoomNumber is {roomNumber} </h3>
+        <h3 className="BrasikaFont floatRightIn grayFont" >Your Room Members Are</h3>
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Course</TableCell>
+                <TableCell class="BrasikaFont grayFont" style={{padding: '2%'}} >Name</TableCell>
+                <TableCell class="BrasikaFont grayFont" >Course</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

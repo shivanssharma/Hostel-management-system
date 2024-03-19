@@ -1,8 +1,8 @@
 .grid-item {
     width: 100%;
-    background-image: url('C:\Users\dmacs-214214\Desktop\project\hms\public\images\SSSIHL-Ad-Block-2020.jpg');
+    background-image: url('/public/images/SSSIHL-Ad-Block-2020.jpg');
     background-repeat: no-repeat;
-    background-color: #d7d6d68d; 
+    /* background-color: #d7d6d68d;  */
     background-size: cover;
     background-position: center;
   }

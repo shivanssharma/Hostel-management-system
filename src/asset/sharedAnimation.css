@@ -1,0 +1,58 @@
+.floatRight{
+    animation: floatRightAnimation 1s ease-in-out forwards;
+}
+.floatRightIn{
+    animation:  floatRightAnimation 1s ease-in-out,
+                fadeInAnimation 3s ease-in-out;
+}
+@keyframes floatRightAnimation {
+    from{
+        transform: translateX(-70px);
+    }
+    to{
+        transform: translateX(0px);
+    }
+}
+.floatUpIn{
+    animation: floatUpInAnimation 2s ease-in-out forwards
+}
+@keyframes floatUpInAnimation {
+    from{
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+
+.fadeOut{
+    animation: fadeOutAnimation 1s ease-in-out forwards;
+}
+@keyframes fadeOutAnimation {
+    from {opacity: 1}
+    to {opacity:0}
+}
+.fadeIn{
+    animation: fadeInAnimation 1s ease-in-out forwards;
+    opacity: 0;
+}
+@keyframes fadeInAnimation {
+    from{ opacity: 0; }
+    to{ opacity: 1; }
+}
+
+
+.zoomIn{
+    animation: zoomInAnimation 1s ease-in-out ;
+}
+@keyframes zoomInAnimation {
+    from, to{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.5);
+    }
+}

@@ -1,42 +1,52 @@
 
 import React from 'react';
-import ImageCarousel from '../ImageCarousel/imagecarousel';
 import './homepage.css';
+import "../asset/sharedAnimation.css"
+import MyImageCarousel from '../ImageCarousel/MyImageCarousel';
+import { Box } from '@mui/material';
 
 // Home component
 const Layout = () => {
   return (
-    <div className='Title'>
+    <Box className='Title'>
       {/* Home component content */}
-      <p>SRI SATHYA SAI INSTITUTE OF HIGHER LEARNING</p>
-      <hr />
-      <div className="content-container">
-        <ImageCarousel />
-        <br />
-        <br />
-        <br />
-        <div id="text">
-          <p>A college that does not confer the knowledge of the Spiritual Reality to the students who are engaged in the pursuit</p>
-          <p>of various material studies is as barren as the sky without the moon, or a heart without peace, or a nation without</p>
-          <p>reference to law.</p>
-          <strong>- Shri Satya Sai Baba</strong>
-        </div>
+      <p class="title BrasikaFont floatUpIn grayFont">SRI SATHYA SAI INSTITUTE OF HIGHER LEARNING</p>
+      {/* <hr /> */}
+      <Box className="content-container" >
+        <Box 
+          sx={{overflow: 'hidden', p: 2, height: {xs:'200px',md:'600px'}, backgroundColor: '#d9c6ba'}}
+          className="fadeIn"
+        >
+          <MyImageCarousel />
+        </Box>
+        <Box className="text BrasikaFont">
+          <p className="floatUpIn">
+            A college that does not confer the knowledge of the Spiritual Reality to the students who are engaged in the pursuit
+            of various material studies is as barren as the sky without the moon, or a heart without peace, or a nation without
+            reference to law.
+          </p>
+          <strong className="floatUpIn" style={{fontSize: '150%'}}>- Shri Satya Sai Baba</strong>
+        </Box>
         <br/>
         {/* Cards */}
-        <div style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '15px', marginBottom: '20px' }}>
-          <h3>Enrollment!!</h3>
-          <p>Enrol yourself to use the services</p>
-        </div>
+        <Box className="flexRow" sx={{justifyContent: 'space-between'}}>
+          <Box className="text1 BrasikaFont">
+            <h3 className="floatUpIn">Enrollment!!</h3>
+            <p className="floatUpIn">Enroll yourself to use the services</p>
+          </Box>
 
-        <div style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '15px', marginBottom: '20px' }}>
-          <h3>Room!!</h3>
-          <p>Want to see which room You are in...</p>
-        </div>
+          <br/>
+          <Box className="text1 BrasikaFont">
+            <h3 className="floatUpIn">Room!!</h3>
+            <p className="floatUpIn">Want to see which room You are in...</p>
+          </Box>
 
-        <div style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '15px', marginBottom: '20px' }}>
-          <h3>Holistic Health</h3>
-          <p>Get The service of Hospital In Our Hostel</p>
-        </div>
+          <br/>
+          <Box className="text1 BrasikaFont">
+            <h3 className="floatUpIn">Holistic Health</h3>
+            <p className="floatUpIn">Get The service of Hospital In Our Hostel</p>
+          </Box>
+        </Box>
 
         {/* Figures/Images */}
         <div className='figure'>
@@ -51,8 +61,8 @@ const Layout = () => {
         </figure>
         </div>
         {/* Add more cards, figures, and images as needed */}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

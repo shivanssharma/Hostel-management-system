@@ -1,14 +1,17 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
-import { TextField, Button,Switch } from "@mui/material";
+import { TextField, Button,Switch, Typography, Box } from "@mui/material";
 // import HealthNav from "../navbars/navbarHealth";
 import './admasset.css';
+import "../asset/sharedCss.css"
+import "../asset/sharedAnimation.css"
 import AdminHorizontalNav from "../navbars/HorizontalNav/Admin_hnav";
+import { server, serverPort } from "../utils/Constants";
 function AdminAsset() {
   const [checked, setChecked] = useState(false);
   const [assetName, setAssetName] = useState("");
   const [assetDescription, setAssetDescription] = useState("");
-  const [assets, setAssets] = useState([]);
+  const [assets, setAssets] = useState(null);
 
   useEffect(() => {
       // Fetch the list of assets when the component mounts
@@ -21,8 +24,10 @@ function AdminAsset() {
 
   const fetchAssets = async () => {
       try {
+        console.log("getting assets"+server+':'+serverPort+'/api/hostel_assets/')
           // Fetch the list of assets from the server
-          const response = await axios.get('http://localhost:8000/api/hostel_assets/');
+          const response = await axios.get(server+':'+serverPort+'/api/hostel_assets/');
+          console.log("response",response.data)
           setAssets(response.data);
       } catch (error) {
           console.error('Error fetching assets:', error);
@@ -39,7 +44,7 @@ function AdminAsset() {
           // Check if the CSRF token is available
           if (csrfToken) {
               // Make the POST request with the CSRF token
-              await axios.post('http://localhost:8000/api/hostel_assets/', {
+              await axios.post(server+':'+serverPort+'/api/hostel_assets/', {
                   AssetName: assetName,
                   Description: assetDescription,
                   AvailabilityStatus: checked,
@@ -82,7 +87,7 @@ function AdminAsset() {
           // Make the DELETE request with the CSRF token
           console.log(`Deleting asset with ID: ${assetID}`);
           const response = await axios.delete(
-            `http://localhost:8000/api/hostel_assets/${assetID}/`,
+            `${server}:${serverPort}/api/hostel_assets/${assetID}/`,
             {
               headers: {
                 'X-CSRFToken': csrfToken,
@@ -118,7 +123,7 @@ function AdminAsset() {
   const checkAssetExists = async (assetID) => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/hostel_assets/${assetID}/`
+        `${server}:${serverPort}/api/hostel_assets/${assetID}/`
       );
       
       // Check if the response is successful (status code 200-299)
@@ -132,75 +137,117 @@ function AdminAsset() {
   
 
   return (
-      <header>
+      <Box>
         <AdminHorizontalNav/>
-          <div className="Style">
-              <div>
-                  <h2>Hostel Assets</h2>
-                  <hr /> <br />
-                  <TextField
-                      id="outlined-basic"
-                      label="Name"
-                      variant="outlined"
-                      style={{ width: '75%', marginBottom: '15px' }}
-                      onChange={(e) => setAssetName(e.target.value)}
-                      value={assetName}
-                  />
-              </div>
-              <br />
-              <br />
+        <Box className="AdA-Style">
+          <Box>
+            <Typography variant="h3" className="AdA-title grayFont" sx={{display: 'flex', justifyContent: 'flex-start'}}>
+              <text className="BrasikaFont floatRightIn">
+                Hostel Assets
+              </text>
+            </Typography>
+            <hr style={{margin: '0% 0% 7% 0%'}} />
+            <Box className="Ada-InputContainer floatUpIn">
               <TextField
-                  id="outlined-multiline-static"
-                  label="Description"
-                  multiline
-                  rows={2}
-                  style={{ width: '75%', marginBottom: '15px' }}
-                  onChange={(e) => setAssetDescription(e.target.value)}
-                  value={assetDescription}
+                className="Ada-Input"
+                id="outlined-basic"
+                label="Name"
+                variant="outlined"
+                // style={{ width: '75%', marginBottom: '15px' }}
+                onChange={(e) => setAssetName(e.target.value)}
+                value={assetName}
               />
-              <h2>Availability:</h2>
-              NO <Switch
+            </Box>
+            <Box className="Ada-InputContainer floatUpIn">
+              <TextField
+                className="Ada-Input"
+                id="outlined-multiline-static"
+                label="Description"
+                multiline
+                rows={2}
+                // style={{ width: '75%', marginBottom: '15px' }}
+                onChange={(e) => setAssetDescription(e.target.value)}
+                value={assetDescription}
+              />
+            </Box>
+            <Box className="flexRow Ada-SwitchContainer floatUpIn">
+              <Typography variant="h4" className="AdA-title grayFont" sx={{marginRight: '5%'}}>
+                <text className="BrasikaFont">
+                  Availability: 
+                </text>
+              </Typography>
+              <Typography >
+                <text className="BrasikaFont grayFont">
+                  NO 
+                </text>
+              </Typography>
+              <Switch
                   checked={checked}
                   onChange={handleSwitchChange}
                   inputProps={{ "aria-label": "controlled" }}
-              /> Yes
-              <br />
-              <br />
-              <div className="button-container">
-                  <Button id='one' variant="outlined" onClick={addAsset} style={{ marginRight: '50px', width: '25%' }}>
-                      Add
-                  </Button>
-              </div>
-              <div style={{ overflow: 'auto', maxHeight: '400px' }}>
-              <h2>Asset List:</h2>
-              <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
-                  <thead>
-                      <tr>
-                          <th>Asset Name</th>
-                          <th>Description</th>
-                          <th>Availability Status</th>
-                          <th>Action</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      {assets.map(asset => (
-                          <tr key={asset.AssetID}>
-                              <td>{asset.AssetName}</td>
-                              <td>{asset.Description}</td>
-                              <td>{asset.AvailabilityStatus.toString()}</td>
-                              <td>
-                                  <Button variant="outlined" onClick={() => deleteAsset(asset.AssetID)} style={{ marginLeft: '20px', width: '80%' }}>
-                                      Delete
-                                  </Button>
-                              </td>
-                          </tr>
-                      ))}
-                  </tbody>
-              </table>
-          </div>
+              /> 
+              <Typography>
+                <text className="BrasikaFont grayFont">
+                  Yes
+                </text>
+              </Typography>
+            </Box>
+            <Box className="SubmitBtn floatUpIn" onClick={addAsset}>
+              <Typography variant="h6">
+                <text className="BrasikaFont">
+                  Add
+                </text>
+                </Typography>
+            </Box>
+          </Box>
 
-          </div>
-      </header>
+          <hr style={{margin: '4% 7% 4% 7%'}}/>
+
+          <Box className="Ada-Listcontainer">
+            <Box>
+              <Typography variant="h3" sx={{display: 'flex', justifyContent: 'flex-start'}}>
+                <text className="BrasikaFont grayFont floatRightIn" sx={{textAlign: 'left'}}>
+                  Asset List
+                </text>
+              </Typography>
+              <hr style={{margin: '3% 0% 7% 0%'}} />
+
+              {assets
+                ? <table className="floatUpIn" style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
+                    <thead>
+                      <tr>
+                        <th className="BrasikaFont">Asset Name</th>
+                        <th className="BrasikaFont">Description</th>
+                        <th className="BrasikaFont">Availability Status</th>
+                        <th className="BrasikaFont">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      { assets.map(asset => (
+                        <tr key={asset.AssetID} class="Ada-listRow">
+                            <td className="Ada-listItem">{asset.AssetName}</td>
+                            <td className="Ada-listItem">{asset.Description}</td>
+                            <td className="Ada-listItem">{asset.AvailabilityStatus.toString()}</td>
+                            <td className="Ada-listItem">
+                              <Button variant="outlined" onClick={() => deleteAsset(asset.AssetID)} style={{ marginLeft: '20px', width: '80%' }}>
+                                Delete
+                              </Button>
+                            </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                :
+                  <Typography variant="h4" sx={{textAlign: 'center'}}>
+                    <text className="BrasikaFont grayFont floatUpIn" >
+                      Currently there are no asset to diplay.
+                    </text>
+                  </Typography>
+              }
+            </Box>
+          </Box>
+        </Box>
+      </Box>
   );
 }
 

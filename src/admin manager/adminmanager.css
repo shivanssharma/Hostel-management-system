@@ -1,16 +1,29 @@
-.style_three{
-    
-        width: 1000px;
-        height: auto;
-        margin-left: 160px;
-        padding: 100px;
-        background-color: #fffffffa; /* Background color */
-        border-radius: 8px / 8px; /* Border radius for rounded corners */
-        padding-top: 30px;
-        margin-top: 80px;
-        font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif;
-        border: 3px solid rgba(46, 42, 42, 0.764); /* Border color and thickness */
-        font-size: 1.25rem;
-        overflow:visible;
-       
+.CS-Style{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        width: 70%;
+        height: 80vh;
+        padding: 5%;
+        margin: auto; 
+}
+
+.CS-FormContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+}
+.CS-FormGroup{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 2%;
+        cursor: pointer;
+}
+
+.CS-FormGroup:hover{
+        transition: all 0.3s ease-in-out;
+        background-color: rgb(244, 242, 242);
 }

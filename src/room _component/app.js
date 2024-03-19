@@ -95,10 +95,14 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
-import { FormControl } from "@mui/material";
+import { Box, FormControl, Typography } from "@mui/material";
 import SelectAllTransferList from "./list.js";
 import axios from "axios";
 import AdminHorizontalNav2 from "../navbars/HorizontalNav/Adminhnav2.jsx";
+import { server, serverPort } from "../utils/Constants.jsx";
+
+import "../asset/sharedAnimation.css"
+import "../asset/sharedCss.css"
 
 function AdminRoomAllotment() {
   // const [leftItems, setLeftItems] = useState([]);
@@ -135,7 +139,7 @@ function AdminRoomAllotment() {
         // Function to fetch 3UG list from Django backend
         useEffect(() => {
           // Fetch room list
-          // axios.get('http://127.0.0.1:8000/api/rooms/')
+          // axios.get(server+':'+serverPort+'/api/rooms/')
           //   .then(response => {
           //     setRoomList(response.data);
           //   })
@@ -145,7 +149,7 @@ function AdminRoomAllotment() {
 
           // Fetch 3UG list
           
-            axios.get(`http://127.0.0.1:8000/api/room/${selectedFloor}/${selectedRoom}/${selectedPosition}`)
+            axios.get(`${server}:${serverPort}/api/room/${selectedFloor}/${selectedRoom}/${selectedPosition}`)
             .then(response => {
               setRoomList(response.data,);
               console.log('hello world, we got list data: ')
@@ -163,7 +167,7 @@ function AdminRoomAllotment() {
           // Fetch 3UG list if room leader option is selected
           if (selectedPosition === "room leader" || selectedPosition === "room mate") {
 
-            axios.get(`http://127.0.0.1:8000/api/students/${selectedDropdown}/`)
+            axios.get(`${server}:${serverPort}/api/students/${selectedDropdown}/`)
               .then(response => {
                 setStudentList(response.data);
               })
@@ -201,7 +205,7 @@ function AdminRoomAllotment() {
 
   const handleSubmit = () => {
     // Make a POST request to save the updated data in the backend
-    axios.post("http://127.0.0.1:8000/api/save_data/", {
+    axios.post(server+':'+serverPort+"/api/save_data/", {
       // roomList: roomList,
       rightList: rightList,
       selectedFloor: selectedFloor,
@@ -221,116 +225,130 @@ function AdminRoomAllotment() {
     });
   };
   console.log("this is the room list",roomList)
- 
+//  Todo: Test app.js
   return (
-    <header>
-    <AdminHorizontalNav2 />
-    <div className="style">
-      <h2>Allocate Room</h2>
-      
-      <FormControl className="floor">
-        <InputLabel id="label-id_1">Floor</InputLabel>
-        <Select
-          labelId="select-id_1"
-          id="id_1"
-          value={selectedFloor}
-          onChange={handleFloorChange}
+    <Box >
+      <AdminHorizontalNav2 />
+      <Box sx={{display: 'flex', flexDirection: 'column', width: '80%', margin: 'auto', p: '5%'}}>
+        <Typography 
+          variant="h3" className="grayFont" 
+          sx={{display: 'flex', justifyContent: 'flex-start', paddingBottom: '5%'}}
         >
-          <MenuItem value="" disabled>
-            Select floor
-          </MenuItem>
-          <MenuItem value="a">a</MenuItem>
-          <MenuItem value="b">b</MenuItem>
-          <MenuItem value="c">c</MenuItem>
-        </Select>
-      </FormControl>
+          <text className="BrasikaFont floatRightIn">
+          Allocate Room
+          </text>
+        </Typography>
+        
+        <Box sx={{width: '100%'}} className="floatUpIn">
+          <FormControl sx={{width:'48%', marginRight: '1%'}}>
+            <InputLabel id="label-id_1">Floor</InputLabel>
+            <Select
+              labelId="select-id_1"
+              id="id_1"
+              value={selectedFloor}
+              onChange={handleFloorChange}
+            >
+              <MenuItem value="" disabled>
+                Select floor
+              </MenuItem>
+              <MenuItem value="a">a</MenuItem>
+              <MenuItem value="b">b</MenuItem>
+              <MenuItem value="c">c</MenuItem>
+            </Select>
+          </FormControl>
 
-      <FormControl className="room" style={{paddingLeft:'45px'}}>
-        <InputLabel id="label-id_2"style={{paddingLeft:'60px'}}>Room number</InputLabel>
-        <Select
-          labelId="select-id_2"
-          id="id_2"
-          value={selectedRoom}
-          onChange={handleRoomChange}
-        >
-          <MenuItem value="1">1</MenuItem>
-          <MenuItem value="2">2</MenuItem>
-          <MenuItem value="3">3</MenuItem>
-        </Select>
-      </FormControl>
-      <br/><br/>
-      <FormControl className="position" >
-        <InputLabel id="label-id_3">Position</InputLabel>
-        <Select
-          labelId="select-id_3"
-          id="id_3"
-          value={selectedPosition}
-          onChange={handlePositionChange}
-        >
-          <MenuItem value="room leader">Room Leader</MenuItem>
-          <MenuItem value="room mate">Room mate</MenuItem>
-        </Select>
-      </FormControl>
+          <FormControl sx={{width:'48%', marginLeft: '1%'}}>
+            <InputLabel id="label-id_2"style={{paddingLeft:'60px'}}>Room number</InputLabel>
+            <Select
+              labelId="select-id_2"
+              id="id_2"
+              value={selectedRoom}
+              onChange={handleRoomChange}
+            >
+              <MenuItem value="1">1</MenuItem>
+              <MenuItem value="2">2</MenuItem>
+              <MenuItem value="3">3</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        
+        <Box sx={{width: '100%', marginTop: '3%'}} className="floatUpIn">
+          <FormControl sx={{width:'48%', marginRight: '1%'}}>
+            <InputLabel id="label-id_3">Position</InputLabel>
+            <Select
+              labelId="select-id_3"
+              id="id_3"
+              value={selectedPosition}
+              onChange={handlePositionChange}
+            >
+              <MenuItem value="room leader">Room Leader</MenuItem>
+              <MenuItem value="room mate">Room mate</MenuItem>
+            </Select>
+          </FormControl>
 
-      {selectedPosition === "room leader" && (
-        <FormControl className="roomLeader" style={{paddingLeft:'45px'}}>
-          <InputLabel id="label-id_4" style={{paddingLeft:'60px'}}>Select Rooms for room-leaders</InputLabel>
-          <Select
-            labelId="select-id_4"
-            id="id_4"
-            value={selectedDropdown}
-            onChange={handleDropdownChange}
-          >
-            <MenuItem value="3 ug">3 Ug</MenuItem>
-            <MenuItem value="1 msc">1 Msc</MenuItem>
-            <MenuItem value="2 msc">2 Msc</MenuItem>
-          </Select>
-        </FormControl>
-      )}
+          {selectedPosition === "room leader" && (
+            <FormControl sx={{width:'48%', marginLeft: '1%'}}>
+              <InputLabel id="label-id_4" >Select Rooms for room-leaders</InputLabel>
+              <Select
+                labelId="select-id_4"
+                id="id_4"
+                value={selectedDropdown}
+                onChange={handleDropdownChange}
+              >
+                <MenuItem value="3 ug">3 Ug</MenuItem>
+                <MenuItem value="1 msc">1 Msc</MenuItem>
+                <MenuItem value="2 msc">2 Msc</MenuItem>
+              </Select>
+            </FormControl>
+          )}
+        </Box>
 
-      {selectedPosition === "room mate" && (
-        <FormControl className="roommate" style={{paddingLeft:'45px'}}>
-          <InputLabel id="label-id_5" style={{paddingLeft:'60px'}}>Select Rooms for Roommate</InputLabel>
-          <Select
-            labelId="select-id_5"
-            id="id_5"
-            value={selectedDropdown}
-            onChange={handleDropdownChange}
-          >
-            
-            <MenuItem value="1 ug">1 Ug</MenuItem>
-            <MenuItem value="2 ug">2 Ug</MenuItem>
-            <MenuItem value="3 ug">3 Ug</MenuItem>
-            <MenuItem value="1 msc">1 Msc</MenuItem>
-            <MenuItem value="2 msc">2 Msc</MenuItem>
-          </Select>
-        </FormControl>
-      )}
-      <br/><br/>
-      <div style={{paddingRight:'195px'}}>
-      {
-        roomList ? 
-        studentList && 
-        <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList}/> 
-        : studentList && <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList}/>
-      }
-     
-      {/* <div>
-        {(roomList === undefined || roomList.length === 0 || studentList === undefined) && (
-          <div>
-            <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList} />
-          </div>
+        {selectedPosition === "room mate" && (
+          <FormControl className="roommate" sx={{width:'48%', marginLeft: '1%'}}>
+            <InputLabel id="label-id_5">Select Rooms for Roommate</InputLabel>
+            <Select
+              labelId="select-id_5"
+              id="id_5"
+              value={selectedDropdown}
+              onChange={handleDropdownChange}
+            >
+              
+              <MenuItem value="1 ug">1 Ug</MenuItem>
+              <MenuItem value="2 ug">2 Ug</MenuItem>
+              <MenuItem value="3 ug">3 Ug</MenuItem>
+              <MenuItem value="1 msc">1 Msc</MenuItem>
+              <MenuItem value="2 msc">2 Msc</MenuItem>
+            </Select>
+          </FormControl>
         )}
-      </div> */}
-      
 
-      </div>
-      <br/>
-    {loginError && <p style={{ color: 'Green' }}>{loginError}</p>} 
-    <br/>
-    <Button variant="outlined" onClick={handleSubmit}>Submit</Button>
-    </div>
-    </header>
+        <Box style={{paddingRight:'195px'}}>
+          {
+            roomList ? 
+            studentList && 
+            <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList}/> 
+            : studentList && <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList}/>
+          }
+        
+          {/* <div>
+            {(roomList === undefined || roomList.length === 0 || studentList === undefined) && (
+              <div>
+                <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList} />
+              </div>
+            )}
+          </div> */}
+
+          <Box sx={{mt: '5%', mb: '5%', p: '5%', borderRadius: '7px', background: '#f5efef'}} className="floatUpIn">
+            {
+              roomList && studentList && <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList}/>
+            }
+          </Box>
+
+          {loginError && <p style={{ color: 'Green' }}>{loginError}</p>} 
+          <Button sx={{p: '1%', width: '10%'}} className="floatUpIn" variant="outlined" onClick={handleSubmit}>Submit</Button>
+        </Box>
+      </Box>
+    </Box>
   );
 }
 

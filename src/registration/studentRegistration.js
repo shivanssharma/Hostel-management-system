@@ -484,7 +484,7 @@
 // export default StudentRegistration;
 //trial code 2
 import React, { useState, useEffect } from "react";
-import { TextField, Autocomplete, Button, Snackbar } from "@mui/material";
+import { TextField, Autocomplete, Button, Snackbar, Typography } from "@mui/material";
 import StudentHorizontalNav2 from "../navbars/HorizontalNav/StudenthNav2.jsx";
 import './register.css';
 import Electronic from '../electronics/electronics.js';
@@ -592,20 +592,25 @@ function StudentRegistration() {
                 {submitted ? (
                     <Electronic />
                 ) : (
-                    <>
-                        <h1>Hello, {username}</h1>
-                        <h1>Register Yourself</h1>
-                        <h3>Registration number </h3>
+                    <>                        
+                        <Typography variant="h2" sx={{pb: '5%'}}>
+                            <text className="BrasikaFont floatRightIn grayFont">
+                                Hello, {username}
+                            </text>
+                        </Typography>
+                        <h1 className="BrasikaFont floatRightIn grayFont">Register Yourself</h1>
+                        <h3 className="BrasikaFont floatRightIn grayFont">Registration number </h3>
                         <TextField name="regis" value={formData.regis} onChange={handleChange} label="Registration number" variant="outlined" required style={textFieldStyle}/>
                         <br />
-                        <div className="TwoTextFieldsTogether">
-                            <h3>First name </h3>
-                            <TextField name="fname" value={formData.fname} onChange={handleChange} label="First name" variant="outlined" required />
-                            <h3>Last name </h3>
-                            <TextField name="lname" value={formData.lname} onChange={handleChange} label="Last name" variant="outlined" required />
+                        <div className="SR-dualInput">
+                            <h3 className="BrasikaFont floatRightIn grayFont">First name </h3>
+                            <TextField className="floatRightIn" name="fname" value={formData.fname} onChange={handleChange} label="First name" variant="outlined" required />
+                            <h3 className="BrasikaFont floatRightIn grayFont">Last name </h3>
+                            <TextField className="floatRightIn" name="lname" value={formData.lname} onChange={handleChange} label="Last name" variant="outlined" required />
                         </div>
-                        <h3>Course and year</h3>
+                        <h3 className="BrasikaFont floatRightIn grayFont">Course and year</h3>
                         <Autocomplete
+                             className="floatRightIn"
                             disablePortal
                             id="combo-box-demo"
                             options={courses}
@@ -617,35 +622,33 @@ function StudentRegistration() {
                             required
                         />
 
-                        <br />
-                        <h3>Date-of-Joining </h3>
-                        <TextField type="date" name="date" value={formData.date} onChange={handleChange} variant="outlined" required style={textFieldStyle}/>
+                        <h3 className="BrasikaFont floatRightIn grayFont">Date-of-Joining </h3>
+                        <TextField className="floatRightIn" type="date" name="date" value={formData.date} onChange={handleChange} variant="outlined" required style={textFieldStyle}/>
                         <br />
                         <hr />
-                        <h3>Parents Details:</h3><br />
-                        <div className='TwoTextFieldsTogether'>
-                            <h3>Father name</h3>
-                            <TextField name="father" value={formData.father} onChange={handleChange} label="Father name" variant="outlined" required />
-                            <h3>Mother name </h3>
-                            <TextField name="mother" value={formData.mother} onChange={handleChange} label="Mother name" variant="outlined" required />
+                        <h3 className="BrasikaFont floatRightIn grayFont">Parents Details:</h3><br />
+                        <div className='SR-dualInput'>
+                            <h3 className="BrasikaFont floatRightIn grayFont">Father name</h3>
+                            <TextField className="floatRightIn" name="father" value={formData.father} onChange={handleChange} label="Father name" variant="outlined" required />
+                            <h3 className="BrasikaFont floatRightIn grayFont">Mother name </h3>
+                            <TextField className="floatRightIn" name="mother" value={formData.mother} onChange={handleChange} label="Mother name" variant="outlined" required />
                         </div>
                         <hr />
-                        <h3>Personal Details:</h3><br />
-                        <h3>Date-of-birth </h3>
-                        <TextField style={textFieldStyle} type="date" name="birth" value={formData.birth} onChange={handleChange} variant="outlined" required />
-                        <br />
-                        <div className='TwoTextFieldsTogether'>
-                            <h3>Email id</h3>
-                            <TextField name="email" value={formData.email} onChange={handleChange} label="Email-id" variant="outlined" required />
-                            <h3>Phone Number</h3>
-                            <TextField name="phone" value={formData.phone} onChange={handleChange} label="Phone Number" variant="outlined" required />
+                        <h3 className="BrasikaFont floatRightIn grayFont">Personal Details:</h3><br />
+                        <h3 className="BrasikaFont floatRightIn grayFont">Date-of-birth </h3>
+                        <TextField className="floatRightIn" style={textFieldStyle} type="date" name="birth" value={formData.birth} onChange={handleChange} variant="outlined" required />
+
+                        <div className='SR-dualInput'>
+                            <h3 className="BrasikaFont floatRightIn grayFont">Email id</h3>
+                            <TextField className="floatRightIn" name="email" value={formData.email} onChange={handleChange} label="Email-id" variant="outlined" required />
+                            <h3 className="BrasikaFont floatRightIn grayFont">Phone Number</h3>
+                            <TextField className="floatRightIn" name="phone" value={formData.phone} onChange={handleChange} label="Phone Number" variant="outlined" required />
                         </div>
-                        <br/>
-                        <h3>Address</h3>
-                        <TextField style={textFieldStyle} name="address" value={formData.address} onChange={handleChange} label="Address" variant="outlined" required />
-                        <hr />
-                        <br />
-                        <Button variant="outlined" onClick={handleSubmit}>Submit</Button>
+                        
+                        <h3 className="BrasikaFont floatRightIn grayFont">Address</h3>
+                        <TextField className="floatRightIn" style={textFieldStyle} name="address" value={formData.address} onChange={handleChange} label="Address" variant="outlined" required />
+                        
+                        <Button className="floatRightIn" variant="outlined" sx={{p: '2%'}} onClick={handleSubmit}>Submit</Button>
                     </>
                 )}
             </div>

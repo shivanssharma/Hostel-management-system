@@ -1,12 +1,25 @@
-import React,{useEffect} from 'react';
-import { Link ,useLocation,useNavigate} from 'react-router-dom';
-import '../HomePage/homepage.css';
+import React, { useState, useEffect } from 'react';
+import { Link ,useLocation, useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import { Box, IconButton, Typography, useMediaQuery } from '@mui/material';
+import { AccountCircleRounded, CottageRounded, HealthAndSafetyRounded, LogoutRounded, NotificationsActiveRounded, RoomPreferencesRounded } from '@mui/icons-material';
+import '../HomePage/homepage.css'
+import "../asset/sharedAnimation.css"
+import { server, serverPort } from '../utils/Constants';
 
-const ActiveuserNavbar = () =>{
+const ActiveuserNavbar = (props) =>{
   const location = useLocation();
-  const username = location.state && location.state.username;
-  const navigate = useNavigate();
+  const navigate= useNavigate()
+  const username = (location.state && location.state.username || localStorage.getItem('username'));
+  const links= [
+    {"title": "Home", "link": "/student-home", icon: <CottageRounded />},
+    {"title": "Enrollment", "link": "/register", icon: <AccountCircleRounded />},
+    {"title": "Health Care", "link": "/student-ailment", icon: <HealthAndSafetyRounded />},
+    {"title": "Check Room", "link": "/student-viewroom", icon : <RoomPreferencesRounded />},
+    {"title": "Notifications", "link": "/studentnotifications", icon: <NotificationsActiveRounded />},
+  ]
+  const [activeNav, setActiveNav] = useState(0);
+  const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('sm')); // Change 'sm' to other breakpoints as needed
 
   useEffect(() => {
     const isAuthenticated = localStorage.getItem('is_authenticated');
@@ -16,8 +29,17 @@ const ActiveuserNavbar = () =>{
     }
   }, [navigate]);
 
+  function selectItem(index){
+    if (activeNav === index)
+      return
+    setActiveNav(index)
+    navigate(links[index].link)
+    if(isSmallScreen)
+      props.callback(false)
+  }
+  
   const handleLogout = () => {
-    axios.post('http://127.0.0.1:8000/api/logout/') // Assuming this is the endpoint for logout in your backend
+    axios.post(server+':'+serverPort+'/api/logout/') // Assuming this is the endpoint for logout in your backend
       .then(response => {
         // Handle successful logout response
         console.log(response.data.message);
@@ -30,23 +52,41 @@ const ActiveuserNavbar = () =>{
         console.error('Logout failed:', error);
       });
   };
+
   return(
   <nav className="sidebar">
-    <div id='image'>
+    <Box className='image hide'>
       <img src="images\sssihl_logo.png" alt='SSSIHL'></img>
-    </div>
-    <hr style={{color:'white'}}/>
-    <div className="username-container">
-      <h3 className="greeting">Hello, <span className="username">{username}</span></h3>
-    </div>
-    <Link id='link' to="/studenthome">Home</Link> <br />
-    <Link id='link' to="/register">Enrolment</Link> <br />
-    <Link id='link' to="/studentailment">Health Care</Link> <br />
-    <Link id='link' to="/studentviewroom">Check Room</Link> <br />
-    <Link id='link' to="/studentnotifications"> Notifications</Link> <br />
+    </Box>
+
+    <Box className="link-container">
+      <Typography variant='h4' className="greeting floatRightIn">Hello, <br/>
+        <span className="username BrasikaFont">{username}</span>
+      </Typography>
+      {
+        links.map((data, index) => (
+          <Box key={index} className={`floatRightIn ${index === activeNav ? "activeLink" : "link"}`} onClick={() => selectItem(index)}>
+            <IconButton className="linkIcon">
+              {data.icon}
+            </IconButton>
+            <Link className="LinkText" to={data.link} >{data.title}</Link>
+          </Box>
+        ))
+      }
+      <Box className={`floatRightIn link `} onClick={handleLogout}>
+        <IconButton className="linkIcon">
+          <LogoutRounded />
+        </IconButton>
+        <Link className="LinkText" >Logout</Link>
+      </Box>
+      {/* <Link className='link' to="/student-home">Home</Link> <br />
+      <Link className='link' to="/register">Enrolment</Link> <br />
+      <Link className='link' to="/student-ailment">Health Care</Link> <br />
+      <Link className='link' to="/student-viewroom">Check Room</Link> <br />
+      <Link className='link' to="/studentnotifications">Notifications</Link> <br /> */}
+    </Box>
     { /* Add other activeuser-specific links as needed */ }
 
-    <button onClick={handleLogout}>Logout</button>
   </nav>
 );
 }
