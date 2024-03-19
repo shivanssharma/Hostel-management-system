@@ -1,16 +1,21 @@
-.Style {
-  width: 500px;
-  height: auto;
-  margin: auto;
-  padding: 100px;
-  background-color: #fffffff5;
-  border-radius: 8px;
-  padding-top: 30px;
-  margin-top: 60px;
-  font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif;
-  border: 2px solid #000000; /* Black border color */
+.HV-Container{
+  width: 80%;
+  padding: 5%;
+  margin: auto;  
+}
+.HV-Style{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.HV-Items{
+  width: 45%;
+  margin: 2%;
 }
 
-h3{
-  justify-content: center;
+.HV-input {
+  flex: 1;
+  margin-top: 3%;
 }

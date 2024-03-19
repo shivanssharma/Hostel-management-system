@@ -17,3 +17,78 @@
   .carousel-arrow.right {
     right: 10px;
   }
+
+
+
+
+
+
+
+.carousel-Container{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+    /* border: 2px solid blue; */
+    padding: 0%;
+}
+.carousel-Container:hover{
+  .icons{
+    border-radius: 100%;
+    background-color: #615160;
+    color: #d9c6ba;
+    opacity: 1;
+  }
+  .carousel-buttons .icons{
+    box-shadow: 2px 2px 14px black;
+    /* background: linear-gradient(to right, rgb(44, 44, 44, 0.7), transparent, rgb(44, 44, 44, 0.7)); */
+  }
+}
+
+.carousel-buttons{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1%;
+  transition: all 0.5s ease-in-out;
+  .icons{
+    /* border-radius: 100%; */
+    background-color: #615160;
+    opacity: 0.5;
+    transition: all 0.3s ease-in-out;
+  }
+  z-index: 700;
+}
+.carousel-image{
+  width: 100%;
+  /* height: 10%; */
+  /* padding-right: 1%; */
+  transition: all 1s ease-in-out;
+  align-self: center;
+  justify-self: center;
+}
+.carousel-image img, .centerImg{
+  width: 100%;
+  height: auto;
+  transition: all 1s ease-in;
+}
+.leftImg,.rightImg{
+  /* border: 2px solid green; */
+  width: 50%;
+  transition: all 1s ease-in;
+  filter: blur(2px);
+}
+.hideImg{
+  width: 0%;
+  transition: all 1s ease-in;
+  filter: blur(12px);
+}
+.invisible{
+  opacity: 0;
+}

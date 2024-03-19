@@ -1,40 +1,22 @@
-.Style{
-  width: 700px;
-  height: auto;
-  margin: auto;
-  padding: 100px;
-  background-color: #fffffffa; /*Background color */
-  border-radius: 8px / 8px; /* Border radius for rounded corners */
-  border: 3px solid black;
-  padding-top: 30px;
-  margin-top: 60px;
-  font-family: TimesNewRoman,Times New Roman,Times,Baskerville,Georgia,serif; 
-  text-align: center;
-  font-size: 1.25rem;
-  
+.Md-Style{
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  padding: 5%;
+  margin: auto;    
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-
-
-Button {
-  margin-right: 15px;
+.Md-Listcontainer{ 
   cursor: pointer;
-  
-  
+  height: 60vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex: 1;
 }
 
-#one{
-  margin-right: 50px;
-  width: 18.5%
-  
-}
-
-#two{
-  margin-left: 30px;
-  width: 18.5%
-}
-
-th,h1,h2,td{
-  font-weight: normal;
+.MD-ListText{
+  text-transform: capitalize;
 }
 

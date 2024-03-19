@@ -7,10 +7,14 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  Box,
+  Typography,
 } from "@mui/material";
 import axios from "axios";
 import "./hpvisit.css"; // Update this with your CSS file name
+import "../asset/sharedAnimation.css"
 import StudentHorizontalNav from "../navbars/HorizontalNav/student_hnav";
+import { server, serverPort } from "../utils/Constants";
 
 function HospitalVisitForm() {
   
@@ -24,7 +28,7 @@ function HospitalVisitForm() {
 
   useEffect(() => {
     // Fetch Hospitals from Django API
-    fetch("http://127.0.0.1:8000/api/hospitals/")
+    fetch(server+':'+serverPort+"/api/hospitals/")
       .then((response) => response.json())
       .then((data) => {
         // Filter out duplicate hospital names
@@ -47,7 +51,7 @@ function HospitalVisitForm() {
 
     // Send data to the backend API endpoint
     axios
-      .post("http://127.0.0.1:8000/api/hospital_visits/", data)
+      .post(server+':'+serverPort+"/api/hospital_visits/", data)
       .then((response) => {
         console.log(response.data);
         // Handle success or navigate to another page
@@ -70,7 +74,7 @@ function HospitalVisitForm() {
     if (selectedHospital) {
       // Fetch Hospital Types based on the selected hospital
       fetch(
-        `http://127.0.0.1:8000/api/hospital-types/?hospital_id=${selectedHospital.HospitalID}`
+        `${server}:${serverPort}/api/hospital-types/?hospital_id=${selectedHospital.HospitalID}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -90,7 +94,7 @@ function HospitalVisitForm() {
     if (selectedHospitalType) {
       // Fetch Departments based on the selected hospital type
       fetch(
-        `http://127.0.0.1:8000/api/departments/?hospital_type=${selectedHospitalType.hospitalType}`
+        `${server}:${serverPort}/api/departments/?hospital_type=${selectedHospitalType.hospitalType}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -107,82 +111,103 @@ function HospitalVisitForm() {
   }, [selectedHospitalType]);
 
   return (
-    <header>
-    <StudentHorizontalNav/>
-    <div className="Style">
-      <h1>Hospital Visit Form</h1>
-      <hr />
-      
-      <div>
-        <h3>Hospital Name</h3>
-        <FormControl variant="outlined" style={{ width: "100%" }}>
-          <InputLabel id="hospital-label">Hospital</InputLabel>
-          <Select
-            labelId="hospital-label"
-            id="hospital"
-            sx={{ width: 500 }}
-            value={selectedHospital ? selectedHospital.HospitalID : ""}
-            onChange={handleHospitalChange}
-            label="Hospital"
-          >
-            {hospitalList.map((hospital) => (
-              <MenuItem key={hospital.HospitalID} value={hospital.HospitalID}>
-                {hospital.HospitalName}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </div>
+    <Box>
+      <StudentHorizontalNav/>
+      <Box className="HV-Container">
+        <Typography variant="h3" className="AdA-title grayFont" sx={{display: 'flex', justifyContent: 'flex-start'}}>
+          <text className="BrasikaFont floatRightIn">
+          Hospital Visit Form
+          </text>
+        </Typography>
+        <Box className="HV-Style">
+          {/* <Box> */}
 
-      <h3>Hospital Type </h3>
-      <Autocomplete
-        disablePortal
-        id="hospital-type"
-        options={hospitalTypes}
-        getOptionLabel={(option) => option.hospitalType}
-        getOptionSelected={(option, value) =>
-          option.hospitalType === value.hospitalType
-        }
-        sx={{ width: 500 }}
-        renderInput={(params) => <TextField {...params} label="Hospital Type" />}
-        onChange={(event, newValue) => setSelectedHospitalType(newValue)}
-      />
+            <Box className="HV-Items">
+              <h3 className="HV-input BrasikaFont floatRightIn grayFont">Hospital Name</h3>
+              <FormControl variant="outlined" style={{ width: "100%" }}>
+                <InputLabel id="hospital-label">Hospital</InputLabel>
+                <Select
+                  className="floatRightIn"
+                  labelId="hospital-label"
+                  id="hospital"
+                  sx={{ width: '100%' }}
+                  value={selectedHospital ? selectedHospital.HospitalID : ""}
+                  onChange={handleHospitalChange}
+                  label="Hospital"
+                >
+                  {hospitalList.map((hospital) => (
+                    <MenuItem key={hospital.HospitalID} value={hospital.HospitalID}>
+                      {hospital.HospitalName}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
 
-      <h3>Department </h3>
-      <Autocomplete
-        disablePortal
-        id="department"
-        options={departments}
-        getOptionLabel={(option) => option.departmentName}
-        sx={{ width: 500 }}
-        renderInput={(params) => <TextField {...params} label="Department" />}
-      />
-      <div>
-        <h3>Purpose</h3>
-        <TextField
-          id="filled-basic"
-          label="Purpose"
-          variant="outlined"
-          sx={{ width: 500 }}
-          onChange={(e) => setPurpose(e.target.value)}
-        />
-      </div>
-      <div>
-        <h3>Visit Date</h3>
-        <TextField
-          id="filled-basic"
-          variant="outlined"
-          type="datetime-local"
-          sx={{ width: 500 }}
-          onChange={(e) => setVisitDate(e.target.value)}
-        />
-      </div>
-      <br />
-      <Button variant="outlined" onClick={handleSave}>
-        Save
-      </Button>
-    </div>
-  </header>
+            <Box  className="HV-Items">
+              <h3 className="HV-input BrasikaFont floatRightIn grayFont">Hospital Type </h3>
+              <Autocomplete
+                className="floatRightIn"
+                disablePortal
+                id="hospital-type"
+                options={hospitalTypes}
+                getOptionLabel={(option) => option.hospitalType}
+                getOptionSelected={(option, value) =>
+                  option.hospitalType === value.hospitalType
+                }
+                sx={{ width: '100%' }}
+                renderInput={(params) => <TextField {...params} label="Hospital Type" />}
+                onChange={(event, newValue) => setSelectedHospitalType(newValue)}
+              />
+            </Box>
+
+            <Box className="HV-Items">
+              <h3 className="HV-input BrasikaFont floatRightIn grayFont">Department </h3>
+              <Autocomplete
+                className="floatRightIn"
+                disablePortal
+                id="department"
+                options={departments}
+                getOptionLabel={(option) => option.departmentName}
+                sx={{ width: '100%' }}
+                renderInput={(params) => <TextField {...params} label="Department" />}
+              />
+            </Box>
+          {/* </Box> */}
+
+          <Box className="HV-Items">
+            <h3 className="HV-input BrasikaFont floatRightIn grayFont">Purpose</h3>
+            <TextField
+              className="floatRightIn"
+              id="filled-basic"
+              label="Purpose"
+              variant="outlined"
+              sx={{ width: '100%' }}
+              onChange={(e) => setPurpose(e.target.value)}
+            />
+          </Box>
+
+          <Box className="HV-Items">
+            <h3 className="HV-input BrasikaFont floatRightIn grayFont">Visit Date</h3>
+            <TextField
+              className="floatRightIn"
+              id="filled-basic"
+              variant="outlined"
+              type="datetime-local"
+              sx={{ width: '100%' }}
+              onChange={(e) => setVisitDate(e.target.value)}
+            />
+          </Box>
+          <Box className="HV-Items"/> 
+          <Box className="HV-Items floatRightIn">
+            <Button variant="outlined" onClick={handleSave}>
+              Save
+            </Button>
+          </Box>
+          <Box className="HV-Items"/>
+        </Box>
+      </Box>
+  </Box>
   );
 }
 

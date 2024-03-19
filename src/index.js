@@ -14,6 +14,7 @@ import ReactDOM from 'react-dom';
 // import App8 from "./form/app8";
 // import App9 from "./home_h2/app9";
 import App0 from './App';
+import { ThemeProvider, createTheme } from '@mui/material';
 // import SignInSide from "./loginpage/login";
 // import SignUpSide from "./loginpage/signup";
 // import Electronic from "./electronics/electronics";
@@ -36,7 +37,18 @@ import App0 from './App';
 // ReactDOM.render(<App7 />,document.getElementById("root"));
 // ReactDOM.render(<App8 />,document.getElementById("root"));
 // ReactDOM.render(<App9 />,document.getElementById("root"));
-ReactDOM.render(<App0 />,document.getElementById("root"));
+
+const createLightTheme = createTheme({
+  palette: {
+      mode: "light",
+  },
+});
+
+ReactDOM.render(
+  <ThemeProvider theme={createLightTheme} >
+    <App0 />
+  </ThemeProvider>
+,document.getElementById("root"));
 // ReactDOM.render(<Router>
   //   <SignInSide />
   // </Router>,document.getElementById("root"));

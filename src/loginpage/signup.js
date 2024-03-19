@@ -9,12 +9,12 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
+import { useNavigate } from 'react-router-dom'
 
-
-const defaultTheme = createTheme();
+import "../asset/sharedAnimation.css"
+import { server, serverPort } from '../utils/Constants';
 
 export default function SignUpSide() {
   const [username, setUsername] = useState('');
@@ -22,6 +22,7 @@ export default function SignUpSide() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackBarMessage, setSnackBarMessage] = useState('');
+  const navigate= useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -42,7 +43,7 @@ export default function SignUpSide() {
     };
   
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/signup/', {
+      const response = await fetch(server+':'+serverPort+'/api/signup/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,7 +54,14 @@ export default function SignUpSide() {
         // Handle success, e.g., redirect user to login page
         setSnackBarMessage("SignUp successful");
         setSnackbarOpen(true);
-        
+        // Going back to Login Page to Login
+        setTimeout(() => {
+          setSnackBarMessage("Taking you to Login Page.");
+          setSnackbarOpen(true);
+          setTimeout(() => {
+            navigate("/")
+          }, 2000)
+        }, 1000)
       } else {
         // Handle error
         console.error('Signup failed');
@@ -75,23 +83,24 @@ export default function SignUpSide() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <Box>
     <Grid container component="main" sx={{ height: '100vh' }}>
       <CssBaseline />
-      <div className='grid-item'>
+      <div className='grid-item fadeIn'>
       <Grid />
       </div>
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid 
+          sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', p: '2%' }} 
+          item xs={12} sm={8} md={5} component={Paper} elevation={6} square
+        >
           <Box
             sx={{
-              my: 8,
-              mx: 4,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar className='zoomIn' sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />                                     
             </Avatar> 
             <Typography component="h1" variant="h5">
@@ -99,6 +108,7 @@ export default function SignUpSide() {
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}> 
               <TextField
+                className="floatUpIn"
                 margin="normal"
                 fullWidth
                 id="username"
@@ -110,6 +120,7 @@ export default function SignUpSide() {
                 onChange={(e) => setUsername(e.target.value)}
               />
               <TextField
+                className="floatUpIn"
                 margin="normal"
                 fullWidth
                 name="newpassword"
@@ -121,6 +132,7 @@ export default function SignUpSide() {
                 onChange={(e) => setNewPassword(e.target.value)}
               />
               <TextField
+                className="floatUpIn"
                 margin="normal"
                 fullWidth
                 name="confirmpassword"
@@ -132,6 +144,7 @@ export default function SignUpSide() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
               <Button
+                className="floatUpIn"
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -148,7 +161,7 @@ export default function SignUpSide() {
                     message={snackBarMessage}>
                   </Snackbar>
                 </Grid>
-                <Grid item>
+                <Grid item className="floatUpIn">
                   <Link component={RouterLink} to="/" variant="body2">
                     {"Already have account? Sign In"}
                   </Link>
@@ -159,7 +172,7 @@ export default function SignUpSide() {
         </Grid>
       </Grid>
      
-    </ThemeProvider>
+    </Box>
   );
 }
 

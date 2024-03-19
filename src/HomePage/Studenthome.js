@@ -3,18 +3,20 @@ import React from "react";
 import Layout from "./Home";
 import './homepage.css';
 import ActiveuserNavbar from "../sidenavbar/student";
+import { Box } from "@mui/material";
 const StudentHome = () => {
+  // const [open, setOpen]
     return (
-      <div className="layout">
+      <Box className="layout">
         {/* Home component */}
-        <div className="left-content">
+        <Box className="" sx={{ width: '100%'}}>
           <Layout />
-        </div>
+        </Box>
         {/* App1 (Sidenavbar) component */}
-        <div className="right-content">
+        {/* <Box className="" sx={{border: '2px solid black'}}>
           <ActiveuserNavbar />
-        </div>
-      </div>
+        </Box> */}
+      </Box>
     );
   };
 

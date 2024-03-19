@@ -1,15 +1,17 @@
 
 //-----------------------------------------------------------------------------------
 import React, { useState, useRef } from "react";
-import { TextField, Autocomplete, Button } from "@mui/material";
+import { TextField, Autocomplete, Button, Box } from "@mui/material";
 // import App10 from "../navbarHealth"; // Remove if unused
 import { Outlet } from "react-router-dom";
 import Nav2 from "../navbars/Nav2";
 import './register.css'
+import "../asset/sharedAnimation.css"
+import { server, serverPort } from "../utils/Constants";
 function StudentRegistration() {
   const textFieldStyle = {
-    width: '75%', // Adjust as needed for your design
-    marginBottom: '15px', // Adjust the margin for spacing between text fields
+    width: '100%', // Adjust as needed for your design
+    marginBottom: '3%', // Adjust the margin for spacing between text fields
     
 }
   const courses = [
@@ -90,7 +92,7 @@ function StudentRegistration() {
     console.log(selectedCourse.value); // Log for verification (optional)
 
     // Send data using fetch or a similar mechanism
-    fetch("http://127.0.0.1:8000/api/form_data/", {
+    fetch(server+':'+serverPort+"/api/form_data/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -112,77 +114,81 @@ function StudentRegistration() {
   };   
     
     return(
-        <header>
-           <Nav2 />
-        <div className="styletwo">
-            <h3>Registration number </h3>
-            <TextField id="outlined-basic" label="Registration number" onChange={handleRegis} variant="outlined" style={textFieldStyle}/>
-            <div className="TwoTextFieldsTogether">
-                <h3>First name </h3>
-                <TextField id="outlined-basic" label="First name" onChange={handleFname} variant="outlined"  />
-                <h3>Last name </h3>
-                <TextField id="outlined-basic" label="Last name" onChange={handleLname} variant="outlined" />
-            </div>
-            
-            <h3>Course and year</h3>
-            <Autocomplete
-                id="combo-box-demo"
-                options={courses}
-                getOptionLabel={(option) => option.label}
-                onChange={(event, value) => {
-                    setSelectedCourse(value);
-                }}
-                value={selectedCourse}
-                sx={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="Course" />}
-                style={textFieldStyle}
-            />
+        <Box>
+          <Nav2 />
+          <Box className="styletwo">
+              <h3 className="BrasikaFont floatRightIn grayFont">Registration number </h3>
+              <TextField className="floatRightIn SR-input" id="outlined-basic" label="Registration number" onChange={handleRegis} variant="outlined" style={textFieldStyle}/>
 
-            <h3>Date-of-Joining </h3>
-            <div>
-            <TextField
-                type="date"
-                onChange={handleChange}
-                ref={dateInputRef}
-                style={textFieldStyle}
-            />
-            <p>Date-of-joining: {date}</p>
-            </div>
+              <Box className="SR-dualInput">
+                  <h3 className="BrasikaFont floatRightIn grayFont">First name </h3>
+                  <TextField className="floatRightIn" id="outlined-basic" label="First name" onChange={handleFname} variant="outlined"  />
 
-            <hr/>
-            <h3>Parents Details:</h3>
-            <div className='TwoTextFieldsTogether'> 
-            
-            <h3>Father name</h3>
-            <TextField id="outlined-basic" label="Father name" onChange={handleFather} variant="outlined"  />
-            <h3>Mother name </h3>
-            <TextField id="outlined-basic" label="Mother name" onChange={handleMother} variant="outlined" />
-            </div>
+                  <h3 className="BrasikaFont floatRightIn grayFont">Last name </h3>
+                  <TextField className="floatRightIn" id="outlined-basic" label="Last name" onChange={handleLname} variant="outlined" />
+              </Box>
+              
+              <h3 className="BrasikaFont floatRightIn grayFont">Course and year</h3>
+              <Autocomplete
+                  className="floatRightIn"
+                  id="combo-box-demo"
+                  options={courses}
+                  getOptionLabel={(option) => option.label}
+                  onChange={(event, value) => {
+                      setSelectedCourse(value);
+                  }}
+                  value={selectedCourse}
+                  renderInput={(params) => <TextField {...params} label="Course" />}
+                  style={textFieldStyle}
+              />
+
+              <h3 className="BrasikaFont floatRightIn grayFont">Date-of-Joining </h3>
+              <Box>
+                <TextField
+                    className="floatRightIn"
+                    type="date"
+                    onChange={handleChange}
+                    ref={dateInputRef}
+                    style={textFieldStyle}
+                />
+                <p className="floatRightIn">Date-of-joining: {date}</p>
+              </Box>
+
+              <hr/>
+              <h3 style={{marginTop: '3%'}} className="BrasikaFont floatRightIn grayFont">Parents Details:</h3>
+              <Box className='SR-dualInput'> 
+                <h3 className="BrasikaFont floatRightIn grayFont">Father name</h3>
+                <TextField className="floatRightIn" id="outlined-basic" label="Father name" onChange={handleFather} variant="outlined"  />
+
+                <h3 className="BrasikaFont floatRightIn grayFont">Mother name </h3>
+                <TextField className="floatRightIn" id="outlined-basic" label="Mother name" onChange={handleMother} variant="outlined" />
+              </Box>
+              {/* <hr/> */}
+              <h3  className="BrasikaFont floatRightIn grayFont">Personal Details:</h3>
+              <h4  className="BrasikaFont floatRightIn grayFont">Date-of-birth </h4>
+              <TextField
+                  className="floatRightIn"
+                  type="date"
+                  onChange={handleChange1}
+                  ref={dateInputRef}
+                  style={textFieldStyle}
+              />
+              <p className="floatRightIn">Date-of-birth: {birth}</p>
+              <Box className='SR-dualInput'>
+                <h3 className="BrasikaFont floatRightIn grayFont">Email id</h3>
+                <TextField className="floatRightIn" id="outlined-basic" label="Email-id" onChange={handleEmail} variant="outlined" />
+
+                <h3 className="BrasikaFont floatRightIn grayFont">Phone number</h3>
+                <TextField className="floatRightIn" id="outlined-basic" label="Phone number" onChange={handlePhone} variant="outlined"  /><br/>
+              </Box>
+              <hr/>
             <br/>
-            <hr/>
-            <h3>Personal Details:</h3>
-            <h3>Date-of-birth </h3>
-            <TextField
-                type="date"
-                onChange={handleChange1}
-                ref={dateInputRef}
-                style={textFieldStyle}
-            />
-            <p>Date-of-birth: {birth}</p>
-            <div className='TwoTextFieldsTogether'>
-            <h3>Email id</h3>
-            <TextField id="outlined-basic" label="Email-id" onChange={handleEmail} variant="outlined" />
-            <h3>Phone number</h3>
-            <TextField id="outlined-basic" label="Phone number" onChange={handlePhone} variant="outlined"  /><br/>
-            </div>
-            <hr/>
-           <br/>
-           <br/>
-           <Button variant="outlined" onClick={handleSubmit}>Submit</Button> 
-           
-        </div>
-        <Outlet/>
-        </header>
+            <br/>
+            <Button className="floatRightIn" variant="outlined" sx={{p: '2%'}} onClick={handleSubmit}>Submit</Button> 
+            
+          </Box>
+          <Outlet/>
+        </Box>
     );
 }
 

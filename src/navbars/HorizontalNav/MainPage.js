@@ -15,7 +15,7 @@ function App1() {
 
                 <Link to="/home"><Button variant="text"><AiFillHome/></Button></Link>
 
-                {/* <Link to="/roomallotment"><Button variant="text">Room Allotment</Button></Link> */}
+                {/* <Link to="/room-allotment"><Button variant="text">Room Allotment</Button></Link> */}
 
                 <Link to="/ailment"><Button variant="text">Ailment</Button></Link>
 
@@ -23,7 +23,7 @@ function App1() {
 
                 <Link to="/asset"><Button variant="text">Asset</Button></Link>
 
-                <Link to="/hospitalvisit"><Button variant="text">Hospital visit</Button></Link>
+                <Link to="/hospital-visit"><Button variant="text">Hospital visit</Button></Link>
 
                 <Link to="/notification"><Button variant="text"><AiFillBell/></Button></Link>
 

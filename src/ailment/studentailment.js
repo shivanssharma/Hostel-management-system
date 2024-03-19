@@ -1,9 +1,11 @@
 
 import React, { useState, useEffect } from "react";
-import { TextField, Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { TextField, Button, Select, MenuItem, FormControl, InputLabel, Box, Typography } from '@mui/material';
 import axios from "axios";
 import './stud.css';
+import "../asset/sharedAnimation.css"
 import StudentHorizontalNav from "../navbars/HorizontalNav/student_hnav";
+import { server, serverPort } from "../utils/Constants";
 
 
 
@@ -16,7 +18,7 @@ function StudentAilment() {
 
   useEffect(() => {
     // Fetch ailment list from the backend
-    axios.get(`http://127.0.0.1:8000/api/ailment/`)
+    axios.get(`${server}:${serverPort}/api/ailment/`)
       .then(response => {
         setAilmentList(response.data);
       })
@@ -32,7 +34,7 @@ function StudentAilment() {
 
   useEffect(() => {
     if (ailment) {
-      axios.get(`http://127.0.0.1:8000/api/suggest_medicine/${encodeURIComponent(ailment.AilmentName)}/`)
+      axios.get(`${server}:${serverPort}/api/suggest_medicine/${encodeURIComponent(ailment.AilmentName)}/`)
         .then(response => {
           const medicineNames = response.data;
           setMedicineData(medicineNames);
@@ -56,16 +58,23 @@ function StudentAilment() {
   };
 
   return (
-    <header>
+    <Box>
     <StudentHorizontalNav/>
-      <div className="Style">
-        <h1>Need Some Medicine!!</h1>
-        <hr />
-        <div>
-          <h2>Select Ailment</h2>
-          <FormControl variant="outlined" style={{ width: '100%' }}>
+      <Box className="SA-Style">
+        <Typography variant="h3" className="AdA-title grayFont" sx={{display: 'flex', justifyContent: 'flex-start'}}>
+          <text className="BrasikaFont floatRightIn">
+            Need Some Medicine!!
+          </text>
+        </Typography>
+
+        <Box className="SA-Item">
+          <h4 className="BrasikaFont floatRightIn grayFont">
+            Select Ailment
+          </h4>
+          <FormControl variant="outlined" style={{ width: '100%', marginBottom: '5%' }}>
             <InputLabel id="ailment-label">Ailment</InputLabel>
             <Select
+              className="floatRightIn"
               labelId="ailment-label"
               id="ailment"
               value={ailment}
@@ -79,25 +88,28 @@ function StudentAilment() {
               ))}
             </Select>
           </FormControl>
-        </div>
-        <div>
-          <h2>Description</h2>
-          <TextField id="filled-basic" label="Description" variant="outlined" style={{ width: '100%' }} />
-        </div>
-        <br />
-        <Button variant="outlined" onClick={handleSuggestMedicine}>Suggest Medicine</Button>
-        <hr />
-        <TextField
-          id="outlined-multiline-static"
-          label="Suggestion"
-          multiline
-          rows={4}
-          style={{ width: '100%' }}
-          value={suggestion}
-        />
+
+
+
+          <h4 className="BrasikaFont floatRightIn grayFont">
+            Description
+          </h4>
+          <TextField id="filled-basic"  className="floatRightIn" label="Description" variant="outlined" style={{ width: '100%', marginBottom: '5%'  }} />
         
-      </div>
-    </header>
+          <Button variant="outlined" className="floatRightIn" sx={{marginBottom: '5%', p: '2%' }} onClick={handleSuggestMedicine}>Suggest Medicine</Button>
+
+          <TextField
+            className="floatRightIn"
+            id="outlined-multiline-static"
+            label="Suggestion"
+            multiline
+            rows={4}
+            style={{ width: '100%' }}
+            value={suggestion}
+          />
+        </Box>        
+      </Box>
+    </Box>
   );
 }
 

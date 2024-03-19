@@ -1,0 +1,127 @@
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
+
+
+/* For Side Menu */
+.MenuOpenBtn{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0%;
+    height: 15%;
+    padding: 1%;
+    background-color: #698ea2;
+    /* background: linear-gradient(to bottom, #d9c6ba, rgb(232, 102, 10)); */
+    justify-content: space-between;
+    border-radius: 7px;
+    color: white;
+    cursor: pointer;
+    .icons{
+        transition: all 0.2s ease-in-out;
+    };
+    .icons:hover{
+        transition: all 0.2s ease-in-out;
+        transform: scale(1.3);
+    };
+}
+.MenuOpenBtn:hover{
+    box-shadow: 2px 2px 14px rgb(112, 98, 98);
+    transition: all 0.2s ease-in-out;
+    /* height: 16%; */
+    .icons{
+        transition: all 0.2s ease-in-out;
+        transform: scale(1.3);
+    }
+}
+.sideSmallMenu{
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    --SMwidth: 100%;
+    height: 100%;
+    z-index: 800;
+    backdrop-filter: blur(7px);
+    background-color: rgb(97, 81, 96, 0.7);
+    width: var(--SMwidth);
+}
+.sideMenu{
+    --SMwidth: 17%;
+    /* height: 100%; */
+    position: relative;
+    width: var(--SMwidth);
+    background-color: #615160;
+}
+.closeSideNav{
+    width: 0%;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+    .menuContainer{
+        opacity: 0;
+    }
+}
+.sideMenu .menuContainer{
+    position: fixed;
+    width: var(--SMwidth);
+}
+.openSideNav{
+    width: var(--SMwidth);
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    .menuContainer{
+        opacity: 1;
+    }
+}
+/* For Side Menu Ends Here */
+
+.topElement{
+    z-index: 999;
+}
+
+
+/* Flex styling */
+.flexColumn{
+    display: flex;
+    flex-direction: column;
+}
+.flexRow{
+    display: flex;
+    flex-direction: row;
+}
+.centerFlex{
+    justify-items: center;
+    align-items: center;
+}
+
+
+/* font Color */
+.grayFont{
+    color: #615160;
+}
+
+
+.textGap{
+    letter-spacing: 1.5px;
+}
+
+
+/* External Fonts importing */
+.BrasikaFont{
+    /* border: 2px solid red; */
+    font-family: 'Brasika';
+}
+@font-face {
+    font-family: 'Brasika';
+    src: url('/src/asset/fonts/Brasika.otf') format('truetype');
+}
+ 
+.CraseyFont{
+    font-family: 'CRASEY';
+}
+@font-face {
+    font-family: 'CRASEY';
+    src: url('/src/asset/fonts/CRASEY.otf') format('truetype');
+}

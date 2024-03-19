@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './adminmanager.css';
 import { Input,Button } from '@mui/material';
+import { server, serverPort } from '../utils/Constants';
 const PasswordResetForm = () => {
   const { username } = useParams();
   const [formData, setFormData] = useState({
@@ -26,7 +27,7 @@ const PasswordResetForm = () => {
     }
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/password-reset/', formData);
+      const response = await axios.post(server+':'+serverPort+'/api/password-reset/', formData);
       setMessage(response.data.message);
     } catch (error) {
       setMessage('An error occurred while resetting the password.');

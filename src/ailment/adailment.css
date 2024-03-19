@@ -1,42 +1,25 @@
 #Style_four{
-    width: 600px;
-    margin: auto;
-    height: auto;
-    padding: 100px;
-    font-family: 'Times New Roman', Times, serif;
-    border-radius: 8px / 8px; /* Border radius for rounded corners */
-    border: 3px solid rgba(46, 42, 42, 0.764);
-    padding-top: 50px;
-    margin-top: 110px;
-    background-color: white;
-  }
-
-
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    padding: 5%;
+    margin: auto;    
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+Button {
+    cursor: pointer;    
+}
   
+.button-container .AdA-Btn{
+  padding: 2%;
+  margin-right: 2%;  
+}
 
-  Button {
-    margin-right: 15px;
-    cursor: pointer;
-    
-    
-  }
+.AdAil-Listcontainer{
   
-  .button-container .one{
-    margin-right: 50px;
-    width: 18.5%
-    
-  }
-  
-  .button-container .two{
-    margin-left: 30px;
-    width: 18.5%
-  }
-
-  Table{
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: bold;
-
-  }
-  h2{
-    padding-left: 150px;
-  }
+  height: 60vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex: 1;
+}

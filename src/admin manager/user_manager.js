@@ -1,11 +1,14 @@
 import React,{useEffect,useState} from "react";
-import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,} from "@mui/material";
+import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper, Typography,} from "@mui/material";
 import axios from "axios";
 import { Button } from "@mui/material";
 // import ChangePasswordForm from "./change_password";
 import { Link } from "react-router-dom";
 import './adminmanager.css';
-import AdminHorizontalNavUser from "../navbars/HorizontalNav/Admin_hnav_user";
+import "../asset/sharedCss.css"
+import "../asset/sharedAnimation.css"
+
+import { server, serverPort } from "../utils/Constants";
 function Manage(){
     const [usernames, setUsernames] = useState([]);
     // const [selectedUsername, setSelectedUsername] = useState(null);
@@ -13,7 +16,7 @@ function Manage(){
     useEffect(() => {
         async function fetchUsernames() {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/usernames/');
+                const response = await axios.get(server+':'+serverPort+'/api/usernames/');
                 setUsernames(response.data.usernames);
             } catch (error) {
                 console.error('Error fetching usernames:', error);
@@ -24,7 +27,7 @@ function Manage(){
     }, []);
     const handleDeleteUser = async (username) => {
         try {
-          await axios.delete(`http://127.0.0.1:8000/api/delete-user/${username}/`);
+          await axios.delete(`${server}:${serverPort}/api/delete-user/${username}/`);
           // If deletion is successful, update the usernames list to reflect the change
           setUsernames(usernames.filter((name) => name !== username));
           alert("User deleted successfully");
@@ -40,42 +43,55 @@ function Manage(){
 
     return(
       <header>
-        <AdminHorizontalNavUser />
-        <div className="style_three">
-        <h1 style={{justifyContent:'center',display:'flex'}}>User manager</h1>
-        <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Sr No.</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Change password</TableCell>
-              <TableCell>Status</TableCell>
-              <TableCell>Delete</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {usernames.map((username, index) => (
-                <TableRow key={index}>
-                    <TableCell>{index + 1}</TableCell>
-                    <TableCell>{username}</TableCell>
-                    <TableCell><Link to={`/forgotpassword/${username}`}><Button variant="text" >
-                        Forgot password
-                    </Button></Link></TableCell>
-                    <TableCell><Button variant="text">Status</Button></TableCell>
-                    <br/>
-                    <Button
-                    variant="outlined"
-                    onClick={() => handleDeleteUser(username)}
-                    >
-                    Delete
-                  </Button>
+        {/* <AdminHorizontalNavUser /> */}
+        <div className="mainContainer">
+          <Typography variant="h3" className="UM-title grayFont">
+            <text className="BrasikaFont floatRightIn">
+              User manager
+            </text>
+          </Typography>
+          <TableContainer className="floatRightIn" component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell class="BrasikaFont">Sr No.</TableCell>
+                  <TableCell class="BrasikaFont">Name</TableCell>
+                  <TableCell class="BrasikaFont">Change password</TableCell>
+                  <TableCell class="BrasikaFont">Status</TableCell>
+                  <TableCell class="BrasikaFont">Delete</TableCell>
                 </TableRow>
-                ))}         
-          </TableBody>
-        </Table>
-      </TableContainer>
-      
+              </TableHead>
+              <TableBody>
+                {usernames.map((username, index) => (
+                    <TableRow key={index} id="row">
+                        <TableCell className="cell">{index + 1}</TableCell>
+                        <TableCell className="cell">{username}</TableCell>
+                        <TableCell className="cell">
+                          <Link to={`/forgot-password/${username}`} sx={{textAlign: 'left'}}>
+                            <Button 
+                              className="UM-btn"
+                              variant="outlined" 
+                              sx={{width: 'fit-content', alignItems: 'left'}}
+                            >
+                              Forgot password
+                            </Button>
+                          </Link>
+                        </TableCell>
+                        <TableCell className="cell"> Status </TableCell>
+                        <TableCell className="cell">
+                          <Button
+                            className="UM-btn"
+                            variant="outlined"
+                            onClick={() => handleDeleteUser(username)}
+                          >
+                          Delete
+                          </Button>
+                        </TableCell>
+                    </TableRow>
+                    ))}         
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       </header>
     );

@@ -10,13 +10,13 @@ function AdminHorizontalNavUser() {
         <div>
             <Navbar expand="lg" className="bg-body-tertiary">
                 <Container>
-                    <Navbar.Brand as={Link} to="/adminhome">
-                        <img src={LogoImage} alt="Logo" className="logo animated-logo" style={{width:'18.5%'}}/>
+                    <Navbar.Brand as={Link} to="/admin-home">
+                        <img src={LogoImage} alt="Logo" className="logo hide" style={{width:'18.5%'}}/>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Link to="/adminhome" className="nav-link">Home</Link>
+                            <Link to="/admin-home" className="nav-link">Home</Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

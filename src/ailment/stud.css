@@ -1,13 +1,15 @@
-.Style{
-  width: 400px;
-  height: auto;
-  margin: auto;
-  padding: 100px;
- 
-  background-color: #fffffff5; /*Background color */
-  border-radius: 8px / 8px; /* Border radius for rounded corners */
-  padding-top: 30px;
-  margin-top: 60px;
-  font-family: TimesNewRoman,Times New Roman,Times,Baskerville,Georgia,serif; 
-  border: 3px solid rgba(0, 0, 0, 0.74);
+.SA-Style{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  width: 70%;
+  padding: 5%;
+  margin: auto;  
+}
+
+
+.SA-Item{
+  width: 100%;
 }

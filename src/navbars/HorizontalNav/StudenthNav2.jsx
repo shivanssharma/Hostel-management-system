@@ -10,16 +10,16 @@ function StudentHorizontalNav2() {
         <div>
             <Navbar expand="lg" className="bg-body-tertiary">
                 <Container>
-                    <Navbar.Brand as={Link} to="/studenthome">
-                        <img src={LogoImage} alt="Logo" className="logo animated-logo" style={{width:'12.5%'}}/>
+                    <Navbar.Brand as={Link} to="/student-home">
+                        <img src={LogoImage} alt="Logo" className="logo" style={{width:'12.5%'}}/>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Link to="/studenthome" className="nav-link">Home</Link>
+                            <Link to="/student-home" className="nav-link">Home</Link>
                             {/* <Link to="/register" className="nav-link">Enroll</Link> */}
 
-                            <Link to="/studentviewroom" className="nav-link"> Check Room</Link>
+                            <Link to="/student-viewroom" className="nav-link"> Check Room</Link>
                             
                         </Nav>
                     </Navbar.Collapse>

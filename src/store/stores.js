@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import { CardActionArea,Checkbox,Typography,CardMedia,CardContent,Card,TextField,Button } from '@mui/material';
 import axios from "axios";
+import { server, serverPort } from '../utils/Constants';
 
 export default function Stores() {
     const [details,setDetails]=useState({});
@@ -9,7 +10,7 @@ export default function Stores() {
     const[count,setCount]=useState(0);
     useEffect(() => {      
           axios
-            .get(`http://127.0.0.1:8000/api/store/`)
+            .get(`${server}:${serverPort}/api/store/`)
             .then((response) => {
               setDetails(response.data);
               setLoading(false);

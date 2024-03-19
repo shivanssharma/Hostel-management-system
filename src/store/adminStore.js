@@ -18,6 +18,7 @@ import {
   
 } from "@mui/material";
 import axios from "axios";
+import { server, serverPort } from "../utils/Constants";
 
 function Stores() {
   const [course, setCourse] = useState("");
@@ -34,7 +35,7 @@ function Stores() {
   const handleDeleteStudent = (studentId) => {
     setLoading(true);
     axios
-      .delete(`http://127.0.0.1:8000/api/delete-student/${studentId}/`, {
+      .delete(`${server}:${serverPort}/api/delete-student/${studentId}/`, {
         // Include CSRF token if required by your Django backend
         headers: {
           'X-CSRFToken': csrftoken, // Replace 'csrfToken' with your token acquisition method
@@ -61,7 +62,7 @@ function Stores() {
 
     setLoading(true);
     axios
-      .get(`http://127.0.0.1:8000/api/adminstore/${course}/`)
+      .get(`${server}:${serverPort}/api/adminstore/${course}/`)
       .then((response) => {
         setLoading(false);
         setList(response.data);

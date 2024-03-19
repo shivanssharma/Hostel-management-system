@@ -10,14 +10,15 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { ThemeProvider,createTheme } from '@mui/material/styles';
-// import AdminHome from '../HomePage/AdminHome';
+// import AdminHome from '../HomePage/admin-home';
 import './login.css';
+import "../asset/sharedAnimation.css"
+import "../asset/sharedCss.css"
+import { server, serverPort } from '../utils/Constants';
 //import axios from 'axios';
-const defaultTheme=createTheme();
 
 
-export default function SignInSide() {
+export default function SignInSide(props) {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [loginError, setLoginError] = useState(null);
   const navigate = useNavigate();
@@ -28,11 +29,14 @@ export default function SignInSide() {
       .find((cookie) => cookie.startsWith('csrftoken='));
     return csrfCookie ? csrfCookie.split('=')[1] : '';
   };
+  
+  localStorage.clear()
+  props.loggedIn(false)
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("hello")
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/login/', {
+      const response = await fetch(server+':'+serverPort+'/api/login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -54,17 +58,23 @@ export default function SignInSide() {
       localStorage.setItem('is_superuser', responseData.is_superuser);
       localStorage.setItem('is_staff', responseData.is_staff);
       localStorage.setItem('is_active', responseData.is_active);
+      localStorage.setItem('username', formData.username);
       
       // Navigate to home page after successful login
       if (responseData.is_superuser) {
-        navigate('/adminhome', { state: { username: formData.username } });
+        localStorage.setItem('userType', "admin");
+        navigate('/admin-home', { state: { username: formData.username } });
       } 
       // else if (responseData.is_staff) {
-      //   navigate('/staffhome',{ state: { username: formData.username } });
+        // localStorage.setItem('userType', "staff");
+      //   navigate('/staff-home',{ state: { username: formData.username } });
       // } 
       else {
-        navigate('/studenthome',{ state: { username: formData.username } });
+        localStorage.setItem('userType', "student");
+        // navigate('/student-home',{ state: { username: formData.username } });
+        navigate('/admin-home',{ state: { username: formData.username } });
       }
+      props.loggedIn(true)
       console.log("Successful login");
     } catch (error) {
       console.error('Login failed:', error);
@@ -83,76 +93,79 @@ export default function SignInSide() {
   
   
   return (
-    <ThemeProvider theme={defaultTheme}>
-    <Grid container component="main" sx={{ height: '100vh' }}>
-      <CssBaseline />
-      <div className='grid-item'>
-        <Grid />
-      </div>
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <Box
-          sx={{
-            my: 8,
-            mx: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
+    <Box>
+      <Grid container component="main" sx={{ height: '100vh' }}>
+        <CssBaseline />
+        <div className='grid-item fadeIn'>
+          <Grid />
+        </div>
+        <Grid 
+          sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2%' }} 
+          item xs={12} sm={8} md={5} component={Paper} elevation={6} square
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
-              autoFocus
-              value={formData.username}
-              onChange={handleUsernameChange}
-              // required // Indicate required field
-              helperText={!formData.username && 'Username is required'} // Set error text
-            />
-            <TextField
-              margin="normal"
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={formData.password}
-              onChange={handlePasswordChange}
-              helperText={!formData.password && 'Password is required'}
-            />
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 4, mb: 2 }}>
-              Sign In
-            </Button>
-            {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
-            <Grid container>
-              <Grid item xs>
-                {/* <Link href="#" variant="body2">
-                  Forgot password?
-                </Link> */}
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar className='zoomIn' sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <TextField
+                className="floatUpIn"
+                margin="normal"
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+                value={formData.username}
+                onChange={handleUsernameChange}
+                // required // Indicate required field
+                helperText={!formData.username && 'Username is required'} // Set error text
+              />
+              <TextField
+                className="floatUpIn"
+                margin="normal"
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={formData.password}
+                onChange={handlePasswordChange}
+                helperText={!formData.password && 'Password is required'}
+              />
+              <Button type="submit" className="floatUpIn" fullWidth variant="contained" sx={{ mt: 4, mb: 2 }}>
+                Sign In
+              </Button>
+              {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
+              <Grid container className="floatUpIn">
+                <Grid item xs>
+                  {/* <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link> */}
+                </Grid>
+                <Grid item>
+                  <Link component={Link} to="/signup" variant="body2">
+                    Don't have an account? Sign Up
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link component={Link} to="/signup" variant="body2">
-                  Don't have an account? Sign Up
-                </Link>
-              </Grid>
-            </Grid>
+            </Box>
           </Box>
-        </Box>
+        </Grid>
       </Grid>
-    </Grid>
-    {/* <AdminHome username={formData.username} /> */}
-    </ThemeProvider>
+      {/* <AdminHome username={formData.username} /> */}
+    </Box>
   );
 }
 

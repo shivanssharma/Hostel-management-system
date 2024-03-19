@@ -3,6 +3,7 @@ import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,} from
 import axios from "axios";
 import App10 from "../navbars/navbarHealth";
 import './style_room.css';
+import { server, serverPort } from "../utils/Constants";
 function StudentView(){
     const name='shivansh';
     const floorNumber='A';
@@ -11,7 +12,7 @@ function StudentView(){
     const[flag,setFlag]=useState(false)
     useEffect(() => {
           axios
-            .get(`http://127.0.0.1:8000/api/student_pannel/${floorNumber}/${roomNumber}/`)
+            .get(`${server}:${serverPort}/api/student_pannel/${floorNumber}/${roomNumber}/`)
             .then((response) => {
               setList(response.data);
               setFlag(true)
@@ -26,15 +27,15 @@ function StudentView(){
     return(
         <header>
             <App10 />
-        <div className="style">
-            <h3>Hello {name} Your Floor is {floorNumber} and RoomNumber is {roomNumber} </h3>
-            <h3>Your Room Members Are</h3>
+        <div className="AV-style">
+            <h3 className="BrasikaFont floatRightIn grayFont" >Hello {name} Your Floor is {floorNumber} and RoomNumber is {roomNumber} </h3>
+            <h3 className="BrasikaFont floatRightIn grayFont" >Your Room Members Are</h3>
         <TableContainer component={Paper}>
             <Table>
             <TableHead>
                 <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Course</TableCell>
+                <TableCell class="BrasikaFont grayFont" style={{padding: '2%'}} >Name</TableCell>
+                <TableCell class="BrasikaFont grayFont" >Course</TableCell>
                 </TableRow>
             </TableHead>
             {/* <TableBody>

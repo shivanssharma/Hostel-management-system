@@ -1,17 +1,21 @@
-.style {
-    width: 900px;
-    height: auto;
-    margin: auto;
-    padding: 100px;
-    background-color: #fffffffa; /* Background color */
-    border-radius: 8px / 8px; /* Border radius for rounded corners */
-    padding-top: 30px;
-    margin-top: 80px;
-    font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif;
-    border: 3px solid rgba(46, 42, 42, 0.764); /* Border color and thickness */
-    font-size: 1.25rem;
+.AV-style {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  width: 70%;
+  padding: 5%;
+  margin: auto; 
 }
 
+.AV-dualInput{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 4%;
+  width: 100%;
+}
   Button {
     display: flex;
     justify-content: center;
@@ -21,16 +25,14 @@
   }
 
 
-  .floor {
-   
-    width: 230px; /* Adjust width based on desired spacing */
-    padding-right: 50px; 
+.AV-floor {
+  width: 48%;
+  margin: 1%; 
 }
 
-.room {
-  
-    width: 275px; 
-    margin-left: 10px; 
+.AV-room {  
+  width: 48%; 
+  margin: 1%; 
 }
 .roomLeader {
   
