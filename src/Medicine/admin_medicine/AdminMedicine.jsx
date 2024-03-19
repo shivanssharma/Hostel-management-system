@@ -225,6 +225,7 @@ function AdminMedicine() {
               Add
             </Button>            
             <Button
+              sx={{marginLeft: '7%'}}
               className='Md-Btn'
               variant="outlined"
               onClick={handleViewAllMedicine}

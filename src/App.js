@@ -12,7 +12,7 @@ import StudentAilment from './ailment/studentailment.js';
 import AdminAsset from './asset/adminasset.js';
 import StudentAsset from './asset/studentasset.js';
 import HospitalVisitForm from './hospitalvisit/hospitalvisit.jsx';
-import StudentRegistration from './registration/studentregistrations.js';
+import StudentRegistration from './registration/studentRegistration.js';
 import AdminRoomAllotment from './room _component/app.js';
 import AdminView from './room _component/adminview.js';
 import StudentView from './room _component/studentView.js';
@@ -25,6 +25,7 @@ import "./asset/sharedCss.css"
 import { CloseRounded, MenuRounded } from '@mui/icons-material';
 import SuperuserNavbar from './sidenavbar/admin.jsx';
 import StaffuserNavbar from './sidenavbar/staff.jsx';
+import UpdateUserStatus from './admin manager/changeStatus.js';
 // import SuperuserNavbar from './sidenavbar/admin.jsx' ;
 // import ActiveuserNavbar from './sidenavbar/student.jsx';
 // import StaffuserNavbar from './sidenavbar/staff.jsx'; 
@@ -109,6 +110,7 @@ function App() {
                   <Route path="/forgot-password/:username" element={<PasswordResetForm />} />
                   <Route path="/viewroom" element={<AdminView />} />
                   <Route path="/student-viewroom" element={<StudentView />} />
+                  <Route path="/status/:username" element={<UpdateUserStatus/>} />
                 </Routes>
             </Box>
           </Box>

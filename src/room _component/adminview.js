@@ -12,6 +12,7 @@ function AdminView() {
   const [selectedRoom, setSelectedRoom] = useState("");
   const [list, setStudentList] = useState([]);
   const [flag, setFlag] = useState(false)
+  // const [usernames, setUsernames] = useState([]);
   // console.log(list);
   const handleFloorChange = (event) => {
     const Floor = event.target.value;
@@ -22,9 +23,9 @@ function AdminView() {
     const Room = event.target.value;
     setSelectedRoom(Room);
   };
- 
+  
   useEffect(() => {
-    if (selectedFloor !== "" && selectedRoom !== "" && !flag) {
+    if (selectedFloor !== "" && selectedRoom !== "" ) {
       axios
         .get(`${server}:${serverPort}/api/list/${selectedFloor}/${selectedRoom}/`)
         .then((response) => {
@@ -38,6 +39,19 @@ function AdminView() {
         });
     }
   });
+  const handleDeleteStudentRoom = (FirstName) => {
+    // Send a request to backend API to delete the student from the room
+    axios.delete(`${server}:${serverPort}/api/remove_student/${FirstName}`)
+      .then((response) => {
+        setStudentList(list.filter((name) => name !== FirstName));
+        setFlag(false);
+        // Reload the student list after deletion
+        setFlag(true);
+      })
+      .catch((error) => {
+        console.error("Error deleting student from room:", error);
+      });
+  };
   const handleSubmit = () => {
     setFlag(true); // Set flag to true to trigger useEffect
   };
@@ -76,7 +90,7 @@ function AdminView() {
               </FormControl>
 
               <FormControl className="AV-room">
-                <InputLabel id="label-id_2">Room number</InputLabel>
+                <InputLabel id="label-id_2" >Room number</InputLabel>
                 <Select
                   labelId="select-id_2"
                   id="id_2"
@@ -90,13 +104,11 @@ function AdminView() {
                 </Select>
               </FormControl>
             </Box>
-            
 
             <Box className="AV-dualInput floatRightIn">
               <Button sx={{ padding: '2%'}} variant="outlined" onClick={handleSubmit} >Submit</Button>
             </Box>
           </Box>
-          // </Box>
         }
         {
           handleFloorChange && handleRoomChange && 
@@ -107,6 +119,7 @@ function AdminView() {
                   <TableRow style={{ borderBottom: '1px solid rgb(242, 238, 238)'}}>
                     <TableCell class="BrasikaFont grayFont" style={{padding: '2%'}}>Name</TableCell>
                     <TableCell class="BrasikaFont grayFont">Course</TableCell>
+                    <TableCell class="BrasikaFont grayFont">Remove</TableCell>
                   </TableRow>
                 </TableHead>
                 {/* <TableBody>
@@ -124,6 +137,11 @@ function AdminView() {
                       <TableRow key={index}>
                         <TableCell>{`${student.FirstName} ${student.LastName}`}</TableCell>
                         <TableCell>{student.CourseName}</TableCell>
+                        <TableCell>
+                          <Button variant="outlined" onClick={() => handleDeleteStudentRoom(student.FirstName)}>
+                            Delete
+                          </Button>
+                        </TableCell>
                       </TableRow>
                     ))
                     ) : (
@@ -137,7 +155,7 @@ function AdminView() {
           </Box>
         }
       </Box>
-  </Box>
+    </Box>
   );
 }
 

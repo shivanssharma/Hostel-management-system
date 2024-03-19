@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Box, IconButton, Typography, useMediaQuery } from '@mui/material';
+import { CottageRounded, HealthAndSafetyRounded, LogoutRounded, RoomPreferencesRounded } from '@mui/icons-material';
+
 import '../HomePage/homepage.css';
 import "../asset/sharedCss.css"
 import "../asset/sharedAnimation.css"
-import { Box, IconButton, Typography, useMediaQuery } from '@mui/material';
-import { CottageRounded, HealthAndSafetyRounded, RoomPreferencesRounded } from '@mui/icons-material';
+import { server, serverPort } from '../utils/Constants';
+
 const StaffuserNavbar = (props) => {
   const location = useLocation();
   const navigate= useNavigate()
@@ -18,6 +21,14 @@ const StaffuserNavbar = (props) => {
   const [activeNav, setActiveNav] = useState(0); 
   const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('sm')); // Change 'sm' to other breakpoints as needed
 
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem('is_authenticated');
+    if (isAuthenticated !== 'true') {
+      // Redirect to login page or perform any other action if user is not authenticated
+      navigate('/');
+    }
+  }, [navigate]);
+
   function selectItem(index){
     if (activeNav === index)
       return
@@ -26,6 +37,22 @@ const StaffuserNavbar = (props) => {
     if (isSmallScreen)
       props.callback(false)
   }
+
+  const handleLogout = () => {
+    axios.post(server+':'+serverPort+'/api/logout/') // Assuming this is the endpoint for logout in your backend
+      .then(response => {
+        // Handle successful logout response
+        console.log(response.data.message);
+        localStorage.setItem('is_authenticated', false);
+        // Redirect to the index page or perform any other action as needed
+        navigate('/'); // Redirect to index page after logout
+      })
+      .catch(error => {
+        // Handle error
+        console.error('Logout failed:', error);
+      });
+  };
+
   return(
   <nav className="sidebar">
     <Box className='image hide'>
@@ -46,11 +73,18 @@ const StaffuserNavbar = (props) => {
           </Box>
         ))
       }
+      <Box className={`floatRightIn link `} onClick={handleLogout}>
+        <IconButton className="linkIcon">
+          <LogoutRounded />
+        </IconButton>
+        <Link className="LinkText" >Logout</Link>
+      </Box>
       {/* <Link id='link' to="/staff-home">Home</Link> <br />
       <Link id='link' to="/ailment">Health care</Link> <br />
       <Link id='link' to="/room-allotment">Room Allotment</Link> <br /> */}
     </Box>
     { /* Add other staffuser-specific links as needed */ }
+
   </nav>
 );
   }

@@ -11,13 +11,14 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import "./hpvisit.css"; // Update this with your CSS file name
 import "../asset/sharedAnimation.css"
 import StudentHorizontalNav from "../navbars/HorizontalNav/student_hnav";
 import { server, serverPort } from "../utils/Constants";
 
 function HospitalVisitForm() {
-  
   const [hospitalList, setHospitalList] = useState([]);
   const [purpose, setPurpose] = useState("");
   const [visitDate, setVisitDate] = useState("");
@@ -25,6 +26,9 @@ function HospitalVisitForm() {
   const [departments, setDepartments] = useState([]);
   const [selectedHospital, setSelectedHospital] = useState(null);
   const [selectedHospitalType, setSelectedHospitalType] = useState(null);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
 
   useEffect(() => {
     // Fetch Hospitals from Django API
@@ -42,25 +46,51 @@ function HospitalVisitForm() {
       });
   }, []);
 
+  const handleSnackbarOpen = (severity, message) => {
+    setSnackbarSeverity(severity);
+    setSnackbarMessage(message);
+    setOpenSnackbar(true);
+  };
+
   const handleSave = () => {
     const data = {
       HospitalID: selectedHospital ? selectedHospital.HospitalID : null,
       Purpose: purpose,
       VisitDate: visitDate,
+      username: localStorage.getItem("username"), // Fetching username from local storage
     };
 
-    // Send data to the backend API endpoint
+    // Fetch CSRF token from cookies
+    const csrfToken = getCookie("csrftoken");
+
+    // Send data to the backend API endpoint with CSRF token included in headers
     axios
-      .post(server+':'+serverPort+"/api/hospital_visits/", data)
+      .post(server+':'+serverPort+"/api/save_hospital_visit/", data, {
+        headers: {
+          "X-CSRFToken": csrfToken,
+        },
+      })
       .then((response) => {
         console.log(response.data);
+        handleSnackbarOpen(
+          "success",
+          "Hospital visit saved successfully"
+        );
         // Handle success or navigate to another page
       })
       .catch((error) => {
         console.error("Error saving hospital visit:", error);
+        handleSnackbarOpen("error", "Error saving hospital visit");
         // Handle error
       });
   };
+
+  // Function to get cookie value by name
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+  }
 
   const handleHospitalChange = (event) => {
     const selectedHospital = hospitalList.find(
@@ -112,68 +142,71 @@ function HospitalVisitForm() {
 
   return (
     <Box>
-      <StudentHorizontalNav/>
+      <StudentHorizontalNav />
       <Box className="HV-Container">
         <Typography variant="h3" className="AdA-title grayFont" sx={{display: 'flex', justifyContent: 'flex-start'}}>
           <text className="BrasikaFont floatRightIn">
           Hospital Visit Form
           </text>
         </Typography>
+
         <Box className="HV-Style">
-          {/* <Box> */}
-
-            <Box className="HV-Items">
-              <h3 className="HV-input BrasikaFont floatRightIn grayFont">Hospital Name</h3>
-              <FormControl variant="outlined" style={{ width: "100%" }}>
-                <InputLabel id="hospital-label">Hospital</InputLabel>
-                <Select
-                  className="floatRightIn"
-                  labelId="hospital-label"
-                  id="hospital"
-                  sx={{ width: '100%' }}
-                  value={selectedHospital ? selectedHospital.HospitalID : ""}
-                  onChange={handleHospitalChange}
-                  label="Hospital"
-                >
-                  {hospitalList.map((hospital) => (
-                    <MenuItem key={hospital.HospitalID} value={hospital.HospitalID}>
-                      {hospital.HospitalName}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Box>
-
-            <Box  className="HV-Items">
-              <h3 className="HV-input BrasikaFont floatRightIn grayFont">Hospital Type </h3>
-              <Autocomplete
+          <Box className="HV-Items">
+            <h3 className="HV-input BrasikaFont floatRightIn grayFont">Hospital Name</h3>            
+            <FormControl variant="outlined" style={{ width: "100%" }}>
+              <InputLabel id="hospital-label">Hospital</InputLabel>
+              <Select
                 className="floatRightIn"
-                disablePortal
-                id="hospital-type"
-                options={hospitalTypes}
-                getOptionLabel={(option) => option.hospitalType}
-                getOptionSelected={(option, value) =>
-                  option.hospitalType === value.hospitalType
-                }
+                labelId="hospital-label"
+                id="hospital"
                 sx={{ width: '100%' }}
-                renderInput={(params) => <TextField {...params} label="Hospital Type" />}
-                onChange={(event, newValue) => setSelectedHospitalType(newValue)}
-              />
-            </Box>
+                value={selectedHospital ? selectedHospital.HospitalID : ""}
+                onChange={handleHospitalChange}
+                label="Hospital"
+              >
+                {hospitalList.map((hospital) => (
+                  <MenuItem
+                    key={hospital.HospitalID}
+                    value={hospital.HospitalID}
+                  >
+                    {hospital.HospitalName}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
 
-            <Box className="HV-Items">
-              <h3 className="HV-input BrasikaFont floatRightIn grayFont">Department </h3>
-              <Autocomplete
-                className="floatRightIn"
-                disablePortal
-                id="department"
-                options={departments}
-                getOptionLabel={(option) => option.departmentName}
-                sx={{ width: '100%' }}
-                renderInput={(params) => <TextField {...params} label="Department" />}
-              />
-            </Box>
-          {/* </Box> */}
+          <Box  className="HV-Items">
+            <h3 className="HV-input BrasikaFont floatRightIn grayFont">Hospital Type </h3>
+            <Autocomplete
+              className="floatRightIn"
+              disablePortal
+              id="hospital-type"
+              options={hospitalTypes}
+              getOptionLabel={(option) => option.hospitalType}
+              getOptionSelected={(option, value) =>
+                option.hospitalType === value.hospitalType
+              }
+              sx={{ width: '100%' }}
+              renderInput={(params) => (
+                <TextField {...params} label="Hospital Type" />
+              )}
+              onChange={(event, newValue) => setSelectedHospitalType(newValue)}
+            />
+          </Box>
+  
+          <Box className="HV-Items">
+            <h3 className="HV-input BrasikaFont floatRightIn grayFont">Department </h3>
+            <Autocomplete
+              className="floatRightIn"
+              disablePortal
+              id="department"
+              options={departments}
+              getOptionLabel={(option) => option.departmentName}
+              style={{ width: "100%"}}
+              renderInput={(params) => <TextField {...params} label="Department" />}
+            />
+          </Box>
 
           <Box className="HV-Items">
             <h3 className="HV-input BrasikaFont floatRightIn grayFont">Purpose</h3>
@@ -192,7 +225,8 @@ function HospitalVisitForm() {
             <TextField
               className="floatRightIn"
               id="filled-basic"
-              variant="outlined"
+              variant
+              ="outlined"
               type="datetime-local"
               sx={{ width: '100%' }}
               onChange={(e) => setVisitDate(e.target.value)}
@@ -206,8 +240,22 @@ function HospitalVisitForm() {
           </Box>
           <Box className="HV-Items"/>
         </Box>
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={6000}
+          onClose={() => setOpenSnackbar(false)}
+        >
+          <MuiAlert
+            elevation={6}
+            variant="filled"
+            onClose={() => setOpenSnackbar(false)}
+            severity={snackbarSeverity}
+          >
+            {snackbarMessage}
+          </MuiAlert>
+        </Snackbar>
       </Box>
-  </Box>
+    </Box>
   );
 }
 

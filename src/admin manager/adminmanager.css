@@ -1,50 +1,29 @@
-/* .style_three{
-    
-        width: 1000px;
-        height: auto;
-        margin-left: 160px;
-        padding: 100px;
-        background-color: #fffffffa;
-        border-radius: 8px / 8px; 
-        padding-top: 30px;
-        margin-top: 80px;
-        font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif;
-        border: 3px solid rgba(46, 42, 42, 0.764); 
-        font-size: 1.25rem;
-        overflow:visible;
-       
-} */
-
-.mainContainer{
-        padding: 5% 5% 2% 5%;
+.CS-Style{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        width: 70%;
+        height: 80vh;
+        padding: 5%;
+        margin: auto; 
 }
 
-.mainContainer .UM-title{
-        padding: 3% 0% 4% 0%;
-        font-weight: bolder;
-        /* border: 2px solid red; */
-        width: fit-content;
+.CS-FormContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 }
-.UM-btn:hover{
-        transform: scale(1.2);
-        background-color: rgb(105, 105, 233) !important;
-        transition: all 0.3s ease-in;
-        color: white;
-}
-
-.mainContainer .cell{
-        cursor: pointer;        
-}
-.tableHead{
+.CS-FormGroup{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         padding: 2%;
+        cursor: pointer;
 }
-#row{
-        transition: all 0.2s ease-in;
-}
-#row:hover{
-        .cell, .UM-btn{
-                font-weight: bolder;
-        }
-        transition: all 0.2s ease-in;
-        background-color: rgb(249, 239, 239);
+
+.CS-FormGroup:hover{
+        transition: all 0.3s ease-in-out;
+        background-color: rgb(244, 242, 242);
 }
