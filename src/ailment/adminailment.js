@@ -20,7 +20,6 @@ import "../asset/sharedAnimation.css"
 import "../asset/sharedCss.css"
 import AdminHorizontalNav from "../navbars/HorizontalNav/Admin_hnav";
 import { server, serverPort } from "../utils/Constants";
-import StaffHorizontalNavUser from "../navbars/HorizontalNav/StaffhorizontalNav";
 
 function AdminAilment() {
   const [ailmentData, setAilmentData] = useState({
@@ -154,10 +153,7 @@ function AdminAilment() {
 
   return (
     <Box>
-      {/* <AdminHorizontalNav /> */}
-      {/* {isAdminHomePage && <AdminHorizontalNav />}
-      {isStaffHomePage && <StaffHorizontalNavUser />} */}
-      {/* {isAdminPage ? <AdminHorizontalNav /> : <StaffHorizontalNavUser />} */}
+      <AdminHorizontalNav />
       <Box id="Style_four">
         <Box sx={{ p: '2%' }}>
           <Typography 

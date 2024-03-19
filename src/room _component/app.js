@@ -151,7 +151,7 @@ function AdminRoomAllotment() {
           
             axios.get(`${server}:${serverPort}/api/room/${selectedFloor}/${selectedRoom}/${selectedPosition}`)
             .then(response => {
-              setRoomList(response.data);
+              setRoomList(response.data.student_first_names);
               console.log('hello world, we got list data: ')
               console.log(response.data);
               //setReady(true)
