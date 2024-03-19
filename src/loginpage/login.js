@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate,Link } from 'react-router-dom';                     
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -28,10 +28,20 @@ export default function SignInSide() {
       .find((cookie) => cookie.startsWith('csrftoken='));
     return csrfCookie ? csrfCookie.split('=')[1] : '';
   };
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem('is_authenticated');
+    if (isAuthenticated !== 'false') {
+      // Redirect to login page or perform any other action if user is not authenticated
+      navigate('/');
+    }
+  }, [navigate]);
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("hello")
     try {
+      // Save username to local storage
+      localStorage.setItem('username', formData.username);
+      
       const response = await fetch('http://127.0.0.1:8000/api/login/', {
         method: 'POST',
         headers: {
@@ -48,13 +58,16 @@ export default function SignInSide() {
         // If response is not successful, throw an error
         throw new Error('Failed to login');
       }
-  
+      
       const responseData = await response.json();
       localStorage.setItem('token', responseData.token); // Store token securely
+      localStorage.setItem('is_authenticated', true);
       localStorage.setItem('is_superuser', responseData.is_superuser);
       localStorage.setItem('is_staff', responseData.is_staff);
       localStorage.setItem('is_active', responseData.is_active);
       
+      // Save username to local storage
+      localStorage.setItem('username', formData.username);
       // Navigate to home page after successful login
       if (responseData.is_superuser) {
         navigate('/adminhome', { state: { username: formData.username } });

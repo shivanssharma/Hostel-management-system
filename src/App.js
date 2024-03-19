@@ -12,11 +12,12 @@ import StudentAilment from './ailment/studentailment.js';
 import AdminAsset from './asset/adminasset.js';
 import StudentAsset from './asset/studentasset.js';
 import HospitalVisitForm from './hospitalvisit/hospitalvisit.jsx';
-import StudentRegistration from './registration/studentregistrations.js';
+import StudentRegistration from './registration/studentRegistration.js';
 import AdminRoomAllotment from './room _component/app.js';
 import AdminView from './room _component/adminview.js';
 import StudentView from './room _component/studentView.js';
 import AdminMedicine from './Medicine/admin_medicine/AdminMedicine.jsx';
+import UpdateUserStatus from './admin manager/changeStatus.js';
 // import SuperuserNavbar from './sidenavbar/admin.jsx' ;
 // import ActiveuserNavbar from './sidenavbar/student.jsx';
 // import StaffuserNavbar from './sidenavbar/staff.jsx'; 
@@ -44,6 +45,7 @@ function App() {
           <Route path="/forgotpassword/:username" element={<PasswordResetForm />} />
           <Route path="/viewroom" element={<AdminView />} />
           <Route path="/studentviewroom" element={<StudentView />} />
+          <Route path="/status/:username" element={<UpdateUserStatus/>} />
         </Routes>
       </Router>
     </div>
