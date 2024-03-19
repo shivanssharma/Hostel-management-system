@@ -56,7 +56,7 @@ function Manage() {
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>{username.username}</TableCell>
                   <TableCell>
-                    <Link to={`/forgotpassword/${username}`}>
+                    <Link to={`/forgotpassword/${username.username}`}>
                       <Button variant="text">Forgot password</Button>
                     </Link>
                   </TableCell>
@@ -64,7 +64,7 @@ function Manage() {
                     {username.is_superuser ? 'Admin' : 'Regular user'} - {username.is_active ? 'Active' : 'Inactive'}
                   </TableCell>
                   <TableCell>
-                  <Link to={`/status/${username}`}>
+                  <Link to={`/status/${username.username}`}>
                     <Button variant="text">Update Status</Button>
                     </Link>
                   </TableCell>
