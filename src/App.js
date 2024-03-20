@@ -21,6 +21,7 @@ import { Box, Tooltip, Typography, useMediaQuery } from '@mui/material';
 import AdminHospitalVisits from './hospitalvisit/adminviewhpvisit.jsx';
 import ActiveuserNavbar from './sidenavbar/student.jsx';
 import { useState } from 'react';
+import StudentAssetList from './asset/StudentListView.jsx';
 
 import "./asset/sharedCss.css"
 import { CloseRounded, MenuRounded } from '@mui/icons-material';
@@ -113,6 +114,7 @@ function App() {
                   <Route path="/student-viewroom" element={<StudentView />} />
                   <Route path="/status/:username" element={<UpdateUserStatus/>} />
                   <Route path="/admin-hospital-visit" element={<AdminHospitalVisits/>} />
+                  <Route path="/admin-asset-view" element={<StudentAssetList/>} />
                 </Routes>
             </Box>
           </Box>

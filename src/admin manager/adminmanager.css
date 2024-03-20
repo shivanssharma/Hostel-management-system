@@ -9,7 +9,17 @@
         padding: 5%;
         margin: auto; 
 }
-
+.FP-Style{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 85%;
+        height: 80vh;
+        padding: 5%;
+        margin: auto; 
+}
 .CS-FormContainer{
         display: flex;
         flex-direction: column;

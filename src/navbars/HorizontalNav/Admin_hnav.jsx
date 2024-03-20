@@ -13,6 +13,7 @@ function AdminHorizontalNav() {
         {"title": "Medicine", "link": "/medicine", icon: <VaccinesRounded />},
         {"title": "Hostel Assets", "link": "/asset", icon: <WidgetsRounded />},
         {"title": "Hospital visit", "link": "/admin-hospital-visit", icon: <WidgetsRounded />},
+        {"title": "Asset Bookings", "link": "/admin-asset-view", icon: <WidgetsRounded />},
     ]
     return (
         <Box className="TN-container">
