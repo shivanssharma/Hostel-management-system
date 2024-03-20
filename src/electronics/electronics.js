@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FormControlLabel, Checkbox, Button, Snackbar } from "@mui/material";
+import { server, serverPort } from "../utils/Constants";
 
 function Electronic({ registrationNumber }) {
   const [electronicData, setElectronicData] = useState({
@@ -28,7 +29,7 @@ function Electronic({ registrationNumber }) {
         return;
       }
 
-      const response = await fetch('http://127.0.0.1:8000/api/submit-electronic/', {
+      const response = await fetch(server+":"+serverPort+'/api/submit-electronic/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

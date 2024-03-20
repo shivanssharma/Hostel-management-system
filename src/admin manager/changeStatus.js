@@ -115,7 +115,7 @@ export default UpdateUserStatus;
 //   const handleSubmit = async (event) => {
 //     event.preventDefault();
 //     try {
-//       const response = await axios.post('http://127.0.0.1:8000/api/update-user-status/', {
+//       const response = await axios.post(server+':'+serverPort+'/api/update-user-status/', {
 //         username: username,
 //         is_superuser: isSuperuser,
 //         is_active: isActive

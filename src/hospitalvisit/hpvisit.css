@@ -1,14 +1,17 @@
-.HV-Container{
-  width: 80%;
-  padding: 5%;
-  margin: auto;  
-}
-.HV-Style{
+.AHV-Style{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  width: 90%;
+  padding: 5%;
+  margin: auto;
+}
+.HV-Container{
+  width: 80%;
+  padding: 5%;
+  margin: auto;  
 }
 .HV-Items{
   width: 45%;

@@ -155,7 +155,7 @@ function AdminAilment() {
   return (
     <Box>
       <AdminHorizontalNav />
-      <Box id="Style_four">
+      <Box className="Style_four">
         <Box sx={{ p: '2%' }}>
           <Typography 
             variant="h3" className="grayFont" 
@@ -220,7 +220,7 @@ function AdminAilment() {
               </text>
             </Typography>
             <Box >
-              <TableContainer component={Paper}>
+              <TableContainer component={Paper} style={{width: '100%'}}>
                 <Table className="floatUpIn" style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
                   <TableHead>
                     <TableRow>
