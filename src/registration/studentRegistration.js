@@ -55,7 +55,7 @@
 //                 return;
 //             }
     
-//             const response = await fetch('http://127.0.0.1:8000/api/save_student_data/', {
+//             const response = await fetch(server+':'+serverPort+'/api/save_student_data/', {
 //                 method: 'POST',
 //                 headers: {
 //                     'Content-Type': 'application/json',
@@ -216,7 +216,7 @@
 //                 return;
 //             }
     
-//             const response = await fetch('http://127.0.0.1:8000/api/save_student_data/', {
+//             const response = await fetch(server+':'+serverPort+'/api/save_student_data/', {
 //                 method: 'POST',
 //                 headers: {
 //                     'Content-Type': 'application/json',
@@ -379,7 +379,7 @@
 //                 return;
 //             }
     
-//             const response = await fetch('http://127.0.0.1:8000/api/save_student_data/', {
+//             const response = await fetch(server+':'+serverPort+'/api/save_student_data/', {
 //                 method: 'POST',
 //                 headers: {
 //                     'Content-Type': 'application/json',
@@ -488,6 +488,7 @@ import { TextField, Autocomplete, Button, Snackbar, Typography } from "@mui/mate
 import StudentHorizontalNav2 from "../navbars/HorizontalNav/StudenthNav2.jsx";
 import './register.css';
 import Electronic from '../electronics/electronics.js';
+import { server, serverPort } from "../utils/Constants.jsx";
 
 function StudentRegistration() {
     const [formData, setFormData] = useState({
@@ -554,7 +555,7 @@ function StudentRegistration() {
                 username: username  // Include the username in the data being sent
             };
     
-            const response = await fetch('http://127.0.0.1:8000/api/save_student_data/', {
+            const response = await fetch(server+':'+serverPort+'/api/save_student_data/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

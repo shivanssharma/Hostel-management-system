@@ -138,7 +138,7 @@ export default Manage;
 //     useEffect(() => {
 //         async function fetchUsernames() {
 //             try {
-//                 const response = await axios.get('http://127.0.0.1:8000/api/usernames/');
+//                 const response = await axios.get(server+':'+serverPort+'/api/usernames/');
 //                 setUsernames(response.data.usernames);
 //             } catch (error) {
 //                 console.error('Error fetching usernames:', error);
@@ -149,7 +149,7 @@ export default Manage;
 //     }, []);
 //     const handleDeleteUser = async (username) => {
 //         try {
-//           await axios.delete(`http://127.0.0.1:8000/api/delete-user/${username}/`);
+//           await axios.delete(`${server}:${serverPort}/api/delete-user/${username}/`);
 //           // If deletion is successful, update the usernames list to reflect the change
 //           setUsernames(usernames.filter((name) => name !== username));
 //           alert("User deleted successfully");
