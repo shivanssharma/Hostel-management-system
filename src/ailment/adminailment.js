@@ -100,10 +100,11 @@ function AdminAilment() {
       });
   
       // Remove the deleted ailment from the local state
-      setAilment((prevAilments) =>
-        prevAilments.filter((ailment) => ailment.AilmentName !== AilmentName)
-      );
-  
+      // setAilment((prevAilments) =>
+      //   prevAilments.filter((ailment) => ailment.AilmentName !== AilmentName)
+      // );
+      // setAilmentData(ailment.filter((ailments)=>ailments !==AilmentName ));
+      setAilment(prevAilments => prevAilments.filter(ailment => ailment.AilmentName !== AilmentName));
       setSnackbarMessage("Ailment deleted successfully!");
       setSnackbarOpen(true);
     } catch (error) {
@@ -206,7 +207,7 @@ function AdminAilment() {
           </Box>
         </Box>
 
-        <hr style={{margin: '4% 7% 4% 7%'}}/>       
+        <hr style={{margin: '4% 5% 4% 5%'}}/>       
 
         {handleDeleteAilment && 
           <Box className="AdAil-Listcontainer" sx={{flex: 1, p: '2% 0% 2% 0%'}}>

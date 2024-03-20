@@ -301,34 +301,29 @@ function AdminRoomAllotment() {
               </Select>
             </FormControl>
           )}
+          {selectedPosition === "room mate" && (
+            <FormControl className="roommate" sx={{width:'48%', marginLeft: '1%'}}>
+              <InputLabel id="label-id_5">Select Rooms for Roommate</InputLabel>
+              <Select
+                labelId="select-id_5"
+                id="id_5"
+                value={selectedDropdown}
+                onChange={handleDropdownChange}
+              >
+                
+                <MenuItem value="1 ug">1 Ug</MenuItem>
+                <MenuItem value="2 ug">2 Ug</MenuItem>
+                <MenuItem value="3 ug">3 Ug</MenuItem>
+                <MenuItem value="1 msc">1 Msc</MenuItem>
+                <MenuItem value="2 msc">2 Msc</MenuItem>
+              </Select>
+            </FormControl>
+          )}
         </Box>
 
-        {selectedPosition === "room mate" && (
-          <FormControl className="roommate" sx={{width:'48%', marginLeft: '1%'}}>
-            <InputLabel id="label-id_5">Select Rooms for Roommate</InputLabel>
-            <Select
-              labelId="select-id_5"
-              id="id_5"
-              value={selectedDropdown}
-              onChange={handleDropdownChange}
-            >
-              
-              <MenuItem value="1 ug">1 Ug</MenuItem>
-              <MenuItem value="2 ug">2 Ug</MenuItem>
-              <MenuItem value="3 ug">3 Ug</MenuItem>
-              <MenuItem value="1 msc">1 Msc</MenuItem>
-              <MenuItem value="2 msc">2 Msc</MenuItem>
-            </Select>
-          </FormControl>
-        )}
 
         <Box style={{paddingRight:'195px'}}>
-          {
-            roomList ? 
-            studentList && 
-            <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList}/> 
-            : studentList && <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList}/>
-          }
+          
         
           {/* <div>
             {(roomList === undefined || roomList.length === 0 || studentList === undefined) && (
@@ -339,9 +334,12 @@ function AdminRoomAllotment() {
           </div> */}
 
           <Box sx={{mt: '5%', mb: '5%', p: '5%', borderRadius: '7px', background: '#f5efef'}} className="floatUpIn">
-            {
-              roomList && studentList && <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList}/>
-            }
+              {
+                roomList ? 
+                studentList && 
+                <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList}/> 
+                : studentList && <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList}/>
+              }
           </Box>
 
           {loginError && <p style={{ color: 'Green' }}>{loginError}</p>} 

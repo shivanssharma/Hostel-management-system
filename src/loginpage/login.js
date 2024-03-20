@@ -82,7 +82,7 @@ export default function SignInSide(props) {
       else if (responseData.is_staff) {
         localStorage.setItem('userType', "staff");
         // navigate('/staffhome',{ state: { username: formData.username } });
-        navigate('/adminhome',{ state: { username: formData.username } });
+        navigate('/staff-home',{ state: { username: formData.username } });
       } 
       else {
         localStorage.setItem('userType', "student");

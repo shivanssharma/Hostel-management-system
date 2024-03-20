@@ -2,7 +2,7 @@ import React from "react";
 // import HealthNav from "../navbars/navbarHealth";
 import Layout from "./Home";
 import './homepage.css';
-import ActiveuserNavbar from "../sidenavbar/student";
+// import ActiveuserNavbar from "../sidenavbar/student";
 import { Box } from "@mui/material";
 const StudentHome = () => {
   // const [open, setOpen]

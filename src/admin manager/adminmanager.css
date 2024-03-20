@@ -4,7 +4,7 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: flex-start;
-        width: 70%;
+        width: 85%;
         height: 80vh;
         padding: 5%;
         margin: auto; 
@@ -14,6 +14,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        
 }
 .CS-FormGroup{
         display: flex;

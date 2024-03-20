@@ -12,7 +12,7 @@ import { server, serverPort } from '../utils/Constants';
 const StaffuserNavbar = (props) => {
   const location = useLocation();
   const navigate= useNavigate()
-  const username = location.state && location.state.username || localStorage.getItem('username');
+  const username = (location.state && location.state.username) || localStorage.getItem('username');
   const links= [
     {"title": "Home", "link": "/staff-home", icon: <CottageRounded />},
     {"title": "Health care", "link": "/ailment", icon: <HealthAndSafetyRounded />},

@@ -13,7 +13,7 @@ const SuperuserNavbar = (props) => {
   // console.log('usename in superusernav',username)
   const location = useLocation();
   const navigate= useNavigate();
-  const username = location.state && location.state.username || localStorage.getItem('username');
+  const username = (location.state && location.state.username) || localStorage.getItem('username');
   const links= [
     {"title": "Home", "link": "/admin-home", icon: <CottageRounded />},
     {"title": "User Manager", "link": "/user-management", icon: <AccountCircleRounded />},

@@ -15,9 +15,10 @@ function Manage() {
   useEffect(() => {
     async function fetchUsernames() {
       try {
-        const response = await axios.get(server+':'+serverPort+'/api/usernames/');
+        const response = await axios.get(`${server}:${serverPort}/api/usernames/`);
         // Todo: what does this mean
-        setUsernames(response.data.usernames); // Update this line
+        setUsernames(response.data.users); // Update this line
+        
       } catch (error) {
         console.error('Error fetching usernames:', error);
       }
@@ -30,7 +31,10 @@ function Manage() {
     try {
       await axios.delete(`${server}:${serverPort}/api/delete-user/${username}/`);
       // If deletion is successful, update the usernames list to reflect the change
-      setUsernames(usernames.filter((name) => name !== username));
+      // setUsernames(usernames.filter((name) => name !== username));
+      setUsernames((prevUsernames) =>
+        prevUsernames.filter((name) => name !== username)
+      );
       alert("User deleted successfully");
     } catch (error) {
       console.error("Error deleting user:", error);
@@ -42,12 +46,13 @@ function Manage() {
     <header>
       {/* Todo: Is this required */}
       <AdminHorizontalNavUser />
-      <div className="mainContainer">
+      <div className="CS-Style">
         <Typography variant="h3" className="UM-title grayFont">
           <text className="BrasikaFont floatRightIn">
             User manager
           </text>
         </Typography>
+      
         <TableContainer className="floatRightIn" component={Paper}>
           <Table>
             <TableHead>
@@ -61,16 +66,16 @@ function Manage() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {usernames.map((username, index) => (
+              {usernames && usernames.map((user, index) => (
                 <TableRow key={index} id="row">
                   <TableCell className="cell">{index + 1}</TableCell>
                   {/* Todo: Check this */}
                   {/* <TableCell>{username.username}</TableCell> */}  
-                  <TableCell className="cell">{username.username}</TableCell>
+                  <TableCell className="cell">{user.username}</TableCell>
                   <TableCell className="cell">
                     {/* <Link to={`/forgot-password/${username.username}`} sx={{textAlign: 'left'}}> */}
                     {/* Todo: Check this */}
-                    <Link to={`/forgot-password/${username.username}`} sx={{textAlign: 'left'}}>
+                    <Link to={`/forgot-password/${user.username}`} sx={{textAlign: 'left'}}>
                       <Button 
                         className="UM-btn"
                         variant="outlined" 
@@ -82,10 +87,10 @@ function Manage() {
                   </TableCell>
                   <TableCell className="cell">
                     {/* Todo: check the status */}
-                    {username.is_superuser ? 'Admin' : 'Regular user'} - {username.is_active ? 'Active' : 'Inactive'}
+                    {user.is_superuser ? 'Admin' : 'Regular user'} - {user.is_active ? 'Active' : 'Inactive'} - {user.is_staff ? 'Staff' : 'Non-Staff'}
                   </TableCell>
                   <TableCell className="cell">
-                    <Link to={`/status/${username.username}`}>
+                    <Link to={`/status/${user.username}`}>
                       <Button 
                         className="UM-btn"
                         variant="outlined" 
@@ -99,7 +104,7 @@ function Manage() {
                     <Button
                       className="UM-btn"
                       variant="outlined"
-                      onClick={() => handleDeleteUser(username)}
+                      onClick={() => handleDeleteUser(user.username)}
                     >
                       Delete
                     </Button>

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './adminmanager.css';
-import { Input,Button } from '@mui/material';
+import { Input,Button,Typography,Box } from '@mui/material';
 import { server, serverPort } from '../utils/Constants';
 const PasswordResetForm = () => {
   const { username } = useParams();
@@ -36,33 +36,43 @@ const PasswordResetForm = () => {
   };
 
   return (
-    <div className='style'>
-      <h2>Password Reset</h2>
+    <div className='CS-Style'>
+      <Typography variant="h2" sx={{pb: '5%'}}>
+          <text className="BrasikaFont floatRightIn grayFont">
+            Password Reset
+          </text>
+      </Typography>
+      
       <form onSubmit={handleSubmit}>
-        <h3>Username is {username}</h3>
-        <div>
-          <label>New Password:</label>
-          <Input
-            type="password"
-            name="newPassword"
-            value={formData.newPassword}
-            onChange={handleChange}
-            required
-            style={{marginLeft:'75px'}}
-          />
-        </div>
-        <br/>
-        <div>
-          <label>Confirm New Password:</label>
-          <Input
-            type="password"
-            name="confirmNewPassword"
-            value={formData.confirmNewPassword}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <Button variant="outlined" type="submit">Reset Password</Button>
+        <h3 className="BrasikaFont floatRightIn grayFont" >Username is {username}</h3>
+        <Box className="CS-FormContainer">
+          <Box sx={{m: '5%'}} className="CS-FormGroup">
+            <div>
+              <label className="BrasikaFont floatRightIn grayFont">New Password:</label>
+              <Input
+                type="password"
+                name="newPassword"
+                value={formData.newPassword}
+                onChange={handleChange}
+                required
+                // style={{marginLeft:'75px'}}
+              />
+            </div>
+          </Box>
+          <Box sx={{m: '5%'}} className="CS-FormGroup">
+            <div>
+              <label className="BrasikaFont floatRightIn grayFont">Confirm New Password:</label>
+              <Input
+                type="password"
+                name="confirmNewPassword"
+                value={formData.confirmNewPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </Box>
+      </Box>
+        <Button className="floatRightIn" sx={{width: '50%', p: '3%'}} variant="outlined" type="submit">Reset Password</Button>
       </form>
       {message && <p>{message}</p>}
     </div>
