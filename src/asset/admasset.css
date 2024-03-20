@@ -56,7 +56,19 @@ Button {
   margin: auto;
   flex-wrap: wrap;
 }
+.SLV-Style{
+  width: 90%;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: auto;
+  flex-wrap: wrap;
+}
 
+.SLV-TableContainer{
+  width: 100%;
+}
 
 .Ada-Listcontainer{
   height: 60vh;
@@ -66,20 +78,20 @@ Button {
   /* padding: 2%; */
   /* margin: 0% 0% 0% 5%; */
 }
-.Ada-listRow{
+.Ada-listRow, .SLV-TableRow{
   border: 1px solid rgb(218, 211, 211, 0.5);
   border-radius: 21px;
 }
-.Ada-listItem{
+.Ada-listItem, .SLV-TableItem{
   text-transform: capitalize;
   font-family: sans-serif;
   cursor: pointer;
   padding: 2%;
   transition: all 0.3s ease;
 }
-.Ada-listRow:hover{
+.Ada-listRow:hover, .SLV-TableRow:hover{
   background-color: rgb(251, 245, 245);
-  .Ada-listItem{
+  .Ada-listItem, .SLV-TableItem{
     /* font-weight: bold; */
     transition: all 0.3s ease;
   }

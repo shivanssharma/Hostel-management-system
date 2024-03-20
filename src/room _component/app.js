@@ -136,48 +136,48 @@ function AdminRoomAllotment() {
   console.log(selectedPosition)
   // const [updatedRoomList, setUpdatedRoomList] = useState([]);
   //const [ready, setReady] = useState(false);
-        // Function to fetch 3UG list from Django backend
-        useEffect(() => {
-          // Fetch room list
-          // axios.get(server+':'+serverPort+'/api/rooms/')
-          //   .then(response => {
-          //     setRoomList(response.data);
-          //   })
-          //   .catch(error => {
-          //     console.error('Error fetching room list:', error);
-          //   });
+  // Function to fetch 3UG list from Django backend
+  useEffect(() => {
+    // Fetch room list
+    // axios.get(server+':'+serverPort+'/api/rooms/')
+    //   .then(response => {
+    //     setRoomList(response.data);
+    //   })
+    //   .catch(error => {
+    //     console.error('Error fetching room list:', error);
+    //   });
 
-          // Fetch 3UG list
+    // Fetch 3UG list
+    
+      axios.get(`${server}:${serverPort}/api/room/${selectedFloor}/${selectedRoom}/${selectedPosition}`)
+      .then(response => {
+        setRoomList(response.data,);
+        console.log('hello world, we got list data: ')
+        console.log(response.data);
+        //setReady(true)
+      })
+      .catch(error => {
+        console.error('Error fetching Room list:', error);
+      });
           
-            axios.get(`${server}:${serverPort}/api/room/${selectedFloor}/${selectedRoom}/${selectedPosition}`)
-            .then(response => {
-              setRoomList(response.data,);
-              console.log('hello world, we got list data: ')
-              console.log(response.data);
-              //setReady(true)
-            })
-            .catch(error => {
-              console.error('Error fetching Room list:', error);
-            });
-                
-        }, [selectedFloor,selectedRoom,selectedPosition]);
-        console.log(studentList);
-        useEffect(() => {
-          
-          // Fetch 3UG list if room leader option is selected
-          if (selectedPosition === "room leader" || selectedPosition === "room mate") {
+  }, [selectedFloor,selectedRoom,selectedPosition]);
+  console.log(studentList);
+  useEffect(() => {
+    
+    // Fetch 3UG list if room leader option is selected
+    if (selectedPosition === "room leader" || selectedPosition === "room mate") {
 
-            axios.get(`${server}:${serverPort}/api/students/${selectedDropdown}/`)
-              .then(response => {
-                setStudentList(response.data);
-              })
-              .catch(error => {
-                console.error(`Error fetching ${selectedDropdown} list:`, error);
-              });
+      axios.get(`${server}:${serverPort}/api/students/${selectedDropdown}/`)
+        .then(response => {
+          setStudentList(response.data);
+        })
+        .catch(error => {
+          console.error(`Error fetching ${selectedDropdown} list:`, error);
+        });
 
-          }
-          
-        }, [selectedDropdown, selectedPosition]);
+    }
+    
+  }, [selectedDropdown, selectedPosition]);
 
   // console.log(studentList)
   const handleFloorChange = (event) => {
@@ -334,12 +334,12 @@ function AdminRoomAllotment() {
           </div> */}
 
           <Box sx={{mt: '5%', mb: '5%', p: '5%', borderRadius: '7px', background: '#f5efef'}} className="floatUpIn">
-              {
-                roomList ? 
+            {
+              roomList ? 
                 studentList && 
-                <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList}/> 
-                : studentList && <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList}/>
-              }
+                <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList}/>
+              : studentList && <SelectAllTransferList roomList={roomList} studentList={studentList} setRightList={setRightList}/>
+            }
           </Box>
 
           {loginError && <p style={{ color: 'Green' }}>{loginError}</p>} 

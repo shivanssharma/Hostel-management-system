@@ -43,10 +43,10 @@ const PasswordResetForm = () => {
           </text>
       </Typography>
       
-      <form onSubmit={handleSubmit}>
-        <h3 className="BrasikaFont floatRightIn grayFont" >Username is {username}</h3>
-        <Box className="CS-FormContainer">
-          <Box sx={{m: '5%'}} className="CS-FormGroup">
+      <form style={{width: '80%'}} onSubmit={handleSubmit}>
+        <h3 className="BrasikaFont floatRightIn grayFont" >Username:  {username}</h3>
+        <Box className="FP-FormContainer">
+          <Box sx={{m: '2%'}} className="FP-FormGroup">
             <div>
               <label className="BrasikaFont floatRightIn grayFont">New Password:</label>
               <Input
@@ -55,11 +55,11 @@ const PasswordResetForm = () => {
                 value={formData.newPassword}
                 onChange={handleChange}
                 required
-                // style={{marginLeft:'75px'}}
+                style={{marginLeft: '3%'}}
               />
             </div>
           </Box>
-          <Box sx={{m: '5%'}} className="CS-FormGroup">
+          <Box sx={{m: '2%'}} className="FP-FormGroup">
             <div>
               <label className="BrasikaFont floatRightIn grayFont">Confirm New Password:</label>
               <Input
@@ -68,11 +68,12 @@ const PasswordResetForm = () => {
                 value={formData.confirmNewPassword}
                 onChange={handleChange}
                 required
+                style={{marginLeft: '3%'}}
               />
             </div>
           </Box>
       </Box>
-        <Button className="floatRightIn" sx={{width: '50%', p: '3%'}} variant="outlined" type="submit">Reset Password</Button>
+      <Button className="floatRightIn" sx={{width: '20%', p: '1.5%'}} variant="outlined" type="submit">Reset Password</Button>
       </form>
       {message && <p>{message}</p>}
     </div>
