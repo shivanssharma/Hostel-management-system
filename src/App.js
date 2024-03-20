@@ -18,6 +18,7 @@ import AdminView from './room _component/adminview.js';
 import StudentView from './room _component/studentView.js';
 import AdminMedicine from './Medicine/admin_medicine/AdminMedicine.jsx';
 import { Box, Tooltip, Typography, useMediaQuery } from '@mui/material';
+import AdminHospitalVisits from './hospitalvisit/adminviewhpvisit.jsx';
 import ActiveuserNavbar from './sidenavbar/student.jsx';
 import { useState } from 'react';
 
@@ -103,14 +104,15 @@ function App() {
                   <Route path="/room-allotment" element={<AdminRoomAllotment />} />
                   <Route path="/ailment" element={<AdminAilment />} />
                   <Route path="/medicine" element={<AdminMedicine />} /> 
-                  <Route path="/hospital-visit" element={< HospitalVisitForm/>} />
-                  <Route path="/student-ailment" element={< StudentAilment/>} />
+                  <Route path="/hospital-visit" element={<HospitalVisitForm/>} />
+                  <Route path="/student-ailment" element={<StudentAilment/>} />
                   <Route path="/student-asset" element={<StudentAsset />} />  
                   <Route path="/register" element={<StudentRegistration />} />
                   <Route path="/forgot-password/:username" element={<PasswordResetForm />} />
                   <Route path="/viewroom" element={<AdminView />} />
                   <Route path="/student-viewroom" element={<StudentView />} />
                   <Route path="/status/:username" element={<UpdateUserStatus/>} />
+                  <Route path="/admin-hospital-visit" element={<AdminHospitalVisits/>} />
                 </Routes>
             </Box>
           </Box>
