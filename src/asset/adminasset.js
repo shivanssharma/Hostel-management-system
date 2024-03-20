@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
-import { TextField, Button,Switch, Typography, Box } from "@mui/material";
+import { TextField, Button,Switch, Typography, Box,Snackbar } from "@mui/material";
 // import HealthNav from "../navbars/navbarHealth";
 import './admasset.css';
 import "../asset/sharedCss.css"
@@ -11,83 +11,76 @@ function AdminAsset() {
   const [checked, setChecked] = useState(false);
   const [assetName, setAssetName] = useState("");
   const [assetDescription, setAssetDescription] = useState("");
-  const [assets, setAssets] = useState(null);
+  const [assets, setAssets] = useState([]);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
   useEffect(() => {
-      // Fetch the list of assets when the component mounts
-      fetchAssets();
+    fetchAssets();
   }, []);
 
   const handleSwitchChange = () => {
-      setChecked(!checked);
+    setChecked(!checked);
   };
 
   const fetchAssets = async () => {
-      try {
-        console.log("getting assets"+server+':'+serverPort+'/api/hostel_assets/')
-          // Fetch the list of assets from the server
-          const response = await axios.get(server+':'+serverPort+'/api/hostel_assets/');
-          console.log("response",response.data)
-          setAssets(response.data);
-      } catch (error) {
-          console.error('Error fetching assets:', error);
-      }
+    try {
+      const response = await axios.get(`${server}:${serverPort}/api/hostel_assets/`);
+      setAssets(response.data);
+    } catch (error) {
+      console.error('Error fetching assets:', error);
+    }
   };
 
   const addAsset = async () => {
-      try {
-          // Get the CSRF token from the browser's cookies
-          const csrfToken = document.cookie.split('; ')
-              .find(row => row.startsWith('csrftoken='))
-              .split('=')[1];
+    try {
+      const csrfToken = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('csrftoken='))
+        .split('=')[1];
 
-          // Check if the CSRF token is available
-          if (csrfToken) {
-              // Make the POST request with the CSRF token
-              await axios.post(server+':'+serverPort+'/api/hostel_assets/', {
-                  AssetName: assetName,
-                  Description: assetDescription,
-                  AvailabilityStatus: checked,
-              }, {
-                  headers: {
-                      'X-CSRFToken': csrfToken,
-                  },
-              });
+      if (csrfToken) {
+        await axios.post(`${server}:${serverPort}/api/hostel_assets/`, {
+          AssetName: assetName,
+          Description: assetDescription,
+          AvailabilityStatus: checked,
+        }, {
+          headers: {
+            'X-CSRFToken': csrfToken,
+          },
+        });
 
-              console.log('Hostel Asset added successfully!');
-              // Update the list of assets after adding
-              fetchAssets();
-              // Clear input fields
-              setAssetName("");
-              setAssetDescription("");
-              setChecked(false);
-          } else {
-              console.error('CSRF token not found in cookies.');
-          }
-      } catch (error) {
-          console.error('Error adding hostel asset:', error);
+        console.log('Hostel Asset added successfully!');
+        fetchAssets();
+        setAssetName("");
+        setAssetDescription("");
+        setChecked(false);
+        setSnackbarMessage('Hostel Asset added successfully!');
+        setSnackbarOpen(true);
+      } else {
+        console.error('CSRF token not found in cookies.');
       }
+    } catch (error) {
+      console.error('Error adding hostel asset:', error);
+      setSnackbarMessage('Error adding hostel asset');
+      setSnackbarOpen(true);
+    }
   };
 
-  const deleteAsset = async (assetID) => {
+  const deleteAsset = async (assetName) => {
     try {
-      // Get the CSRF token from the browser's cookies
       const csrfToken = document.cookie
         .split('; ')
         .find((row) => row.startsWith('csrftoken='))
         ?.split('=')[1];
   
-      // Check if the asset with the specified ID exists
-      // You can add a function to verify this on the frontend
-      const assetExists = await checkAssetExists(assetID);
+      const assetExists = await checkAssetExists(assetName);
   
       if (assetExists) {
-        // Check if the CSRF token is available
         if (csrfToken) {
-          // Make the DELETE request with the CSRF token
-          console.log(`Deleting asset with ID: ${assetID}`);
+          console.log(`Deleting asset with Name: ${encodeURIComponent(assetName)}`);
           const response = await axios.delete(
-            `${server}:${serverPort}/api/hostel_assets/${assetID}/`,
+            `${server}:${serverPort}/api/delete_assets/${encodeURIComponent(assetName)}/`,
             {
               headers: {
                 'X-CSRFToken': csrfToken,
@@ -95,45 +88,48 @@ function AdminAsset() {
             }
           );
   
-          // Log the response from the server
           console.log('Response:', response);
   
-          // Check if the response is successful (status code 200-299)
           if (response.status >= 200 && response.status < 300) {
             console.log('Hostel Asset deleted successfully!');
-            // Update the list of assets after deleting
             fetchAssets();
+            setSnackbarMessage('Hostel Asset deleted successfully!');
+            setSnackbarOpen(true);
           } else {
-            // Log an error if the server returns an unexpected status
             console.error('Failed to delete hostel asset. Status:', response.status);
+            setSnackbarMessage('Failed to delete hostel asset');
+            setSnackbarOpen(true);
           }
         } else {
           console.error('CSRF token not found in cookies.');
+          setSnackbarMessage('CSRF token not found in cookies.');
+          setSnackbarOpen(true);
         }
       } else {
-        console.error(`Asset with ID ${assetID} does not exist.`);
+        console.error(`Asset with Name ${assetName} does not exist.`);
+        setSnackbarMessage(`Asset with Name ${assetName} does not exist.`);
+        setSnackbarOpen(true);
       }
     } catch (error) {
-      // Log and handle any errors
       console.error('Error deleting hostel asset:', error);
+      setSnackbarMessage('Error deleting hostel asset');
+      setSnackbarOpen(true);
     }
   };
   
-  // Function to check if the asset with the specified ID exists
-  const checkAssetExists = async (assetID) => {
+  const checkAssetExists = async (assetName) => {
     try {
       const response = await axios.get(
-        `${server}:${serverPort}/api/hostel_assets/${assetID}/`
+        `${server}:${serverPort}/api/delete_assets/${encodeURIComponent(assetName)}/`
       );
       
-      // Check if the response is successful (status code 200-299)
       return response.status >= 200 && response.status < 300;
     } catch (error) {
-      // Log and handle any errors
-      console.error(`Error checking if asset with ID ${assetID} exists:`, error);
+      console.error(`Error checking if asset with name ${assetName} exists:`, error);
       return false;
     }
   };
+
   
 
   return (
@@ -229,7 +225,7 @@ function AdminAsset() {
                             <td className="Ada-listItem">{asset.Description}</td>
                             <td className="Ada-listItem">{asset.AvailabilityStatus.toString()}</td>
                             <td className="Ada-listItem">
-                              <Button variant="outlined" onClick={() => deleteAsset(asset.AssetID)} style={{ marginLeft: '20px', width: '80%' }}>
+                              <Button variant="outlined" onClick={() => deleteAsset(asset.AssetName)} style={{ marginLeft: '20px', width: '80%' }}>
                                 Delete
                               </Button>
                             </td>
@@ -239,9 +235,12 @@ function AdminAsset() {
                   </table>
                 :
                   <Typography variant="h4" sx={{textAlign: 'center'}}>
-                    <text className="BrasikaFont grayFont floatUpIn" >
-                      Currently there are no asset to diplay.
-                    </text>
+                  <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={6000}
+                    onClose={() => setSnackbarOpen(false)}
+                    message={snackbarMessage}
+                  />
                   </Typography>
               }
             </Box>

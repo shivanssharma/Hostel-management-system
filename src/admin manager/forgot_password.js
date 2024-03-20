@@ -36,7 +36,7 @@ const PasswordResetForm = () => {
   };
 
   return (
-    <div className='CS-Style'>
+    <div className='FP-Style'>
       <Typography variant="h2" sx={{pb: '5%'}}>
           <text className="BrasikaFont floatRightIn grayFont">
             Password Reset

@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Autocomplete, TextField, Switch, Button, Box, Typography } from "@mui/material";
+import { Autocomplete, TextField, Switch, Button, Box, Typography,Snackbar } from "@mui/material";
 import './studasset.css';
 import "../asset/sharedAnimation.css"
 // import HealthNav from "../navbars/navbarHealth";
 import StudentHorizontalNav from "../navbars/HorizontalNav/student_hnav";
+import MuiAlert from "@mui/material/Alert";
 import { server, serverPort } from "../utils/Constants";
-
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
 function StudentAsset() {
     const [hostelAssets, setHostelAssets] = useState([]);
     const [selectedAsset, setSelectedAsset] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
+    const [snackbarSeverity, setSnackbarSeverity] = useState("success");
 
     useEffect(() => {
         fetchData();
@@ -19,7 +25,7 @@ function StudentAsset() {
     const fetchData = () => {
         // Fetch data from the backend API
         axios
-            .get(server+':'+serverPort+"/api/hostel_assets/")
+            .get(`${server}:${serverPort}/api/hostel_assets/`)
             .then((response) => {
                 // Log the raw response data for inspection
                 console.log("Raw response data:", response.data);
@@ -44,6 +50,47 @@ function StudentAsset() {
         setSelectedAsset(value);
     };
 
+    const handleBookAsset = () => {
+        // Get CSRF token from cookies
+        const csrftoken = getCookie("csrftoken");
+
+        // Send a POST request to book the selected asset
+        axios.post(`${server}:${serverPort}/api/book_asset/`, {
+            username: localStorage.getItem('username'), // Get username from localStorage
+            assetID: selectedAsset.assetID,           
+        }, {
+            headers: {
+                "X-CSRFToken": csrftoken,
+            }
+        })
+            .then((response) => {
+                
+                console.log("Asset booked successfully:", response.data);
+                setSnackbarMessage("Asset booked successfully");
+                setSnackbarSeverity("success");
+                setSnackbarOpen(true);
+            })
+            .catch((error) => {
+                
+                console.error("Error booking asset:", error);
+                setSnackbarMessage("Error booking asset");
+                setSnackbarSeverity("error");
+                setSnackbarOpen(true);
+            });
+            
+    };
+    
+
+    const handleSnackbarClose = () => {
+        
+        setSnackbarOpen(false);
+    };
+
+    const getCookie = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+    };
     return (
         <Box>
             {/* Styling div for better organization */}
@@ -106,8 +153,17 @@ function StudentAsset() {
 
                 </Box>
                 {/* Button for booking */}
-                <Button className="floatRightIn" variant="outlined">Book</Button>
+                <Button variant="outlined" onClick={handleBookAsset}>Book</Button>
             </div>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={6000}
+                onClose={handleSnackbarClose}
+            >
+                <Alert onClose={handleSnackbarClose} severity={snackbarSeverity}>
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
         </Box>
     );
 }
