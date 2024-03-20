@@ -3,8 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './admasset.css';
+import { server, serverPort } from '../utils/Constants';
+import { Box, Typography } from '@mui/material';
 function StudentAssetList() {
-    const [bookings, setBookings] = useState([]);
+    const [bookings, setBookings] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -12,7 +14,7 @@ function StudentAssetList() {
     }, []);
 
     const fetchBookings = () => {
-        axios.get('http://127.0.0.1:8000/api/asset_bookings/')
+        axios.get(server+':'+serverPort+'/api/asset_bookings/')
             .then(response => {
                 // Filter out bookings made more than 5-6 days ago
                 const filteredBookings = response.data.filter(booking => {
@@ -37,32 +39,43 @@ function StudentAssetList() {
     };
 
     return (
-        <div className='Style'>
-            <h1>Asset Bookings</h1><br/>
-            {loading ? (
-                <p>Loading...</p>
-            ) : (
-                <table>
-                    <thead>
-                        <tr>
-                            
-                            <th>Student Name</th>
-                            <th>Asset Name</th>
-                            <th>Reservation Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {bookings.map(booking => (
-                            <tr key={booking.id}>
-                                <td>{booking.StudentName}</td>
-                                <td>{booking.AssetName}</td>
-                                <td>{formatDate(booking.ReservationDate)}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            )}
-        </div>
+        <Box className='SLV-Style'>
+            <Box>
+                <Typography variant="h2" sx={{pb: '5%'}}>
+                    <text className="BrasikaFont floatRightIn grayFont">
+                        Asset Bookings
+                    </text>
+                </Typography>
+            </Box>
+            <Box>
+                {
+                    loading 
+                    ?  <p className="BrasikaFont floatRightIn grayFont">Loading...</p>
+                    : bookings && bookings ?
+                        <table className="SLV-TableContainer">
+                            <thead>
+                                <tr>
+                                    <th className="BrasikaFont floatRightIn grayFont">Student Name</th>
+                                    <th className="BrasikaFont floatRightIn grayFont">Asset Name</th>
+                                    <th className="BrasikaFont floatRightIn grayFont">Reservation Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {bookings.map(booking => (
+                                    <tr key={booking.id} className="SLV-TableRow">
+                                        <td className="BrasikaFont floatRightIn grayFont SLV-TableItem">{booking.StudentName}</td>
+                                        <td className="BrasikaFont floatRightIn grayFont SLV-TableItem">{booking.AssetName}</td>
+                                        <td className="BrasikaFont floatRightIn grayFont SLV-TableItem">{formatDate(booking.ReservationDate)}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    :
+                        <h2 className="BrasikaFont floatRightIn grayFont">Currently there are no data to display</h2>
+
+                }
+            </Box>
+        </Box>
     );
 }
 
