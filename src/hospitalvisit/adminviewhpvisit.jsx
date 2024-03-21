@@ -52,7 +52,7 @@ import './hpvisit.css';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@mui/material";
-
+import AdminHorizontalNav from '../navbars/HorizontalNav/Admin_hnav';
 function AdminHospitalVisits() {
   const [hospitalVisits, setHospitalVisits] = useState([]);
   const [isClearing, setIsClearing] = useState(false);
@@ -87,6 +87,8 @@ function AdminHospitalVisits() {
   };
 
   return (
+    <header>
+    <AdminHorizontalNav/>
     <div className="Style">
       <h1>Admin Hospital Visits</h1>
       <TableContainer component={Paper}>
@@ -118,6 +120,7 @@ function AdminHospitalVisits() {
         </Table>
       </TableContainer>
     </div>
+    </header>
   );
 }
 
