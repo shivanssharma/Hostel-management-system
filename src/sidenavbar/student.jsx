@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link ,useLocation, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import { Box, IconButton, Typography, useMediaQuery } from '@mui/material';
-import { AccountCircleRounded, CottageRounded, HealthAndSafetyRounded, LogoutRounded, NotificationsActiveRounded, RoomPreferencesRounded } from '@mui/icons-material';
+import { AccountCircleRounded, CottageRounded, HealthAndSafetyRounded, LogoutRounded,  RoomPreferencesRounded } from '@mui/icons-material';
 import '../HomePage/homepage.css'
 import "../asset/sharedAnimation.css"
 import { server, serverPort } from '../utils/Constants';
@@ -16,7 +16,7 @@ const ActiveuserNavbar = (props) =>{
     {"title": "Enrollment", "link": "/register", icon: <AccountCircleRounded />},
     {"title": "Health Care", "link": "/student-ailment", icon: <HealthAndSafetyRounded />},
     {"title": "Check Room", "link": "/student-viewroom", icon : <RoomPreferencesRounded />},
-    {"title": "Notifications", "link": "/studentnotifications", icon: <NotificationsActiveRounded />},
+   
   ]
   const [activeNav, setActiveNav] = useState(0);
   const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('sm')); // Change 'sm' to other breakpoints as needed

@@ -4,7 +4,7 @@ import { server, serverPort } from "../utils/Constants";
 
 function Electronic({ registrationNumber }) {
   const [electronicData, setElectronicData] = useState({
-    registration_number: registrationNumber,
+    username:localStorage.getItem('username'),
     mobile_phone: false,
     laptop: false,
     earphone: false,
@@ -96,6 +96,9 @@ function Electronic({ registrationNumber }) {
           <Button variant="outlined" onClick={handleSubmit}>
             Submit
           </Button>
+        )}
+         {submitted && (
+          <p>Form submitted successfully!</p>
         )}
       </div>
       <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose} message={snackbarMessage} />
