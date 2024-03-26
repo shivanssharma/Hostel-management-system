@@ -89,6 +89,16 @@ function AdminAilment() {
       setSnackbarOpen(true);
     }
   };
+  const fetchAilments = async () => {
+    try {
+      const response = await axios.get(server+':'+serverPort+'/api/ailment/');
+      setAilment(response.data);
+    } catch (error) {
+      console.error(error);
+      setSnackbarMessage("Error fetching ailment. Please try again.");
+      setSnackbarOpen(true);
+    }
+  };
 
   const handleDeleteAilment = async (AilmentName) => {
     try {
@@ -104,7 +114,8 @@ function AdminAilment() {
       //   prevAilments.filter((ailment) => ailment.AilmentName !== AilmentName)
       // );
       // setAilmentData(ailment.filter((ailments)=>ailments !==AilmentName ));
-      setAilment(prevAilments => prevAilments.filter(ailment => ailment.AilmentName !== AilmentName));
+      // setAilment(prevAilments => prevAilments.filter(ailment => ailment.AilmentName !== AilmentName));
+      fetchAilments();
       setSnackbarMessage("Ailment deleted successfully!");
       setSnackbarOpen(true);
     } catch (error) {
@@ -115,16 +126,7 @@ function AdminAilment() {
     }
   };
   
-  const fetchAilments = async () => {
-    try {
-      const response = await axios.get(server+':'+serverPort+'/api/ailment/');
-      setAilment(response.data);
-    } catch (error) {
-      console.error(error);
-      setSnackbarMessage("Error fetching ailment. Please try again.");
-      setSnackbarOpen(true);
-    }
-  };
+  
 
   const fetchMedicines = async () => {
     try {
@@ -209,7 +211,7 @@ function AdminAilment() {
 
         <hr style={{margin: '4% 5% 4% 5%'}}/>       
 
-        {handleDeleteAilment && 
+        {ailment.length > 0 && 
           <Box className="AdAil-Listcontainer" sx={{flex: 1, p: '2% 0% 2% 0%'}}>
             <Typography 
               variant="h3" className="grayFont" 

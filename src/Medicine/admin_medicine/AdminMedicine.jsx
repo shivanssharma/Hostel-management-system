@@ -109,7 +109,7 @@ function AdminMedicine() {
         dosage: "",
       });
 
-      fetchMedicines();
+      // fetchMedicines();
     } catch (error) {
       console.error(error);
       setSnackbarMessage("Error adding medicine. Please try again.");
@@ -137,9 +137,9 @@ function AdminMedicine() {
     }
   };
 
-  const handleViewAllMedicine = async () => {
-    fetchMedicines();
-  };
+  // const handleViewAllMedicine = async () => {
+  //   fetchMedicines();
+  // };
 
   const fetchMedicines = async () => {
     try {
@@ -228,7 +228,7 @@ function AdminMedicine() {
               sx={{marginLeft: '7%'}}
               className='Md-Btn'
               variant="outlined"
-              onClick={handleViewAllMedicine}
+              onClick={fetchMedicines}
             >
               Viewall
             </Button>
