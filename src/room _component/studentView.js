@@ -75,13 +75,13 @@ function StudentView() {
                     </TableRow>
                   ))
                 ) : (
-                  <TableRow>
-                    <TableCell colSpan={2}>You are the only one in this room for now.</TableCell>
+                  <TableRow class="BrasikaFont grayFont">
+                    <TableCell colSpan={2}><h3>You are the only one in this room for now.</h3></TableCell>
                   </TableRow>
                 )
               ) : (
-                <TableRow>
-                  <TableCell colSpan={2}>Error!! Server Not Responding</TableCell>
+                <TableRow class="BrasikaFont grayFont">
+                  <TableCell colSpan={5}><h3>Sorry!! Not Found </h3></TableCell>
                 </TableRow>
               )}
             </TableBody>

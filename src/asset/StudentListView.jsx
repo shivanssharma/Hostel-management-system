@@ -51,32 +51,40 @@ function StudentAssetList() {
                 </Typography>
             </Box>
             <Box>
-                {
-                    loading 
-                    ?  <p className="BrasikaFont floatRightIn grayFont">Loading...</p>
-                    : bookings && bookings ?
-                        <table className="SLV-TableContainer">
-                            <thead>
-                                <tr>
-                                    <th className="BrasikaFont floatRightIn grayFont">Student Name</th>
-                                    <th className="BrasikaFont floatRightIn grayFont">Asset Name</th>
-                                    <th className="BrasikaFont floatRightIn grayFont">Reservation Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {bookings.map(booking => (
+             {
+                loading 
+                ? <p className="BrasikaFont floatRightIn grayFont">Loading...</p>
+                : (
+                    <table className="SLV-TableContainer">
+                        <thead>
+                            <tr>
+                                <th className="BrasikaFont floatRightIn grayFont">Student Name</th>
+                                <th className="BrasikaFont floatRightIn grayFont">Asset Name</th>
+                                <th className="BrasikaFont floatRightIn grayFont">Reservation Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {bookings && bookings.length > 0 ? (
+                                bookings.map(booking => (
                                     <tr key={booking.id} className="SLV-TableRow">
                                         <td className="BrasikaFont floatRightIn grayFont SLV-TableItem">{booking.StudentName}</td>
                                         <td className="BrasikaFont floatRightIn grayFont SLV-TableItem">{booking.AssetName}</td>
                                         <td className="BrasikaFont floatRightIn grayFont SLV-TableItem">{formatDate(booking.ReservationDate)}</td>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    :
-                        <h2 className="BrasikaFont floatRightIn grayFont">Currently there are no data to display</h2>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="5" className="BrasikaFont floatRightIn grayFont" style={{padding: '3%'}}>
+                                      <h3> Currently there are no data to display</h3> 
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                )
+            }
 
-                }
+
             </Box>
         </Box>
         </header>
