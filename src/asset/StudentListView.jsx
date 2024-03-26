@@ -40,8 +40,6 @@ function StudentAssetList() {
     };
 
     return (
-        <header>
-        <AdminHorizontalNav />
         <Box className='SLV-Style'>
             <Box>
                 <Typography variant="h2" sx={{pb: '5%'}}>

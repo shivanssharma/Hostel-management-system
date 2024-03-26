@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 import './adminmanager.css';
 import { Input,Button,Typography,Box } from '@mui/material';
 import { server, serverPort } from '../utils/Constants';
+import AdminHorizontalNavUser from '../navbars/HorizontalNav/Admin_hnav_user';
+
 const PasswordResetForm = () => {
   const { username } = useParams();
   const [formData, setFormData] = useState({
@@ -36,6 +38,8 @@ const PasswordResetForm = () => {
   };
 
   return (
+    <header>
+    <AdminHorizontalNavUser/>
     <div className='FP-Style'>
       <Typography variant="h2" sx={{pb: '5%'}}>
           <text className="BrasikaFont floatRightIn grayFont">
@@ -77,6 +81,7 @@ const PasswordResetForm = () => {
       </form>
       {message && <p>{message}</p>}
     </div>
+    </header>
   );
 };
 

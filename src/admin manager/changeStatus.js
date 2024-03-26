@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 import './adminmanager.css';
 import { Input,Button,Typography, Box } from '@mui/material';
 import { server, serverPort } from '../utils/Constants';
+import AdminHorizontalNavUser from '../navbars/HorizontalNav/Admin_hnav_user';
+
 const  UpdateUserStatus= () => {
   const { username } = useParams();
   const [isSuperuser, setIsSuperuser] = useState(false);
@@ -39,6 +41,8 @@ const  UpdateUserStatus= () => {
     
 
   return (
+    <header>
+    <AdminHorizontalNavUser/>
     <div className='CS-Style'>
       <Typography variant="h2" sx={{pb: '5%'}}>
           <text className="BrasikaFont floatRightIn grayFont">
@@ -84,6 +88,7 @@ const  UpdateUserStatus= () => {
       </form>
       {message && <p>{message}</p>}
     </div>
+    </header>
   );
 };
 
@@ -115,7 +120,7 @@ export default UpdateUserStatus;
 //   const handleSubmit = async (event) => {
 //     event.preventDefault();
 //     try {
-//       const response = await axios.post('http://127.0.0.1:8000/api/update-user-status/', {
+//       const response = await axios.post(server+':'+serverPort+'/api/update-user-status/', {
 //         username: username,
 //         is_superuser: isSuperuser,
 //         is_active: isActive

@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import LogoImage from './Bright_Colorful_Playful_Funny_Donuts_Food_Circle_Logo-removebg-preview.png'; // Import your logo image here
 import './nav_health.css';
 import "../../asset/sharedAnimation.css"
-import { CoronavirusRounded, CottageRounded, VaccinesRounded, WidgetsRounded } from "@mui/icons-material";
+import { CoronavirusRounded, CottageRounded, HomeRepairServiceRounded, LocalHospitalRounded, VaccinesRounded, WidgetsRounded } from "@mui/icons-material";
+// import { HospitalRounded,EventAvailableRounded } from '@material-ui/icons';
 import { Box, IconButton } from "@mui/material";
 function AdminHorizontalNav() {
     const navigate= useNavigate()
@@ -12,8 +13,8 @@ function AdminHorizontalNav() {
         {"title": "Ailment", "link": "/ailment", icon: <CoronavirusRounded />},
         {"title": "Medicine", "link": "/medicine", icon: <VaccinesRounded />},
         {"title": "Hostel Assets", "link": "/asset", icon: <WidgetsRounded />},
-        {"title": "Hospital visit", "link": "/admin-hospital-visit", icon: <WidgetsRounded />},
-        {"title": "Asset Bookings", "link": "/admin-asset-view", icon: <WidgetsRounded />},
+        {"title": "Hospital visit", "link": "/admin-hospital-visit", icon: <LocalHospitalRounded />},
+        {"title": "Asset Bookings", "link": "/admin-asset-view", icon: <HomeRepairServiceRounded />},
     ]
     return (
         <Box className="TN-container">
