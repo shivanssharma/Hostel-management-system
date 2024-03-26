@@ -22,7 +22,7 @@ function StudentAssetList() {
                     const bookingDate = new Date(booking.ReservationDate);
                     const currentDate = new Date();
                     const daysDifference = Math.floor((currentDate - bookingDate) / (1000 * 60 * 60 * 24));
-                    return daysDifference <= 6; // Adjust this value to filter out bookings made more than 5-6 days ago
+                    return daysDifference <= 6; // Adjusted this value to filter out bookings made more than 5-6 days ago
                 });
                 setBookings(filteredBookings);
                 setLoading(false);
