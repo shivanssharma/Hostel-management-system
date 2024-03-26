@@ -53,6 +53,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography, Box } from "@mui/material";
 import { server, serverPort } from '../utils/Constants';
+import AdminHorizontalNav from '../navbars/HorizontalNav/Admin_hnav';
 
 function AdminHospitalVisits() {
   const [hospitalVisits, setHospitalVisits] = useState([]);
@@ -87,6 +88,8 @@ function AdminHospitalVisits() {
   };
 
   return (
+    <header>
+    <AdminHorizontalNav />
     <Box className="AHV-Style">
       <Typography variant="h2" sx={{pb: '5%'}}>
           <text className="BrasikaFont floatRightIn grayFont">
@@ -130,6 +133,7 @@ function AdminHospitalVisits() {
         </Table>
       </TableContainer>
     </Box>
+    </header>
   );
 }
 

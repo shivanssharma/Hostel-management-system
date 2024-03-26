@@ -138,7 +138,7 @@ function AdminAilment() {
   };
 
   useEffect(() => {
-    fetchAilments();
+    // fetchAilments();
     fetchMedicines();
   }, []);
 

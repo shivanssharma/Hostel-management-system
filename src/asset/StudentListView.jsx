@@ -5,6 +5,7 @@ import axios from 'axios';
 import './admasset.css';
 import { server, serverPort } from '../utils/Constants';
 import { Box, Typography } from '@mui/material';
+import AdminHorizontalNav from '../navbars/HorizontalNav/Admin_hnav';
 function StudentAssetList() {
     const [bookings, setBookings] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -39,6 +40,8 @@ function StudentAssetList() {
     };
 
     return (
+        <header>
+        <AdminHorizontalNav/>
         <Box className='SLV-Style'>
             <Box>
                 <Typography variant="h2" sx={{pb: '5%'}}>
@@ -76,6 +79,7 @@ function StudentAssetList() {
                 }
             </Box>
         </Box>
+        </header>
     );
 }
 

@@ -55,7 +55,8 @@ function StudentView() {
     <header>
       <StudentHorizontalNav2 />
       <div className="AV-style">
-        <h3 className="BrasikaFont floatRightIn grayFont" >Hello {name} Your Floor is {floorNumber} and RoomNumber is {roomNumber} </h3>
+        <h3 className="BrasikaFont floatRightIn grayFont" >Hello <span className="username BrasikaFont">{name}</span></h3> 
+        <h3 className="BrasikaFont floatRightIn grayFont"  >Your Floor is <span className="username BrasikaFont">{floorNumber}</span> and Room Number is <span className="username BrasikaFont">{roomNumber}</span> </h3>
         <h3 className="BrasikaFont floatRightIn grayFont" >Your Room Members Are</h3>
         <TableContainer component={Paper}>
           <Table>
