@@ -105,6 +105,22 @@ import "../asset/sharedAnimation.css"
 import "../asset/sharedCss.css"
 
 function AdminRoomAllotment() {
+  // const [leftItems, setLeftItems] = useState([]);
+  // const [rightItems, setRightItems] = useState([]);
+
+  // useEffect(() => {
+  //   // Fetch data from backend
+  //   fetch('your-backend-endpoint')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       // Assume data is an array of objects with 'id' and 'name' properties
+  //       const dataLeft = data.map(item => item.id); // Extract 'id' for left items
+  //       const dataRight = data.map(item => item.name); // Extract 'name' for right items
+  //       setLeftItems(dataLeft); // Update state with left items
+  //       setRightItems(dataRight); // Update state with right items
+  //     })
+  //     .catch(error => console.error('Error fetching data:', error));
+  // }, []); // Empty dependency array ensures the effect runs only once on component mount
 
   
   const [selectedFloor, setSelectedFloor] = useState("");
@@ -279,9 +295,9 @@ function AdminRoomAllotment() {
                 value={selectedDropdown}
                 onChange={handleDropdownChange}
               >
-                <MenuItem value="3 ug">3 UG</MenuItem>
-                <MenuItem value="1 msc">1 MSc</MenuItem>
-                <MenuItem value="2 msc">2 MSc</MenuItem>
+                <MenuItem value="3 ug">3 Ug</MenuItem>
+                <MenuItem value="1 msc">1 Msc</MenuItem>
+                <MenuItem value="2 msc">2 Msc</MenuItem>
               </Select>
             </FormControl>
           )}

@@ -7,6 +7,7 @@ import './adminmanager.css';
 import { Input,Button,Typography, Box } from '@mui/material';
 import { server, serverPort } from '../utils/Constants';
 import AdminHorizontalNavUser from '../navbars/HorizontalNav/Admin_hnav_user';
+
 const  UpdateUserStatus= () => {
   const { username } = useParams();
   const [isSuperuser, setIsSuperuser] = useState(false);
@@ -41,7 +42,7 @@ const  UpdateUserStatus= () => {
 
   return (
     <header>
-      <AdminHorizontalNavUser/>
+    <AdminHorizontalNavUser/>
     <div className='CS-Style'>
       <Typography variant="h2" sx={{pb: '5%'}}>
           <text className="BrasikaFont floatRightIn grayFont">
