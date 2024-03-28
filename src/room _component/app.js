@@ -152,7 +152,7 @@ function AdminRoomAllotment() {
       axios.get(`${server}:${serverPort}/api/room/${selectedFloor}/${selectedRoom}/${selectedPosition}`)
       .then(response => {
         setRoomList(response.data,);
-        console.log('hello world, we got list data: ')
+        console.log('hello user, we got list data: ')
         console.log(response.data);
         //setReady(true)
       })
@@ -265,6 +265,9 @@ function AdminRoomAllotment() {
               value={selectedRoom}
               onChange={handleRoomChange}
             >
+              <MenuItem value="" disabled>
+                Select Room
+              </MenuItem>
               <MenuItem value="1">1</MenuItem>
               <MenuItem value="2">2</MenuItem>
               <MenuItem value="3">3</MenuItem>
@@ -281,6 +284,9 @@ function AdminRoomAllotment() {
               value={selectedPosition}
               onChange={handlePositionChange}
             >
+              <MenuItem value="" disabled>
+                Select Position
+              </MenuItem>
               <MenuItem value="room leader">Room Leader</MenuItem>
               <MenuItem value="room mate">Room mate</MenuItem>
             </Select>
@@ -295,6 +301,9 @@ function AdminRoomAllotment() {
                 value={selectedDropdown}
                 onChange={handleDropdownChange}
               >
+                <MenuItem value="" disabled>
+                Select Rooms
+               </MenuItem>
                 <MenuItem value="3 ug">3 Ug</MenuItem>
                 <MenuItem value="1 msc">1 Msc</MenuItem>
                 <MenuItem value="2 msc">2 Msc</MenuItem>
@@ -310,7 +319,9 @@ function AdminRoomAllotment() {
                 value={selectedDropdown}
                 onChange={handleDropdownChange}
               >
-                
+                <MenuItem value="" disabled>
+                Select Rooms
+                </MenuItem>
                 <MenuItem value="1 ug">1 Ug</MenuItem>
                 <MenuItem value="2 ug">2 Ug</MenuItem>
                 <MenuItem value="3 ug">3 Ug</MenuItem>

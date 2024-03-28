@@ -1,6 +1,6 @@
 .CS-Style{
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
         align-items: flex-start;
@@ -63,7 +63,9 @@
 }
 .UM-title {
         position: relative;
-        /* background-color: white; Ensure readability */
         padding: 10px; 
         z-index: 99; 
     }
+
+
+  

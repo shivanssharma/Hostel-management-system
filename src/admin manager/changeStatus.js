@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import './adminmanager.css';
 import { Input,Button,Typography, Box } from '@mui/material';
 import { server, serverPort } from '../utils/Constants';
@@ -14,6 +14,7 @@ const  UpdateUserStatus= () => {
   const [isActive, setIsActive] = useState(false);
   const [isStaff, setIsStaff] = useState(false);
   const [message, setMessage] = useState('');
+  const navigate=useNavigate();
   const handleIsSuperuserChange = (event) => {
    setIsSuperuser(event.target.checked);
   }
@@ -34,6 +35,7 @@ const  UpdateUserStatus= () => {
         is_active: isActive
       });
       setMessage(response.data.message);
+      navigate('/user-management');
     } catch (error) {
       setMessage('An error occurred while updating user status');
     }

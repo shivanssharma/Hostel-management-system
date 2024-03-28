@@ -152,6 +152,7 @@ export default function SignInSide(props) {
                 name="username"
                 autoComplete="username"
                 autoFocus
+                required
                 value={formData.username}
                 onChange={handleUsernameChange}
                 // required // Indicate required field
@@ -165,6 +166,7 @@ export default function SignInSide(props) {
                 label="Password"
                 type="password"
                 id="password"
+                required
                 autoComplete="current-password"
                 value={formData.password}
                 onChange={handlePasswordChange}

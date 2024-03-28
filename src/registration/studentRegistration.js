@@ -85,7 +85,7 @@ function StudentRegistration() {
                 setSnackbarOpen(true);
                 setSubmitted(true);
             } else {
-                setSnackbarMessage('Failed to submit form.');
+                setSnackbarMessage('You Are Already Registered.');
                 setSnackbarOpen(true);
             }
         } catch (error) {

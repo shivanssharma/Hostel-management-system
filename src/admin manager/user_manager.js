@@ -103,7 +103,7 @@ function Manage() {
                   </TableCell>
                   <TableCell className="cell">
                     {/* Todo: check the status */}
-                    {user.is_superuser ? 'Admin' : 'Regular user'} - {user.is_active ? 'Active' : 'Inactive'} - {user.is_staff ? 'Staff' : 'Non-Staff'}
+                    {user.is_superuser ? 'Admin' : 'Regular user'}  - {user.is_staff ? 'Staff' : 'Non-Staff'}- {user.is_active ? 'Active' : 'Inactive'}
                   </TableCell>
                   <TableCell className="cell">
                     <Link to={`/status/${user.username}`}>

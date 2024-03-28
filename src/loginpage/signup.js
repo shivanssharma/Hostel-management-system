@@ -115,6 +115,7 @@ export default function SignUpSide() {
                 label="UserName"
                 name="username"
                 autoComplete="username"
+                required
                 autoFocus
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -128,6 +129,7 @@ export default function SignUpSide() {
                 type="password"
                 id="newpassword"
                 autoComplete="current-password"
+                required
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
               />
@@ -140,6 +142,7 @@ export default function SignUpSide() {
                 type="password"
                 id="confirmpassword"
                 autoComplete="current-password"
+                required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />

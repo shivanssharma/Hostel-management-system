@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import {FormControl,InputLabel,Select,MenuItem,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper, Box, Typography,} from "@mui/material";
+import React, { useState, useEffect,useCallback } from "react";
+import { FormControl, InputLabel, Select, MenuItem, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Typography } from "@mui/material";
 import axios from "axios";
-import {Button} from "@mui/material";
+import { Button } from "@mui/material";
 import './style_room.css';
 import "../asset/sharedAnimation.css"
 import AdminHorizontalNav2 from "../navbars/HorizontalNav/Adminhnav2";
@@ -11,9 +11,8 @@ function AdminView() {
   const [selectedFloor, setSelectedFloor] = useState("");
   const [selectedRoom, setSelectedRoom] = useState("");
   const [list, setStudentList] = useState([]);
-  const [flag, setFlag] = useState(false)
-  // const [usernames, setUsernames] = useState([]);
-  // console.log(list);
+  const [flag, setFlag] = useState(false);
+
   const handleFloorChange = (event) => {
     const Floor = event.target.value;
     setSelectedFloor(Floor);
@@ -23,14 +22,13 @@ function AdminView() {
     const Room = event.target.value;
     setSelectedRoom(Room);
   };
-  
-  useEffect(() => {
-    if (selectedFloor !== "" && selectedRoom !== "" ) {
+
+  const fetchStudentList = useCallback(() => {
+    if (selectedFloor !== "" && selectedRoom !== "") {
       axios
         .get(`${server}:${serverPort}/api/list/${selectedFloor}/${selectedRoom}/`)
         .then((response) => {
           setStudentList(response.data);
-          // setFlag(true)
           console.log("hello world, we got list data: ");
           console.log(response.data);
         })
@@ -38,33 +36,36 @@ function AdminView() {
           console.error("Error fetching Room list:", error);
         });
     }
-  });
+  }, [selectedFloor, selectedRoom]);
+
+  useEffect(() => {
+    fetchStudentList();
+  }, [fetchStudentList]);
+
   const handleDeleteStudentRoom = (FirstName) => {
-    // Send a request to backend API to delete the student from the room
-    axios.delete(`${server}:${serverPort}/api/remove_student/${FirstName}`)
+    const encodedFirstName = encodeURIComponent(FirstName);
+    axios.delete(`${server}:${serverPort}/api/delete_student/${encodedFirstName}`)
       .then((response) => {
-        setStudentList(list.filter((name) => name !== FirstName));
-        setFlag(false);
-        // Reload the student list after deletion
+        // setStudentList(list.filter((name) => name !== FirstName));
+        fetchStudentList();
+        // setFlag(false);
         setFlag(true);
       })
       .catch((error) => {
         console.error("Error deleting student from room:", error);
       });
   };
+
   const handleSubmit = () => {
-    setFlag(true); // Set flag to true to trigger useEffect
+    setFlag(true);
   };
-  // }, [selectedFloor, selectedRoom]);
-   console.log(selectedFloor);
-   console.log(selectedRoom);
 
   return (
     <Box>
       <AdminHorizontalNav2 />
       <Box className="AV-style">
         {list &&
-          <Box sx={{width: '100%'}}>
+          <Box sx={{ width: '100%' }}>
             <Typography variant="h3" className="UM-title grayFont">
               <text className="BrasikaFont floatRightIn">
                 Room list
@@ -97,7 +98,7 @@ function AdminView() {
                   value={selectedRoom}
                   onChange={handleRoomChange}
                 >
-                  <MenuItem value="">Select room number</MenuItem>
+                  <MenuItem value="" disabled>Select room number</MenuItem>
                   <MenuItem value="1">1</MenuItem>
                   <MenuItem value="2">2</MenuItem>
                   <MenuItem value="3">3</MenuItem>
@@ -106,33 +107,24 @@ function AdminView() {
             </Box>
 
             <Box className="AV-dualInput floatRightIn">
-              <Button sx={{ padding: '2%'}} variant="outlined" onClick={handleSubmit} >Submit</Button>
+              <Button sx={{ padding: '2%' }} variant="outlined" onClick={handleSubmit} >Submit</Button>
             </Box>
           </Box>
         }
         {
-          handleFloorChange && handleRoomChange && 
-          <Box sx={{width: '100%', marginTop: '5%'}} className="floatRightIn">
+          handleFloorChange && handleRoomChange &&
+          <Box sx={{ width: '100%', marginTop: '5%' }} className="floatRightIn">
             <TableContainer component={Paper}>
               <Table>
                 <TableHead>
-                  <TableRow style={{ borderBottom: '1px solid rgb(242, 238, 238)'}}>
-                    <TableCell class="BrasikaFont grayFont" style={{padding: '2%'}}>Name</TableCell>
+                  <TableRow style={{ borderBottom: '1px solid rgb(242, 238, 238)' }}>
+                    <TableCell class="BrasikaFont grayFont" style={{ padding: '2%' }}>Name</TableCell>
                     <TableCell class="BrasikaFont grayFont">Course</TableCell>
                     <TableCell class="BrasikaFont grayFont">Remove</TableCell>
                   </TableRow>
                 </TableHead>
-                {/* <TableBody>
-                  {list.map((student, index) => (
-                    <TableRow key={index}>
-                      <TableCell>{student.FirstName}</TableCell>
-                      <TableCell>{student.CourseName}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody> */}
                 <TableBody>
-                  {/* {Array.isArray(list) && list.length > 0 ? ( */}
-                  { flag ? (
+                  {flag ? (
                     list.map((student, index) => (
                       <TableRow key={index}>
                         <TableCell>{`${student.FirstName} ${student.LastName}`}</TableCell>
@@ -144,11 +136,11 @@ function AdminView() {
                         </TableCell>
                       </TableRow>
                     ))
-                    ) : (
+                  ) : (
                     <TableRow>
                       <TableCell colSpan={2}>No data available</TableCell>
                     </TableRow>
-                  )}
+                    )}
                 </TableBody>
               </Table>
             </TableContainer>

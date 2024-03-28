@@ -82,7 +82,7 @@ function AdminAilment() {
         selectedMedicine: null,
       });
 
-      fetchAilments();
+      // fetchAilments();
     } catch (error) {
       console.error(error);
       setSnackbarMessage("Error adding Ailment. Please try again.");
@@ -138,7 +138,7 @@ function AdminAilment() {
   };
 
   useEffect(() => {
-    fetchAilments();
+    // fetchAilments();
     fetchMedicines();
   }, []);
 
