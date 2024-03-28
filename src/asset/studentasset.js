@@ -7,6 +7,7 @@ import "../asset/sharedAnimation.css"
 import StudentHorizontalNav from "../navbars/HorizontalNav/student_hnav";
 import MuiAlert from "@mui/material/Alert";
 import { server, serverPort } from "../utils/Constants";
+import { useNavigate } from "react-router-dom";
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
@@ -17,7 +18,7 @@ function StudentAsset() {
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState("");
     const [snackbarSeverity, setSnackbarSeverity] = useState("success");
-
+    const navigate=useNavigate();
     useEffect(() => {
         fetchData();
     }, []);
@@ -69,6 +70,7 @@ function StudentAsset() {
                 setSnackbarMessage("Asset booked successfully");
                 setSnackbarSeverity("success");
                 setSnackbarOpen(true);
+                navigate('/student-home')
             })
             .catch((error) => {
                 
