@@ -15,6 +15,7 @@ import './login.css';
 import "../asset/sharedAnimation.css"
 import "../asset/sharedCss.css"
 import { server, serverPort } from '../utils/Constants';
+
 //import axios from 'axios';
 
 
@@ -30,15 +31,25 @@ export default function SignInSide(props) {
     return csrfCookie ? csrfCookie.split('=')[1] : '';
   };
   
-  localStorage.clear()
-  props.loggedIn(false)
+  // localStorage.clear()
+  // props.loggedIn(false)
+  // useEffect(() => {
+  //   const isAuthenticated = localStorage.getItem('is_authenticated');
+  //   if (isAuthenticated === 'true') {
+  //     const userType = localStorage.getItem('userType');
+  //     navigate(`/${userType}-home`, { state: { username: localStorage.getItem('username') } });
+  //   }
+  // }, [navigate]);
   useEffect(() => {
     const isAuthenticated = localStorage.getItem('is_authenticated');
-    if (isAuthenticated !== 'false') {
-      // Redirect to login page or perform any other action if user is not authenticated
-      navigate('/');
-    }
-  }, [navigate]);
+      if (!isAuthenticated || isAuthenticated !== 'true') {
+        localStorage.clear();
+        props.loggedIn(false);
+      } else {
+        const userType = localStorage.getItem('userType');
+        navigate(`/${userType}-home`, { state: { username: localStorage.getItem('username') } });
+      }
+    }, [navigate, props]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -87,7 +98,7 @@ export default function SignInSide(props) {
       else {
         localStorage.setItem('userType', "student");
         // navigate('/student-home',{ state: { username: formData.username } });
-        navigate('/admin-home',{ state: { username: formData.username } });
+        navigate('/student-home',{ state: { username: formData.username } });
       }
       props.loggedIn(true)
       console.log("Successful login");

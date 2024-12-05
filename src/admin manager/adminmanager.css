@@ -8,7 +8,19 @@
         height: 80vh;
         padding: 5%;
         margin: auto; 
+        overflow-x: hidden;
+        padding-top: 100px;
 }
+@media (min-width: 768px) {
+        .CS-Style {
+            flex-direction: row;
+            align-items: flex-start;
+            overflow-x: auto; /* Enable horizontal scrolling */
+        }
+    }
+.TableContainer {
+        overflow: auto;
+        }    
 .FP-Style{
         display: flex;
         flex-direction: column;
@@ -16,7 +28,7 @@
         justify-content: center;
         align-items: flex-start;
         width: 85%;
-        height: 100dvh;
+        height: 90dvh;
         padding: 5%;
         margin: auto;
 }
@@ -49,4 +61,9 @@
         transition: all 0.3s ease-in-out;
         background-color: rgb(244, 242, 242);
 }
-
+.UM-title {
+        position: relative;
+        /* background-color: white; Ensure readability */
+        padding: 10px; 
+        z-index: 99; 
+    }

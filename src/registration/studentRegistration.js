@@ -522,14 +522,12 @@ function StudentRegistration() {
     };
 
     const courses = [
-        { name: '1 BSc' },
-        { name: '1 BBA' },
-        { name: '2 BSc' },
-        { name: '2 BBA' },
-        { name: '3 BBA' },
-        { name: '3 BSc' },
-        { name: '1 MSc' },
-        { name: '2 MSc' },
+        
+        { value:'1 ug',name: '1 UG' },
+        { value:'2 ug',name: '2 UG' },
+        { value:'3 ug',name: '3 UG' },
+        { value:'1 msc',name: '1 MSc' },
+        { value:'2 msc',name: '2 MSc' },
     ];
 
     const handleChange = (e) => {
