@@ -73,22 +73,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-# Screen Shots
+# Pictorial representation of the Prject 
 
+1.Login page 
 ![Screenshot_24-3-2024_103359_localhost](https://github.com/user-attachments/assets/7abcba68-e941-427d-bea4-9d35ee499a2b)
-
+2.Home Page
 ![Screenshot_24-3-2024_155720_localhost](https://github.com/user-attachments/assets/84791966-6470-4671-94a4-6e1a8b48c5ab)
-
-
+3.Enrollment page where student can enroll himself 
+![Screenshot_24-3-2024_103448_localhost](https://github.com/user-attachments/assets/12052850-6d0b-4f28-9f5f-9118f7f19939)
+4.Assests page where student can book assets from health department in advance 
 ![Screenshot 2024-03-28 212143](https://github.com/user-attachments/assets/ab27757f-7e94-4d2c-a494-bb63b2d58490)
 
-![Screenshot_24-3-2024_103448_localhost](https://github.com/user-attachments/assets/12052850-6d0b-4f28-9f5f-9118f7f19939)
-
-
+5.Electronic record comes under enrollent whether student brounght any electronic item or not 
 ![Screenshot_24-3-2024_103727_localhost](https://github.com/user-attachments/assets/9b3d1e8d-cd53-458f-b085-d74e30dfa5de)
-
-
-
+6.Lastly Room allotment for students which will be done by the Admin 
 ![Screenshot_24-3-2024_103141_localhost](https://github.com/user-attachments/assets/26f599ef-beae-42f3-a91c-14a1462b082a)
 
 
