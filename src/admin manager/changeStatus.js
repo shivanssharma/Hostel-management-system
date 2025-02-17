@@ -2,16 +2,19 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import './adminmanager.css';
 import { Input,Button,Typography, Box } from '@mui/material';
 import { server, serverPort } from '../utils/Constants';
+import AdminHorizontalNavUser from '../navbars/HorizontalNav/Admin_hnav_user';
+
 const  UpdateUserStatus= () => {
   const { username } = useParams();
   const [isSuperuser, setIsSuperuser] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [isStaff, setIsStaff] = useState(false);
   const [message, setMessage] = useState('');
+  const navigate=useNavigate();
   const handleIsSuperuserChange = (event) => {
    setIsSuperuser(event.target.checked);
   }
@@ -32,6 +35,7 @@ const  UpdateUserStatus= () => {
         is_active: isActive
       });
       setMessage(response.data.message);
+      navigate('/user-management');
     } catch (error) {
       setMessage('An error occurred while updating user status');
     }
@@ -39,10 +43,12 @@ const  UpdateUserStatus= () => {
     
 
   return (
+    <header>
+    <AdminHorizontalNavUser/>
     <div className='CS-Style'>
       <Typography variant="h2" sx={{pb: '5%'}}>
           <text className="BrasikaFont floatRightIn grayFont">
-            Status Reset
+            Role Reset
           </text>
       </Typography>
   
@@ -80,10 +86,11 @@ const  UpdateUserStatus= () => {
             />
           </Box>
         </Box>
-        <Button className="floatRightIn" sx={{width: '50%', p: '3%'}} variant="outlined" type="submit">Reset Status</Button>
+        <Button className="floatRightIn" sx={{width: '50%', p: '3%'}} variant="outlined" type="submit">Reset Role</Button>
       </form>
       {message && <p>{message}</p>}
     </div>
+    </header>
   );
 };
 

@@ -51,7 +51,7 @@ export default function SignUpSide() {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        // Handle success, e.g., redirect user to login page
+        // Handle success, e.g., redirect user to login page after 3s delay
         setSnackBarMessage("SignUp successful");
         setSnackbarOpen(true);
         // Going back to Login Page to Login
@@ -115,6 +115,7 @@ export default function SignUpSide() {
                 label="UserName"
                 name="username"
                 autoComplete="username"
+                required
                 autoFocus
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -124,10 +125,11 @@ export default function SignUpSide() {
                 margin="normal"
                 fullWidth
                 name="newpassword"
-                label="New Password"
+                label="Password"
                 type="password"
                 id="newpassword"
                 autoComplete="current-password"
+                required
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
               />
@@ -140,6 +142,7 @@ export default function SignUpSide() {
                 type="password"
                 id="confirmpassword"
                 autoComplete="current-password"
+                required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />

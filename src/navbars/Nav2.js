@@ -2,7 +2,7 @@
 import React from "react";
 import { Link, useNavigate } from 'react-router-dom';
 
-import { AssignmentIndRounded, CottageRounded, NotificationsActiveRounded, StorefrontRounded } from "@mui/icons-material";
+import { AssignmentIndRounded, CottageRounded,  StorefrontRounded } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
 
 import "./HorizontalNav/nav_health.css"
@@ -13,7 +13,6 @@ function Nav2() {
         {"title": "Home", "link": "/home", icon: <CottageRounded />},
         {"title": "Enrollment", "link": "/register", icon: <AssignmentIndRounded />},
         {"title": "Store", "link": "/stores", icon: <StorefrontRounded />},
-        {"title": "Notification", "link": "/notification", icon: <NotificationsActiveRounded />},
     ]
     return (
         <Box className="TN-container">

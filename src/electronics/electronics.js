@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { FormControlLabel, Checkbox, Button, Snackbar } from "@mui/material";
 import { server, serverPort } from "../utils/Constants";
-
+import { useNavigate } from "react-router-dom";
 function Electronic({ registrationNumber }) {
   const [electronicData, setElectronicData] = useState({
-    registration_number: registrationNumber,
+    username:localStorage.getItem('username'),
     mobile_phone: false,
     laptop: false,
     earphone: false,
@@ -14,6 +14,7 @@ function Electronic({ registrationNumber }) {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const navigate=useNavigate();
 
   const handleCheckboxChange = (name) => {
     setElectronicData((prevData) => ({ ...prevData, [name]: !prevData[name] }));
@@ -42,6 +43,9 @@ function Electronic({ registrationNumber }) {
         setSnackbarMessage('Electronic record submitted successfully.');
         setSnackbarOpen(true);
         setSubmitted(true);
+        setTimeout(() => {
+          navigate("/student-home")
+        }, 2000)
       } else {
         setSnackbarMessage('Failed to submit electronic record.');
         setSnackbarOpen(true);
@@ -96,6 +100,9 @@ function Electronic({ registrationNumber }) {
           <Button variant="outlined" onClick={handleSubmit}>
             Submit
           </Button>
+        )}
+         {submitted && (
+          <p>Form submitted successfully!</p>
         )}
       </div>
       <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose} message={snackbarMessage} />

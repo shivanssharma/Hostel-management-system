@@ -25,14 +25,14 @@ const Layout = () => {
             of various material studies is as barren as the sky without the moon, or a heart without peace, or a nation without
             reference to law.
           </p>
-          <strong className="floatUpIn" style={{fontSize: '150%'}}>- Shri Satya Sai Baba</strong>
+          <strong className="floatUpIn" style={{fontSize: '150%'}}>- Sri Sathya Sai Baba</strong>
         </Box>
         <br/>
         {/* Cards */}
         <Box className="flexRow" sx={{justifyContent: 'space-between'}}>
           <Box className="text1 BrasikaFont">
             <h3 className="floatUpIn">Enrollment!!</h3>
-            <p className="floatUpIn">Enroll yourself to use the services</p>
+            <p className="floatUpIn">Enroll yourself and be part of our hostel</p>
           </Box>
 
           <br/>
@@ -43,24 +43,35 @@ const Layout = () => {
 
           <br/>
           <Box className="text1 BrasikaFont">
-            <h3 className="floatUpIn">Holistic Health</h3>
+            <h3 className="floatUpIn">Holistic Health!!</h3>
             <p className="floatUpIn">Get The service of Hospital In Our Hostel</p>
           </Box>
         </Box>
 
-        {/* Figures/Images */}
+        
         <div className='figure'>
         <figure style={{ marginBottom: '20px'}}>
-          <img src="images\swami with kids.jpeg" alt="swami with kids" style={{ maxWidth: '70%', borderRadius: '8px' }} />
-          <figcaption>Figure 1: Swami With Kids</figcaption>
+          <img src="images\_MG_1893.JPG" alt="Eco Einstein: Plogging" style={{ maxWidth: '90%', borderRadius: '8px' }} />
+          <figcaption>Eco Einsteins: Plogging</figcaption>
         </figure>
 
         <figure style={{ marginBottom: '20px' }}>
-          <img src="images\swami with kids.jpeg" alt="swami with students" style={{ maxWidth: '70%', borderRadius: '8px' }} />
-          <figcaption>Figure 2: Swami with Students</figcaption>
+          <img src="images\_MG_1907.JPG" alt="Eco Einstein: Plogging" style={{ maxWidth: '90%', borderRadius: '8px' }} />
+          <figcaption>Eco Einsteins: Plogging</figcaption>
+        </figure>
+
+        <figure style={{ marginBottom: '20px' }}>
+          <img src="images\_MG_0450.JPG" alt="Eco Einstein: Plogging" style={{ maxWidth: '90%', borderRadius: '8px' }} />
+          <figcaption>Eco Einsteins: Sending Waste for recycling</figcaption>
+        </figure>
+
+
+        <figure style={{ marginBottom: '20px' }}>
+          <img src="images/_MG_0343.JPG" alt="Eco Einstein: Plogging" style={{ maxWidth: '90%', borderRadius: '8px' }} />
+          <figcaption>Eco Einsteins: Waste seggregation</figcaption>
         </figure>
         </div>
-        {/* Add more cards, figures, and images as needed */}
+        
       </Box>
     </Box>
   );

@@ -56,7 +56,7 @@ function App() {
                 sx={{width:{lg: '3%'}}}
                 onClick={() => setOpen(!open)}
               >
-                <Typography variant='p' > HMIS </Typography>
+                <Typography variant='p' > HMS </Typography>
                 {/* <IconButton> */}
                   {open 
                     ? <CloseRounded className="icons" />

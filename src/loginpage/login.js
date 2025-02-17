@@ -15,6 +15,7 @@ import './login.css';
 import "../asset/sharedAnimation.css"
 import "../asset/sharedCss.css"
 import { server, serverPort } from '../utils/Constants';
+
 //import axios from 'axios';
 
 
@@ -30,15 +31,17 @@ export default function SignInSide(props) {
     return csrfCookie ? csrfCookie.split('=')[1] : '';
   };
   
-  localStorage.clear()
-  props.loggedIn(false)
+ 
   useEffect(() => {
     const isAuthenticated = localStorage.getItem('is_authenticated');
-    if (isAuthenticated !== 'false') {
-      // Redirect to login page or perform any other action if user is not authenticated
-      navigate('/');
-    }
-  }, [navigate]);
+      if (!isAuthenticated || isAuthenticated !== 'true') {
+        localStorage.clear();
+        props.loggedIn(false);
+      } else {
+        const userType = localStorage.getItem('userType');
+        navigate(`/${userType}-home`, { state: { username: localStorage.getItem('username') } });
+      }
+    }, [navigate, props]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -87,7 +90,7 @@ export default function SignInSide(props) {
       else {
         localStorage.setItem('userType', "student");
         // navigate('/student-home',{ state: { username: formData.username } });
-        navigate('/admin-home',{ state: { username: formData.username } });
+        navigate('/student-home',{ state: { username: formData.username } });
       }
       props.loggedIn(true)
       console.log("Successful login");
@@ -141,6 +144,7 @@ export default function SignInSide(props) {
                 name="username"
                 autoComplete="username"
                 autoFocus
+                required
                 value={formData.username}
                 onChange={handleUsernameChange}
                 // required // Indicate required field
@@ -154,6 +158,7 @@ export default function SignInSide(props) {
                 label="Password"
                 type="password"
                 id="password"
+                required
                 autoComplete="current-password"
                 value={formData.password}
                 onChange={handlePasswordChange}
@@ -165,9 +170,7 @@ export default function SignInSide(props) {
               {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
               <Grid container className="floatUpIn">
                 <Grid item xs>
-                  {/* <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link> */}
+                 
                 </Grid>
                 <Grid item>
                   <Link component={Link} to="/signup" variant="body2">
@@ -179,7 +182,6 @@ export default function SignInSide(props) {
           </Box>
         </Grid>
       </Grid>
-      {/* <AdminHome username={formData.username} /> */}
     </Box>
   );
 }

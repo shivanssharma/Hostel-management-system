@@ -2,57 +2,11 @@
 // import axios from "axios";
 // import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 import './hpvisit.css';
-// function AdminHospitalVisits() {
-//   const [hospitalVisits, setHospitalVisits] = useState([]);
-
-//   useEffect(() => {
-//     // Fetch hospital visit requests from the backend
-//     axios.get(server+':'+serverPort+"/api/hospital-visits/")
-//       .then((response) => {
-//         console.log("Hospital visits data:", response.data); // Debugging line
-//         setHospitalVisits(response.data);
-//       })
-//       .catch((error) => {
-//         console.error("Error fetching hospital visits:", error);
-//       });
-//   }, []);
-
-//   return (
-//     <div className="Style">
-//       <h1>Admin Hospital Visits</h1>
-//       <TableContainer component={Paper}>
-//         <Table>
-//           <TableHead>
-//             <TableRow>
-//               <TableCell>Registration Number</TableCell>
-//               <TableCell>Hospital Name</TableCell>
-//               <TableCell>Department</TableCell>
-//               <TableCell>Purpose</TableCell>
-              
-//             </TableRow>
-//           </TableHead>
-//           <TableBody>
-//             {hospitalVisits.map((visit, index) => (
-//               <TableRow key={index}>
-//                 <TableCell>{visit.RegistrationNumber}</TableCell>
-//                 <TableCell>{visit.HospitalName}</TableCell>
-//                 <TableCell>{visit.Department}</TableCell>
-//                 <TableCell>{visit.Purpose}</TableCell>
-                
-//               </TableRow>
-//             ))}
-//           </TableBody>
-//         </Table>
-//       </TableContainer>
-//     </div>
-//   );
-// }
-
-// export default AdminHospitalVisits;
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography, Box } from "@mui/material";
 import { server, serverPort } from '../utils/Constants';
+import AdminHorizontalNav from '../navbars/HorizontalNav/Admin_hnav';
 
 function AdminHospitalVisits() {
   const [hospitalVisits, setHospitalVisits] = useState([]);
@@ -87,7 +41,10 @@ function AdminHospitalVisits() {
   };
 
   return (
+    <header>
+      <AdminHorizontalNav/>
     <Box className="AHV-Style">
+    
       <Typography variant="h2" sx={{pb: '5%'}}>
           <text className="BrasikaFont floatRightIn grayFont">
             Admin Hospital Visits
@@ -130,6 +87,7 @@ function AdminHospitalVisits() {
         </Table>
       </TableContainer>
     </Box>
+    </header>
   );
 }
 
