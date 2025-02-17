@@ -2,14 +2,16 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import './adminmanager.css';
 import { Input,Button,Typography,Box } from '@mui/material';
 import { server, serverPort } from '../utils/Constants';
 import AdminHorizontalNavUser from '../navbars/HorizontalNav/Admin_hnav_user';
 
+
 const PasswordResetForm = () => {
   const { username } = useParams();
+  const navigate= useNavigate();
   const [formData, setFormData] = useState({
     username: username,
     newPassword: '',
@@ -25,12 +27,14 @@ const PasswordResetForm = () => {
     e.preventDefault();
     if (formData.newPassword !== formData.confirmNewPassword) {
       setMessage('Passwords do not match');
+     
       return;
     }
 
     try {
       const response = await axios.post(server+':'+serverPort+'/api/password-reset/', formData);
       setMessage(response.data.message);
+      navigate('/user-management');
     } catch (error) {
       setMessage('An error occurred while resetting the password.');
       console.error(error);

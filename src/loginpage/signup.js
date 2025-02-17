@@ -51,7 +51,7 @@ export default function SignUpSide() {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        // Handle success, e.g., redirect user to login page
+        // Handle success, e.g., redirect user to login page after 3s delay
         setSnackBarMessage("SignUp successful");
         setSnackbarOpen(true);
         // Going back to Login Page to Login
@@ -125,7 +125,7 @@ export default function SignUpSide() {
                 margin="normal"
                 fullWidth
                 name="newpassword"
-                label="New Password"
+                label="Password"
                 type="password"
                 id="newpassword"
                 autoComplete="current-password"

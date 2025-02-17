@@ -31,15 +31,7 @@ export default function SignInSide(props) {
     return csrfCookie ? csrfCookie.split('=')[1] : '';
   };
   
-  // localStorage.clear()
-  // props.loggedIn(false)
-  // useEffect(() => {
-  //   const isAuthenticated = localStorage.getItem('is_authenticated');
-  //   if (isAuthenticated === 'true') {
-  //     const userType = localStorage.getItem('userType');
-  //     navigate(`/${userType}-home`, { state: { username: localStorage.getItem('username') } });
-  //   }
-  // }, [navigate]);
+ 
   useEffect(() => {
     const isAuthenticated = localStorage.getItem('is_authenticated');
       if (!isAuthenticated || isAuthenticated !== 'true') {
@@ -178,9 +170,7 @@ export default function SignInSide(props) {
               {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
               <Grid container className="floatUpIn">
                 <Grid item xs>
-                  {/* <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link> */}
+                 
                 </Grid>
                 <Grid item>
                   <Link component={Link} to="/signup" variant="body2">
@@ -192,7 +182,6 @@ export default function SignInSide(props) {
           </Box>
         </Grid>
       </Grid>
-      {/* <AdminHome username={formData.username} /> */}
     </Box>
   );
 }

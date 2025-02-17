@@ -48,7 +48,7 @@ const  UpdateUserStatus= () => {
     <div className='CS-Style'>
       <Typography variant="h2" sx={{pb: '5%'}}>
           <text className="BrasikaFont floatRightIn grayFont">
-            Status Reset
+            Role Reset
           </text>
       </Typography>
   
@@ -86,7 +86,7 @@ const  UpdateUserStatus= () => {
             />
           </Box>
         </Box>
-        <Button className="floatRightIn" sx={{width: '50%', p: '3%'}} variant="outlined" type="submit">Reset Status</Button>
+        <Button className="floatRightIn" sx={{width: '50%', p: '3%'}} variant="outlined" type="submit">Reset Role</Button>
       </form>
       {message && <p>{message}</p>}
     </div>

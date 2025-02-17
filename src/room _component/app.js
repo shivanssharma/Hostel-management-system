@@ -216,7 +216,7 @@ function AdminRoomAllotment() {
     
     .then((response) => {
       console.log("Data saved successfully:", response.data);
-      setLoginError("Data saved successfully");
+      setLoginError("Room Alloted successfully");
 
     })
     .catch((error) => {

@@ -82,7 +82,7 @@ function StudentView() {
                 )
               ) : (
                 <TableRow>
-                  <TableCell colSpan={2}>Error!! Server Not Responding</TableCell>
+                  <TableCell colSpan={2}>You are not alloted room yet </TableCell>
                 </TableRow>
               )}
             </TableBody>

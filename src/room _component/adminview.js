@@ -138,7 +138,7 @@ function AdminView() {
                     ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={2}>No data available</TableCell>
+                      <TableCell colSpan={5}>No data available</TableCell>
                     </TableRow>
                     )}
                 </TableBody>

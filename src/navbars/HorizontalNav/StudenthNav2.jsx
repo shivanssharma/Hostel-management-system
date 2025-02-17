@@ -5,13 +5,13 @@ import { Link, useNavigate } from 'react-router-dom';
 // import Navbar from 'react-bootstrap/Navbar';
 import LogoImage from './Bright_Colorful_Playful_Funny_Donuts_Food_Circle_Logo-removebg-preview.png'; // Import your logo image here
 import './nav_health.css';
-import { ChairRounded, CottageRounded } from "@mui/icons-material";
+import {  CottageRounded } from "@mui/icons-material";
 import { Box, IconButton } from "@mui/material";
 function StudentHorizontalNav2() {
     const navigate= useNavigate()
     const links= [
         {"title": "Home", "link": "/student-home", icon: <CottageRounded />},
-        {"title": "Check Room", "link": "/student-viewroom", icon: <ChairRounded />},
+        // {"title": "Check Room", "link": "/student-viewroom", icon: <ChairRounded />},
     ]
     return (
         <Box className="TN-container">

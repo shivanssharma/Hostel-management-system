@@ -38,14 +38,14 @@ function StudentRegistration() {
     };
 
     const courses = [
-        { value:'',name: '1 BSc' },
-        { value:'',name: '1 BBA' },
-        { value:'',name: '2 BSc' },
-        {value:'', name: '2 BBA' },
-        {value:'', name: '3 BBA' },
-        { value:'',name: '3 BSc' },
-        { value:'',name: '1 MSc' },
-        { value:'',name: '2 MSc' },
+        { value:'1 ug',name: '1 BSc' },
+        { value:'1 ug',name: '1 BBA' },
+        { value:'2 ug',name: '2 BSc' },
+        {value:'2 ug', name: '2 BBA' },
+        {value:'3 ug', name: '3 BBA' },
+        { value:'3 ug',name: '3 BSc' },
+        { value:'1 msc',name: '1 MSc' },
+        { value:'2 msc',name: '2 MSc' },
     ];
 
     const handleChange = (e) => {
@@ -127,17 +127,18 @@ function StudentRegistration() {
                         </div>
                         <h3 className="BrasikaFont floatRightIn grayFont">Course and year</h3>
                         <Autocomplete
-                             className="floatRightIn"
+                            className="floatRightIn"
                             disablePortal
                             id="combo-box-demo"
                             options={courses}
                             style={textFieldStyle}
                             getOptionLabel={(option) => option.name}
                             isOptionEqualToValue={(option, value) => option.name === value.name}
-                            onChange={(event, value) => setFormData(prevState => ({ ...prevState, selectedCourse: value ? value.name : '' }))}
+                            onChange={(event, value) => setFormData(prevState => ({ ...prevState, selectedCourse: value ? value.value : '' }))}
                             renderInput={(params) => <TextField {...params} label="Course" />}
                             required
                         />
+
 
                         <h3 className="BrasikaFont floatRightIn grayFont">Date-of-Joining </h3>
                         <TextField className="floatRightIn" type="date" name="date" value={formData.date} onChange={handleChange} variant="outlined" required style={textFieldStyle}/>
